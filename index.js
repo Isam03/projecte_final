@@ -2,9 +2,6 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const actividades = require('./actividades');
-const usuarios = require('./usuarios');
-const clasificaciones = require('./clasificaciones');
-const categorias = require('./categorias');
 const moment = require('moment');
 const port = 3000;
 // app.use(express.static('www'));
@@ -36,47 +33,6 @@ app.post('/api', (req, res) => {
  
   actividades.push(newActividad);
   res.status(200).json({ actividades });
-
-  const newUsuario = {
-
-    id: req.body._id,
-    nombre: req.body.nombre,
-    apellido: req.body.apellido,
-    email: req.body.email,
-    password: req.body.password,
-    dni: req.body.dni,
-    fecha_nacimiento: req.body.fecha_nacimiento,
-    rol: req.body.rol
-
-  };
-
-  usuarios.push(newUsuario);
-  res.status(200).json({ usuarios });
-
-  const newClasificacion = {
-    
-    id: req.body._id,
-    titulo: req.body.titulo,
-    descripcion: req.body.descripcion,
-    pic: req.body.pic
-
-  }
-
-  clasificaciones.push(newClasificacion);
-  res.status(200).json({ clasificaciones });
-
-  const newCategoria = {
-
-    id: req.body._id,
-    titulo: req.body.titulo,
-    descripcion: req.body.descripcion
-
-  }
-
-  categorias.push(newCategoria);
-  res.status(200).json({ categorias });
-
-
 
 });
 
