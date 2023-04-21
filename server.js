@@ -1,4 +1,3 @@
-
 // API REST per el manteniment de verdures 
 const express = require('express');
 const path = require('path');
@@ -9,7 +8,7 @@ const app = express();
 const port = 3000;
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://isam:isam03@parking.ikyce.mongodb.net/',
+mongoose.connect('mongodb+srv://isam:isam03@parking.ikyce.mongodb.net/quedaya',
 {
     useNewUrlParser: true,
     useUnifiedTopology: true

@@ -1,5 +1,4 @@
-const BaseUrl = "http://localhost:3000/api/responsables";
-const BaseUrl2 = "http://localhost:3000/api/tasques";
+const BaseUrl = "http://localhost:3000/api/actividades";
 var llista = [];
 var llistaresp = [];
 var llistaTasques = [];
