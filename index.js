@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const actividades = require('./actividades');
+const usuarios = require('./usuarios');
 const moment = require('moment');
 const port = 3000;
 // app.use(express.static('www'));
@@ -33,6 +34,22 @@ app.post('/api', (req, res) => {
  
   actividades.push(newActividad);
   res.status(200).json({ actividades });
+
+  const newUsuario = {
+
+    id: req.body._id,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    password: req.body.password,
+    dni: req.body.dni,
+    fecha_nacimiento: req.body.fecha_nacimiento,
+    rol: req.body.rol
+
+  };
+
+  usuarios.push(newUsuario);
+  res.status(200).json({ usuarios });
 
 });
 
