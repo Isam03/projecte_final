@@ -1,11 +1,16 @@
 const actividades = require('./actividades');
 const usuarios = require('./usuarios');
+const categorias = require('./categorias');
+const clasificaciones = require('./clasificaciones');
 const actividadModel = require("./models/actividad");
 const usuarioModel = require("./models/usuario");
+const categoriaModel = require("./models/categoria");
+const clasificacionModel = require("./models/clasificacion");
 const moment = require('moment');
 const { response } = require('express');
 
 module.exports = (app) => {
+
 
 
     ///////////////////////////////////////////////////
@@ -15,9 +20,10 @@ module.exports = (app) => {
     //GET endpoint /actividades
     app.get('/api/actividades', async (req, res) => {
 
-        const actividades = await actividadModel.find({});
+       const actividades = await actividadModel.find({});
 
        try {
+
             res.status(200).send(actividades);
        } catch (error) {
             res.status(500).send(error);
@@ -97,7 +103,7 @@ module.exports = (app) => {
     //////////////////// USUARIOS /////////////////////
     ///////////////////////////////////////////////////
 
-    //GET endpoint /actividades
+    //GET endpoint /usuarios
     app.get('/api/usuarios', async (req, res) => {
 
         const usuarios = await usuarioModel.find({});
@@ -122,7 +128,7 @@ module.exports = (app) => {
     });
 
    
-    //POST endpoint /actividades
+    //POST endpoint /usuario
     app.post('/api/usuario', async (req, res) => {
         const usuarios = new usuarioModel(req.body);
         
@@ -135,7 +141,7 @@ module.exports = (app) => {
         }
     });
 
-    //PUT endopint /actividad/id (sirve para editar un objeto a partir del ID)
+    //PUT endopint /usuario/id (sirve para editar un objeto a partir del ID)
     app.put('/api/usuario/:id', async (req, res) => {
 
         const usuario = await usuarioModel.findOne({_id: req.params.id});
@@ -159,7 +165,7 @@ module.exports = (app) => {
         }
     });
 
-    //DELETE enpoint /actividad/id
+    //DELETE enpoint /usuario/id
     app.delete('/api/usuario/:id', async (req, res) => {
 
         const usuario = await usuarioModel.deleteOne({_id: req.params.id});
@@ -172,5 +178,135 @@ module.exports = (app) => {
         }
     });
 
+    //////////////////////////////////////////////////
+    ////////////////// CATEGORIAS ////////////////////
+    //////////////////////////////////////////////////
 
+    //GET endpoint /categorias
+    app.get('/api/categorias', async (req, res) => {
+
+        const categorias = await categoriaModel.find({});
+
+       try {
+            res.status(200).send(categorias);
+       } catch (error) {
+            res.status(500).send(error);
+       }
+    });
+   
+    //POST endpoint /categoria
+    app.post('/api/categoria', async (req, res) => {
+        const categorias = new categoriaModel(req.body);
+        
+        try {
+            await categorias.save(); 
+            const resp = await categoriaModel.find({});
+            res.status(200).send(resp);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    //PUT endopint /categoria/id (sirve para editar un objeto a partir del ID)
+    app.put('/api/categoria/:id', async (req, res) => {
+
+        const categoria = await categoriaModel.findOne({_id: req.params.id});
+        try {
+            
+            categoria.id = req.body._id,
+            categoria.titulo = req.body.titulo,
+            categoria.descripcion = req.body.descripcion
+
+            await categoria.save(); 
+            const resp = await categoriaModel.find({});
+
+            res.status(200).send(resp);
+
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    //DELETE enpoint /categoria/id
+    app.delete('/api/categoria/:id', async (req, res) => {
+
+        const categoria = await categoriaModel.deleteOne({_id: req.params.id});
+        try {
+            const resp = await categoriaModel.find({});
+
+            res.status(200).send(resp);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    
+    //////////////////////////////////////////////////
+    //////////////// CLASIFICACIONES /////////////////
+    //////////////////////////////////////////////////
+
+    //GET endpoint /clasificaciones
+    app.get('/api/clasificaciones', async (req, res) => {
+
+        const clasificaciones = await clasificacionModel.find({});
+
+       try {
+            res.status(200).send(clasificaciones);
+       } catch (error) {
+            res.status(500).send(error);
+       }
+    });
+   
+    //POST endpoint /clasificacion
+    app.post('/api/clasificacion', async (req, res) => {
+        const clasificaciones = new clasificacionModel(req.body);
+        
+        try {
+            await clasificaciones.save(); 
+            const resp = await clasificacionModel.find({});
+            res.status(200).send(resp);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    //PUT endopint /clasificacion/id (sirve para editar un objeto a partir del ID)
+    app.put('/api/clasificacion/:id', async (req, res) => {
+
+        const clasificacion = await clasificacionModel.findOne({_id: req.params.id});
+        try {
+            
+            clasificacion.id = req.body._id,
+            clasificacion.titulo = req.body.titulo,
+            clasificacion.descripcion = req.body.descripcion,
+            clasificacion.valor = req.body.valor
+
+            await clasificacion.save(); 
+            const resp = await clasificacionModel.find({});
+
+            res.status(200).send(resp);
+
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    //DELETE enpoint /clasificacion/id
+    app.delete('/api/clasificacion/:id', async (req, res) => {
+
+        const clasificacion = await clasificacionModel.deleteOne({_id: req.params.id});
+        try {
+            const resp = await clasificacionModel.find({});
+
+            res.status(200).send(resp);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    let port = 3004;
+    
+    app.listen(port, () => {
+        console.log(`Servidor arrancat, escoltant el port ${port}`);
+    });
 }
