@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins',sans-serif;
+}
+
+#colorText {
+    color: rgb(196, 215, 233);
+}
+
+
+
+
+.custom-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgb(196, 215, 233)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.dropdown-menu {
+    background-color: #020b1c;
+}
+
+#searchBar::placeholder {
+    color: #83909c;
+}
+
+#bodyCard {
+    background-color: #03112b;
+}
+
+.card {
+    border: 1px;
+    background-color: #03112b;
+
+}
+
+.card-title,
+.card-text {
+    color: #c4d7e9;
+}
+
+#img-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+
+}
+
+.bi-arrow-right {
+    color: #c4d7e9;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+#carouselPrincipal {
+    height: 800px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: -1;
+}
+
+#profilePic {
+    border-radius: 50% 50% 50% 50%;
+    width: 50px;
+    height: 50px;
+    margin-left: 30px;
+    border: 1px solid black;
+}
+
+@media(max-width: 992px) {
+    #profilePic {
+        border-radius: 50% 50% 50% 50%;
+        width: 50px;
+        height: 50px;
+        margin-left: 0px;
+        margin-top: 20px;
+        margin-right: 20px;
+        border: 1px solid black;
+    }
+}
+
+#tituloCarousel {
+    position: absolute;
+    text-align: center;
+    color: antiquewhite;
+    font-family: impact;
+    font-size: 10vh;
+    letter-spacing: 0;
+    text-shadow: -3px -3px 3px black, 3px -3px 3px black, -3px 3px 3px black, 3px 3px 3px black;
+    opacity: 80%;
+}
+
+@media (max-width: 768px) {
+    #tituloCarousel {
+        position: absolute;
+        text-align: center;
+        color: antiquewhite;
+        font-family: impact;
+        font-size: 7vh;
+        letter-spacing: 0;
+        text-shadow: -3px -3px 3px black, 3px -3px 3px black, -3px 3px 3px black, 3px 3px 3px black;
+        opacity: 80%;
+    }
+
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "";
+    color: #c4d7e9;
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+.dropdown-menu {
+    --bs-dropdown-link-hover-bg: #5f235a;
+}
+
+
+.dropdown a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
+}
+
+.bi-music-note-beamed {
+    color: #c4d7e9;
+}
+
+.bi-people-fill {
+    color: #c4d7e9;
+}
+
+.bi-caret-down-fill {
+    color: #c4d7e9;
+}
+
+@media (max-width: 992px) {
+    #logo-bar {
+        opacity: 0%;
+    }
+
+    #logo-text {
+        opacity: 0%;
+    }
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+#tituloCategoria {
+    margin-left: 25px;
+    font-size: 3vh;
+}
+
+#carouselPrincipal1 {
+
+    margin: 0 auto;
+    width: 100%;
+    min-width: 1200px;
+    height: 800px;
+}
+
+video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 95%;
+    z-index: 999;
+}
+
+video::-webkit-media-controls {
+    display: none !important;
+}
+
+audio::-webkit-media-controls {
+    display:none !important;
+}
+audio::-webkit-media-controls-enclosure {
+    display:none !important;
+}
+audio::-webkit-media-controls-panel {
+    display:none !important;
+}
+
+#shake:hover {
+    cursor: pointer;
+    animation: shake 1s ease-in infinite;
+}
+
+@keyframes pop {
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    5% {
+        transform: rotate(-5deg);
+    }
+
+    10% {
+        transform: rotate(5deg);
+    }
+
+    20% {
+        transform: rotate(-5deg);
+    }
+
+    30% {
+        transform: rotate(5deg);
+    }
+
+    40% {
+        transform: rotate(-5deg);
+    }
+
+    50% {
+        transform: rotate(5deg);
+    }
+
+    60% {
+        transform: rotate(-5deg);
+    }
+
+    70% {
+        transform: rotate(5deg);
+    }
+
+    80% {
+        transform: rotate(-5deg);
+    }
+
+    90% {
+        transform: rotate(5deg);
+    }
+
+    100% {
+        transform: rotate(0deg);
+    }
+}
