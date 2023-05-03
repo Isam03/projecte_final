@@ -179,6 +179,33 @@ module.exports = (app) => {
     });
 
     //////////////////////////////////////////////////
+    ///////////////   AUTENTICACIÓ   /////////////////
+    //////////////////////////////////////////////////
+
+    // POST LOGIN
+
+    app.post("/login", async (req,res) =>{
+        var emailReq = req.body.mail;
+        var passReq = req.body.password;
+
+        const usuario = await usuarioModel.findOne({email: emailReq}, function(err, data){
+            if(data){
+                console.log(data)
+                if(data.password == passReq){
+                    res.send("login succesful")
+                }
+                else{
+                    res.send("incorrect password")
+                }
+            }
+            else{
+                console.log(err)
+            }
+        });
+
+    })
+
+    //////////////////////////////////////////////////
     ////////////////// CATEGORIAS ////////////////////
     //////////////////////////////////////////////////
 
@@ -305,7 +332,7 @@ module.exports = (app) => {
     });
 
     let port = 3004;
-    
+
     app.listen(port, () => {
         console.log(`Servidor arrancat, escoltant el port ${port}`);
     });

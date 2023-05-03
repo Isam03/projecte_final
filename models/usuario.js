@@ -1,5 +1,6 @@
 const { json } = require("express");
 const mongoose = require("mongoose");
+const passportLocalMongoose = require('passport-local-mongoose');
 
 const UsuarioSchema = new mongoose.Schema({
 
@@ -34,6 +35,9 @@ const UsuarioSchema = new mongoose.Schema({
 
 
 });
+
+
+UsuarioSchema.plugin(passportLocalMongoose);
 
 const Usuario = mongoose.model("usuarios", UsuarioSchema);
 
