@@ -179,7 +179,7 @@ a {
     text-decoration: none;
 }
 
-#tituloCategoria {
+.tituloCategoria {
     margin-left: 25px;
     font-size: 3vh;
 }
