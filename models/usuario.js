@@ -1,5 +1,6 @@
 const { json } = require("express");
 const mongoose = require("mongoose");
+const bcrypt = require('bcryptjs');
 
 const UsuarioSchema = new mongoose.Schema({
 
@@ -29,11 +30,38 @@ const UsuarioSchema = new mongoose.Schema({
     },
     rol: {
         type: Number,
-        required: true
+        required: false,
+        default: 2
     }
 
 
 });
+
+UsuarioSchema.pre('save', async function(next) {
+    try {
+        // check method of registration
+        const user = this;
+        if (!user.isModified('password')) next();
+        // generate salt
+        const salt = await bcrypt.genSalt(10);
+        // hash the password
+        const hashedPassword = await bcrypt.hash(this.password, salt);
+        // replace plain text password with hashed password
+        this.password = hashedPassword;
+        next();
+    } catch (error) {
+        return next(error);
+    }
+});
+
+// UsuarioSchema.methods.encryptPassword = async password=>{
+//     const salt = await bcrypt.genSalt(10);
+//     return await bcrypt.hash(password,salt);
+// };
+
+UsuarioSchema.methods.matchPassword = async function(password){
+    return await bcrypt.compare(password, this.password);
+}
 
 const Usuario = mongoose.model("usuarios", UsuarioSchema);
 
