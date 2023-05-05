@@ -6,6 +6,33 @@
     font-family: 'poppins', sans-serif;
 }
 
+.c {
+    display: flex;
+    margin: 0 0.5em;
+    /* box-shadow: 2px 6px 8px 0 #5f235a; */
+    border: none;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.card-img-top {
+    box-shadow: 0 4px 9px -4px #5f235a;
+    border-radius: 10% 10% 10% 10%;
+}
+.profile-details{
+    box-shadow: 0 4px 9px -4px #5f235a;
+}
+
+.card-title {
+    text-overflow: clip;
+    text-align: left;
+    font-size: large;
+}
+
+.swiper-slide:hover{
+    
+}
+
 #loader {
     position: fixed;
     top: 0;
@@ -39,9 +66,7 @@
     color: #83909c;
 }
 
-#bodyCard {
-    background-color: #03112b;
-}
+
 
 .card {
     border: 1px;
@@ -75,13 +100,19 @@
     --bs-nav-link-hover-color: #c4d7e9;
 }
 
+#bodyCard {
+    background-color: #03112b;
+}
+
+
 #carouselPrincipal {
     height: 800px;
     position: absolute;
-    top: 0;
+    top: 40px;
     left: 0;
     width: 100%;
     z-index: -1;
+    background-size: cover;
 }
 
 #profilePic {
@@ -127,6 +158,14 @@
         opacity: 80%;
     }
 
+}
+
+.navbar-nav .nav-link.active, .navbar-nav .nav-link.show {
+    color: #00000000;
+}
+
+.dropdown-toggle:focus, .dropdown-toggle:hover {
+    color: #00000000;
 }
 
 .dropdown-toggle::after {
@@ -279,3 +318,5 @@ audio::-webkit-media-controls-panel {
         transform: rotate(0deg);
     }
 }
+
+
