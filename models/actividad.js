@@ -1,3 +1,4 @@
+const { ObjectId } = require("bson");
 const { json } = require("express");
 const mongoose = require("mongoose");
 
@@ -12,7 +13,7 @@ const ActividadSchema = new mongoose.Schema({
         required: true
     },
     id_categoria: {
-        type: Number,
+        type: ObjectId,
         required: true
     },
     foto: {
@@ -56,7 +57,8 @@ const ActividadSchema = new mongoose.Schema({
     },
     num_visitas:{
         type: Number,
-        required: false
+        required: false,
+        default: 0
     }
 
 
