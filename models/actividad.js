@@ -54,6 +54,10 @@ const ActividadSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    num_visitas:{
+        type: Number,
+        required: false
+    }
 
 
 });
