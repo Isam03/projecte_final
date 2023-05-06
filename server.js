@@ -3,13 +3,15 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const axios = require('axios');
-const session = require("express-session");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const usuarios = require('./models/usuario');
 var moment = require('moment');
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
+const usuarioModel = require("./models/usuario");
+const categoriaModel = require("./models/usuario");
 
 const app = express();
+require('./config/passport');
 const port = 3000;
 app.use(express.json());
 
@@ -25,26 +27,7 @@ db.once("open", ()=>{
     console.log("Connected successfully");
 });
 
-app.use(express.static("public"));
-app.use(bodyParser.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,'www')));
-
-app.use(session({
-    secret: 'testests',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60 * 60 * 1000 } // 1 hour
-  }));
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(usuarios.createStrategy());
-
-passport.serializeUser(usuarios.serializeUser());
-passport.deserializeUser(usuarios.deserializeUser());
-
 require('./api')(app);
 
 ///////////////////////////////////////////////////
@@ -55,6 +38,16 @@ require('./api')(app);
 // app.set('view engine', 'html');
 app.set('views', './www/views')
 app.set('view engine', 'ejs')
+
+app.use(express.urlencoded({extended: false}));
+app.use(session({
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 
 // // With middleware
 // app.use('/api/actividades', function (req, res, next) {
@@ -79,32 +72,41 @@ app.get('/login', (req, res) => {
     res.render('login')
 })
 
-//////////////////////////////////////////////////
-///////////////   AUTENTICACIÓ   /////////////////
-//////////////////////////////////////////////////
+// ENDPOINT LOGIN
+app.post('/login', passport.authenticate('local',{
+    failureRedirect: '/login',
+    successRedirect: '/event',
+    failureFlash: true
+}))
 
-// POST LOGIN
+app.post('/register', (req, res) => {
+    const formData = req.body;
+    const usuarios = new usuarioModel(req.body);
+  
+    usuarios.save(formData, (err, result) => {
+      if (err) throw err;
+      res.redirect('/login', {message: "Usuario registrado, ya puede ingresar con su correo electronico y contraseña"});
+    });
+  });
 
-// app.post("/login", async (req,res) =>{
-
-// })
-
-app.post('/login', passport.authenticate('local', { failureRedirect: '/' }),  function(req, res) {
-	console.log(req.usuarios)
-	res.redirect('/');
+app.get('/protected', (req, res) => {
+if (req.isAuthenticated()) {
+    // Render the protected page
+    res.render('user/panel', { user: req.user });
+} else {
+    // Redirect the user to the login page
+    res.redirect('/login');
+}
 });
 
-app.get("/user/protected", passport.authenticate("local", { session: false }),
-    (req, res, next) => {
-        res.json({user: req.user});
-    }
-);
 
-app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-});
-
+app.get('/logout', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      req.flash('success_msg', 'You are logged out');
+      res.redirect('/');
+    });
+  });
 
 /// VISTA de EVENTO
 app.get('/event', (req, res) => {
@@ -116,6 +118,15 @@ app.get('/event/create', (req, res) => {
     res.render('event/crear')
 })
 
+
+/// VISTA de CATEGORIAS
+app.get('/category/:id',async (req, res) =>{
+    const resAct = await axios.get('http://localhost:3004/api/actividades');
+    const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
+    const dataAct = resAct.data;
+    const dataCat = resCat.data;
+    res.render('category', {events: dataAct, categoria: dataCat})
+})
 
 
 
