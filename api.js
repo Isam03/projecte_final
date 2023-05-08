@@ -325,9 +325,17 @@ module.exports = (app) => {
     });
 
     // SEARCH endpoint
-    app.post('/search', (req,res) => {
-        let payload = req.body.payload.trim();
-        console.log(payload);
+
+    app.get('/search', async (req, res) => {
+        try {
+            const search = req.query.q;
+            
+            const actividades = await actividadModel.find({titulo: {$regex: new RegExp(search, "i")}})
+
+            res.status(200).send(actividades)
+        } catch (error) {
+            res.status(500).send(error);
+        }
     })
 
     let port = 3004;

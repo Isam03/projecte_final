@@ -28,8 +28,7 @@ const UsuarioSchema = new mongoose.Schema({
     },
     dni: {
         type: String,
-        unique: true,
-        required: true
+        required: false
     },
     fecha_nacimiento: {
         type: Date,
