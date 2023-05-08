@@ -6,7 +6,7 @@ function sendData(srch){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'localhost'
+            'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify({payload: srch.value})
     });
