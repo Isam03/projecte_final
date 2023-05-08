@@ -60,12 +60,33 @@ app.get('/', async (req, res) => {
     try {
         const response = await axios.get('http://localhost:3004/api/actividades');
         const data = response.data;
+
+        // const page = parseInt(req.query.page) - 1||0;
+        // const limit = parseInt(req.query.limit) || 5;
+        // const search = req.query.search || "";
+
+        // let catOptions = [];
+
+        // for (let i = 0; i <= dataCat.length; i++){
+        //     catOptions.push(dataCat[i].titulo);
+        // }
+
+        // category === "All" ? (category = [...catOptions]) : (category = req.query.category.split(","));
+
+        // let sortBy = {};
+        // if(category[1]){
+        //     sortBy[category[0]] = category[1];
+        // }else{
+        //     sortBy[category[0]] = "asc";
+        // }
+
         res.render('index', {events: data});
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
     }
 })
+
 
 /// VISTA de LOGIN / REGISTRO
 app.get('/login', (req, res) => {
@@ -125,6 +146,7 @@ app.get('/category/:id',async (req, res) =>{
     const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
     const dataAct = resAct.data;
     const dataCat = resCat.data;
+
     res.render('category', {events: dataAct, categoria: dataCat})
 })
 
