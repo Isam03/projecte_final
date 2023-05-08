@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+font {
+    color: #e3ebf7;
+}
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+    top: 5%;
+}
+
+#logo {
+    width: 70px;
+    height: auto;
+}
+
+#queda {
+    font-size: 50px;
+    color: white;
+    margin-left: 5px;
+}
+
+#ya {
+    font-size: 50px;
+    color: orange;
+    margin-right: 40px;
+}
+
+@media (max-width: 600px) {
+    #queda {
+        font-size: 30px;
+        color: white;
+        margin-left: 5px;
+    }
+
+    #logo {
+        width: 40px;
+        height: auto;
+    }
+
+    #ya {
+        font-size: 30px;
+        color: orange;
+        margin-right: 40px;
+    }
+
+    .imagen {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        z-index: 1;
+        top: 3%;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* video {
+    object-fit: cover;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+} */
+
+.container-fluid {
+    text-align: center;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    min-width: 100%;
+    background-position: center;
+    background-size: cover;
+    overflow-y: scroll;
+    background-image: url('./fondoLogin.mp4');
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    background: transparent;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+.container {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    width: 80%;
+    height: auto;
+    backdrop-filter: blur(15px);
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    --mdb-nav-pills-link-active-bg: #e3ebf700;
+    --mdb-nav-pills-link-active-color: #285192;
+    background-color: #90358a;
+    box-shadow: 0 4px 9px -4px #ae41a5;
+    color: #90358a;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+}
+
+.nav-pills .nav-link {
+    --mdb-nav-pills-link-border-radius: 20px;
+    --mdb-nav-pills-link-font-size: 12px;
+    --mdb-nav-pills-link-padding-top: 17px;
+    --mdb-nav-pills-link-padding-bottom: 16px;
+    --mdb-nav-pills-link-padding-x: 29px;
+    --mdb-nav-pills-link-line-height: 1;
+    --mdb-nav-pills-link-hover-bg: #f7f7f7;
+    --mdb-nav-pills-link-font-weight: 500;
+    --mdb-nav-pills-link-color: rgba(0, 0, 0, 0);
+    --mdb-nav-pills-margin: 0.5rem;
+    border-radius: var(--mdb-nav-pills-link-border-radius);
+    font-size: var(--mdb-nav-pills-link-font-size);
+    text-transform: uppercase;
+    padding: var(--mdb-nav-pills-link-padding-top) var(--mdb-nav-pills-link-padding-x) var(--mdb-nav-pills-link-padding-bottom) var(--mdb-nav-pills-link-padding-x);
+    line-height: var(--mdb-nav-pills-link-line-height);
+    background-color: #e3ebf700;
+    font-weight: var(--mdb-nav-pills-link-font-weight);
+    /* color: var(--mdb-nav-pills-link-color); */
+    margin: var(--mdb-nav-pills-margin);
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #bdbdbd;
+}
+
+.btn-primary {
+    --mdb-btn-bg: #90358a;
+    --mdb-btn-color: #fff;
+    --mdb-btn-box-shadow: 0 4px 9px -4px #5f235a;
+    --mdb-btn-hover-bg: #a53d9e;
+    --mdb-btn-hover-color: #fff;
+    --mdb-btn-focus-bg: #cb4bc3;
+    --mdb-btn-focus-color: #fff;
+    --mdb-btn-active-bg: #cb4bc3;
+    --mdb-btn-active-color: #fff;
+}
+
+
+.form-control,
+.form-control:focus {
+    color: #ffffff;
+    outline: 0px;
+    box-shadow: inset 0 0 0 1px #5f235a;
+}
+
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #bdbdbd;
+    background-clip: padding-box;
+    border: 1px solid #bdbdbd;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 20px;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075);
+    transition: all .2s linear;
+}
+
+
+
+@import "susy";
+@import "compass/reset";
+
+.stars, .twinkling, .clouds {
+	position:absolute;
+	display:block;
+	top:0; bottom:0;
+	left:0; right:0;
+	width:100%; height:100%;
+}
+
+.stars {
+	z-index: -3;
+	background: #000 url('https://i.imgur.com/YKY28eT.png') repeat top center;
+}
+
+.twinkling{
+	z-index: -2;
+	background:transparent url('https://i.imgur.com/XYMF4ca.png') repeat top center;
+	animation: move-twink-back 200s linear infinite;
+}
+
+.clouds{
+	z-index: -1;
+    background:transparent url('https://i.imgur.com/mHbScrQ.png') repeat top center;
+	animation: move-clouds-back 200s linear infinite;
+}
+
+@keyframes move-twink-back {
+	from {background-position:0 0;}
+	to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+	from {background-position:0 0;}
+	to {background-position:10000px 0;}
+}
