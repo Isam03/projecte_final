@@ -32,7 +32,11 @@ module.exports = (app) => {
 
     app.get('/api/actividad/:id', async (req, res) => {
 
-        const actividad = await actividadModel.findOne({_id: req.params.id});
+       const actividad = await actividadModel.findOne({_id: req.params.id});
+
+       actividad.num_visitas += 1;
+
+       await actividad.save();
 
        try {
             res.status(200).send(actividad);
@@ -220,7 +224,19 @@ module.exports = (app) => {
             res.status(500).send(error);
        }
     });
-   
+
+    //GET endpoint /categoria by ID
+    app.get('/api/categoria/:id', async (req, res) => {
+
+        const categoria = await categoriaModel.findOne({_id: req.params.id});
+    
+        try {
+            res.status(200).send(categoria);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+     
     //POST endpoint /categoria
     app.post('/api/categoria', async (req, res) => {
         const categorias = new categoriaModel(req.body);
