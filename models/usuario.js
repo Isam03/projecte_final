@@ -14,10 +14,12 @@ const UsuarioSchema = new mongoose.Schema({
     },
     nombreUsuario: {
         type: String,
+        unique: true,
         required: true
     },
     email: {
         type: String,
+        unique: true,
         required: true
     },
     password: {
@@ -26,6 +28,7 @@ const UsuarioSchema = new mongoose.Schema({
     },
     dni: {
         type: String,
+        unique: true,
         required: true
     },
     fecha_nacimiento: {
