@@ -320,6 +320,12 @@ module.exports = (app) => {
         }
     });
 
+    // SEARCH endpoint
+    app.post('/search', (req,res) => {
+        let payload = req.body.payload.trim();
+        console.log(payload);
+    })
+
     let port = 3004;
     
     app.listen(port, () => {
