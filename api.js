@@ -6,12 +6,16 @@ const actividadModel = require("./models/actividad");
 const usuarioModel = require("./models/usuario");
 const categoriaModel = require("./models/categoria");
 const clasificacionModel = require("./models/clasificacion");
+const cors = require('cors');
 const moment = require('moment');
 const { response } = require('express');
 
 module.exports = (app) => {
 
-
+    app.use(cors({
+        origin: 'http://localhost:3000',
+        optionsSuccessStatus: 200
+      }));
 
     ///////////////////////////////////////////////////
     ////////////////// ACTIVIDADES ////////////////////

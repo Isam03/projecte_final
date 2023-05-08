@@ -6,9 +6,13 @@ const UsuarioSchema = new mongoose.Schema({
 
     nombre: {
         type: String,
-        required: true
+        required: false
     },
     apellido: {
+        type: String,
+        required: false
+    },
+    nombreUsuario: {
         type: String,
         required: true
     },
