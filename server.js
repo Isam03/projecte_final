@@ -16,18 +16,18 @@ const port = 3000;
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://isam:isam03@parking.ikyce.mongodb.net/quedaya',
-{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", ()=>{
+db.once("open", () => {
     console.log("Connected successfully");
 });
 
-app.use(express.static(path.join(__dirname,'www')));
+app.use(express.static(path.join(__dirname, 'www')));
 require('./api')(app);
 
 ///////////////////////////////////////////////////
@@ -39,7 +39,7 @@ require('./api')(app);
 app.set('views', './www/views')
 app.set('view engine', 'ejs')
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(session({
     secret: 'secret',
     resave: false,
@@ -51,7 +51,7 @@ app.use(flash());
 
 // // With middleware
 // app.use('/api/actividades', function (req, res, next) {
-    
+
 //     next();
 // });
 
@@ -80,7 +80,15 @@ app.get('/', async (req, res) => {
         //     sortBy[category[0]] = "asc";
         // }
 
-        res.render('index', {events: data});
+        if (req.isAuthenticated()) {
+            // Render the protected page
+            res.render('index', { events: data, user: req.user });
+        } else {
+            // Redirect the user to the login page
+            res.render('index', { events: data, user: req.user });
+        }
+
+
     } catch (error) {
         console.error(error);
         res.status(500).send('Server Error');
@@ -94,40 +102,50 @@ app.get('/login', (req, res) => {
 })
 
 // ENDPOINT LOGIN
-app.post('/login', passport.authenticate('local',{
+app.post('/login', passport.authenticate('local', {
     failureRedirect: '/login',
-    successRedirect: '/event',
+    successRedirect: '/',
     failureFlash: true
 }))
 
 app.post('/register', (req, res) => {
     const formData = req.body;
     const usuarios = new usuarioModel(req.body);
-  
+
     usuarios.save(formData, (err, result) => {
-      if (err) throw err;
-      res.redirect('/login', {message: "Usuario registrado, ya puede ingresar con su correo electronico y contraseña"});
+        if (err) throw err;
+        res.redirect('/login', { message: "Usuario registrado, ya puede ingresar con su correo electronico y contraseña" });
     });
-  });
+});
 
 app.get('/protected', (req, res) => {
-if (req.isAuthenticated()) {
-    // Render the protected page
-    res.render('user/panel', { user: req.user });
-} else {
-    // Redirect the user to the login page
-    res.redirect('/login');
-}
+    if (req.isAuthenticated()) {
+        // Render the protected page
+        res.render('user/panel', { user: req.user });
+    } else {
+        // Redirect the user to the login page
+        res.redirect('/login');
+    }
+});
+
+app.get('/profile', (req, res) => {
+    if (req.isAuthenticated()) {
+        // Render the protected page
+        res.render('user/profile', { user: req.user });
+    } else {
+        // Redirect the user to the login page
+        res.redirect('/login');
+    }
 });
 
 
-app.get('/logout', function(req, res, next) {
-    req.logout(function(err) {
-      if (err) { return next(err); }
-      req.flash('success_msg', 'You are logged out');
-      res.redirect('/');
+app.get('/logout', function (req, res, next) {
+    req.logout(function (err) {
+        if (err) { return next(err); }
+        req.flash('success_msg', 'You are logged out');
+        res.redirect('/');
     });
-  });
+});
 
 /// VISTA de EVENTO
 app.get('/event', (req, res) => {
@@ -141,13 +159,13 @@ app.get('/event/create', (req, res) => {
 
 
 /// VISTA de CATEGORIAS
-app.get('/category/:id',async (req, res) =>{
+app.get('/category/:id', async (req, res) => {
     const resAct = await axios.get('http://localhost:3004/api/actividades');
     const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
     const dataAct = resAct.data;
     const dataCat = resCat.data;
 
-    res.render('category', {events: dataAct, categoria: dataCat})
+    res.render('category', { events: dataAct, categoria: dataCat })
 })
 
 

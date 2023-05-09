@@ -29,10 +29,6 @@
     font-size: large;
 }
 
-.swiper-slide:hover{
-    
-}
-
 #loader {
     position: fixed;
     top: 0;
@@ -64,6 +60,7 @@
 
 #searchBar::placeholder {
     color: #83909c;
+    font-family: 'poppins', sans-serif;
 }
 
 
