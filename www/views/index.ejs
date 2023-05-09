@@ -118,15 +118,18 @@
           </ul>
           <form class="d-flex justify-content-center align-items-center" role="search">
             <div class="input-group">
-              <input id="searchBar" type="search" class="border-secondary form-control rounded-start-5"
+                <input id="searchBar" type="search" class="border-secondary form-control rounded-start-5"
                 placeholder="Busca un evento" aria-label="searchBar" aria-describedby="button-addon2"
-                style="background-color: #020b1c; color: #c4d7e9;">
-              <button title="boton" class="btn btn-outline-secondary rounded-end-5" type="submit"
-                id="button-addon2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-search" viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg></button>
+                style="background-color: #020b1c; color: #c4d7e9;" onkeyup="sendData(this)">
+                <button title="boton" class="btn btn-outline-secondary rounded-end-5" type="submit"
+                  id="button-addon2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-search" viewBox="0 0 16 16">
+                    <path
+                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                  </svg></button>
+                  <br>
+                <div data-bs-spy="scroll" class="flex-column align-items-stretch pe-4 border-end" style="overflow: scroll;height: 10rem;position: absolute;background-color: white;top: 100%; border-radius: 3px;z-index: 3;" id="searchResults"></div>
+              
             </div>
           </form>
           <ul class="navbar-nav mb-2 mb-lg-0">
@@ -397,13 +400,9 @@
 
   </div>
 
+  <script src="app.js"></script>
 
   <!-- END Card -->
-  <audio id="myAudio" controls="false">
-    <source src="../Imagenes/ticketer-new-message.mp3" type="audio/mpeg">
-    Tu navegador no soporta la reproducción de audio.
-  </audio>
-
   <script>
 
     // Mostrar el loader
@@ -443,11 +442,6 @@
     //     video.parentNode.removeChild(video);
     //   }
     // }
-
-    function audioPlay() {
-      var audio = document.getElementById("myAudio");
-      audio.play();
-    }
 
   </script>
 
