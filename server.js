@@ -61,6 +61,9 @@ app.get('/', async (req, res) => {
         const response = await axios.get('http://localhost:3004/api/actividades');
         const data = response.data;
 
+        const categoria = await axios.get('http://localhost:3004/api/categorias/');
+        const dataCat = categoria.data;
+
         // const page = parseInt(req.query.page) - 1||0;
         // const limit = parseInt(req.query.limit) || 5;
         // const search = req.query.search || "";
@@ -82,10 +85,10 @@ app.get('/', async (req, res) => {
 
         if (req.isAuthenticated()) {
             // Render the protected page
-            res.render('index', { events: data, user: req.user });
+            res.render('index', { events: data, user: req.user, categoria: dataCat });
         } else {
             // Redirect the user to the login page
-            res.render('index', { events: data, user: req.user });
+            res.render('index', { events: data, user: req.user, categoria: dataCat });
         }
 
 

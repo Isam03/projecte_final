@@ -217,52 +217,81 @@
       <div class="card-body rounded-2" id="bodyCard">
         <!-- Slider de categorias 1-->
         <br>
-        <a class="icon-link icon-link-hover tituloCategoria" href="#">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi-people-fill"
-            viewBox="0 0 16 16">
-            <path
-              d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
-          </svg>
-          <font class="colorText"> Quedadas </font><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-            fill="#c4d7e9" class="bi bi-arrow-right" viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-              d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
-          </svg>
-        </a>
-        <div class="container swiper">
-          <div class="slide-container">
-            <div class="card-wrapper swiper-wrapper">
-              <% if (events !=null) { %>
-                <% for(var i=0; i <=6; i++) {%>
-                  <div class="card swiper-slide">
-                    <div class="image-box">
-                      <a href="#">
-                        <img src="../Imagenes/comida-rapida-casera.jpg" alt="" class="card-img-top" alt="..." />
-                      </a>
-                    </div>
-                    <div class="profile-details">
-                      <img src="../Imagenes/profilePic.jpg" alt="" />
-                      <div class="name-job">
-                        <h3 class="name" style="color: #c4d7e9;">
-                          <%= events[i].titulo %>
-                        </h3>
-                        <h4 class="job" style="color: #c4d7e9;">
-                          <%= events[i].descripcion.substring(0,20) %><ion-icon name="information-circle"
-                              data-bs-toggle="tooltip" data-bs-placement="top"
-                              data-bs-title="<%= events[i].descripcion %>"
-                              style="margin-left: 10px; width: 15px; height: 15px; color: #0dcaf0;"></ion-icon>
-                        </h4>
+
+          <% if (categoria != null) { %>
+            <% categoria.forEach(element => { %>
+              <a class="icon-link icon-link-hover tituloCategoria" href="<%= "http://localhost:3000/category/" + element._id %>">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi-people-fill"
+                  viewBox="0 0 16 16">
+                  <path
+                    d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                </svg>
+              <font class="colorText"> <%= element.titulo %> </font><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="#c4d7e9" class="bi bi-arrow-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
+            </svg>
+          </a>
+          <div class="container swiper">
+            <div class="slide-container">
+              <div class="card-wrapper swiper-wrapper">
+                <% if (events != null) { %>
+                  <% for(var i=0; i <= events.length; i++) {%>
+                    <% let total = 0 %>
+                    <% if (events[i] && events[i].id_categoria == element._id ) { %>
+                      <%  total++ %>
+                      <div class="card swiper-slide">
+                        <div class="image-box">
+                          <a href="#">
+                            <img src="../Imagenes/comida-rapida-casera.jpg" alt="" class="card-img-top" alt="..." />
+                          </a>
+                        </div>
+                        <div class="profile-details">
+                          <img src="../Imagenes/profilePic.jpg" alt="" />
+                          <div class="name-job">
+                            <h3 class="name" style="color: #c4d7e9;">
+                              <%= events[i].titulo %>
+                            </h3>
+                            <h4 class="job" style="color: #c4d7e9;">
+                              <%= events[i].descripcion.substring(0,20) %>
+                                  <ion-icon name="information-circle"
+                                  data-bs-toggle="tooltip" data-bs-placement="top"
+                                  data-bs-title="<%= events[i].descripcion %>"
+                                  style="margin-left: 10px; width: 15px; height: 15px; color: #0dcaf0;"></ion-icon>
+                            </h4>
+                            <% if (events[i].precio == 0) { %>
+                              <h5><span class="position-absolute bottom-20  end-0 p-2 badge rounded-pill text-warning-emphasis bg-warning-subtle border border-2 border-warning-subtle">
+                                <b>GRATIS</b>
+                                <span class="visually-hidden">Preu</span>
+                              </span></h5>
+                              
+                            <% } else { %>
+                              <h5><span class="position-absolute bottom-20  end-0 p-2 badge rounded-pill text-success-emphasis bg-success-subtle border border-2 border-success-subtle">
+                                <%= events[i].precio %>€
+                                <span class="visually-hidden">Preu</span>
+                              </span></h5>
+                            <% } %>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                  <% } %>
+
                     <% } %>
+                    
+                  <% } %>
+                  <% } %>
+                
+              </div>
+              <div class="swiper-button-next swiper-navBtn"></div>
+              <div class="swiper-button-prev swiper-navBtn"></div>
+              <div class="swiper-pagination"></div>
             </div>
+              
           </div>
-          <div class="swiper-button-next swiper-navBtn"></div>
-          <div class="swiper-button-prev swiper-navBtn"></div>
-          <div class="swiper-pagination"></div>
-        </div>
+            <% }) %>
+          <% } %>
+          
+
+        
         <!-- END Slider de categorias 1-->
         <br><br>
         <!-- Slider de categorias 2-->
