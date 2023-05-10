@@ -15,7 +15,7 @@ module.exports = (app) => {
     app.use(cors({
         origin: 'http://localhost:3000',
         optionsSuccessStatus: 200
-      }));
+    }));
 
     ///////////////////////////////////////////////////
     ////////////////// ACTIVIDADES ////////////////////
@@ -24,38 +24,38 @@ module.exports = (app) => {
     //GET endpoint /actividades
     app.get('/api/actividades', async (req, res) => {
 
-       const actividades = await actividadModel.find({});
+        const actividades = await actividadModel.find({});
 
-       try {
+        try {
 
             res.status(200).send(actividades);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
 
     app.get('/api/actividad/:id', async (req, res) => {
 
-       const actividad = await actividadModel.findOne({_id: req.params.id});
+        const actividad = await actividadModel.findOne({ _id: req.params.id });
 
-       actividad.num_visitas += 1;
+        actividad.num_visitas += 1;
 
-       await actividad.save();
+        await actividad.save();
 
-       try {
+        try {
             res.status(200).send(actividad);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
 
-   
+
     //POST endpoint /actividades
     app.post('/api/actividad', async (req, res) => {
         const actividades = new actividadModel(req.body);
-        
+
         try {
-            await actividades.save(); 
+            await actividades.save();
             const actv = await actividadModel.find({});
             res.status(200).send(actv);
         } catch (error) {
@@ -67,24 +67,24 @@ module.exports = (app) => {
     //PUT endopint /actividad/id (sirve para editar un objeto a partir del ID)
     app.put('/api/actividad/:id', async (req, res) => {
 
-        const actividad = await actividadModel.findOne({_id: req.params.id});
+        const actividad = await actividadModel.findOne({ _id: req.params.id });
         try {
             actividad.id = req.body._id,
-            actividad.titulo = req.body.titulo,
-            actividad.descripcion = req.body.descripcion,
-            actividad.id_categoria = req.body.id_categoria,
-            actividad.foto = req.body.foto,
-            actividad.fecha = req.body.fecha,
-            actividad.horario = req.body.horario,
-            actividad.duracion = req.body.duracion,
-            actividad.precio = req.body.precio,
-            actividad.correoContacto = req.body.correoContacto,
-            actividad.telefonoContacto = req.body.telefonoContacto,
-            actividad.creado_por = req.body.creado_por,
-            actividad.coords = req.body.coords,
-            actividad.id_widgetCompra = req.body.id_widgetCompra,
-            actividad.id_clasificacion = req.body.id_clasificacion
-            await actividad.save(); 
+                actividad.titulo = req.body.titulo,
+                actividad.descripcion = req.body.descripcion,
+                actividad.id_categoria = req.body.id_categoria,
+                actividad.foto = req.body.foto,
+                actividad.fecha = req.body.fecha,
+                actividad.horario = req.body.horario,
+                actividad.duracion = req.body.duracion,
+                actividad.precio = req.body.precio,
+                actividad.correoContacto = req.body.correoContacto,
+                actividad.telefonoContacto = req.body.telefonoContacto,
+                actividad.creado_por = req.body.creado_por,
+                actividad.coords = req.body.coords,
+                actividad.id_widgetCompra = req.body.id_widgetCompra,
+                actividad.id_clasificacion = req.body.id_clasificacion
+            await actividad.save();
             const resp = await actividadModel.find({});
 
             res.status(200).send(resp);
@@ -97,7 +97,7 @@ module.exports = (app) => {
     //DELETE enpoint /actividad/id
     app.delete('/api/actividad/:id', async (req, res) => {
 
-        const actividad = await actividadModel.deleteOne({_id: req.params.id});
+        const actividad = await actividadModel.deleteOne({ _id: req.params.id });
         try {
             const resp = await actividadModel.find({});
 
@@ -116,32 +116,32 @@ module.exports = (app) => {
 
         const usuarios = await usuarioModel.find({});
 
-       try {
+        try {
             res.status(200).send(usuarios);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
 
     //GET endpoint /usuario/id 
     app.get('/api/usuario/:id', async (req, res) => {
 
-        const usuario = await usuarioModel.findOne({_id: req.params.id});
+        const usuario = await usuarioModel.findOne({ _id: req.params.id });
 
-       try {
+        try {
             res.status(200).send(usuario);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
 
-   
+
     //POST endpoint /usuario
     app.post('/api/usuario', async (req, res) => {
         const usuarios = new usuarioModel(req.body);
-        
+
         try {
-            await usuarios.save(); 
+            await usuarios.save();
             const resp = await usuarioModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -152,18 +152,18 @@ module.exports = (app) => {
     //PUT endopint /usuario/id (sirve para editar un objeto a partir del ID)
     app.put('/api/usuario/:id', async (req, res) => {
 
-        const usuario = await usuarioModel.findOne({_id: req.params.id});
+        const usuario = await usuarioModel.findOne({ _id: req.params.id });
         try {
             usuario.id = req.body._id,
-            usuario.nombre = req.body.nombre,
-            usuario.apellido = req.body.apellido,
-            usuario.email = req.body.email,
-            usuario.password = req.body.password,
-            usuario.dni = req.body.dni,
-            usuario.fecha_nacimiento = req.body.fecha_nacimiento,
-            usuario.rol = req.body.rol
+                usuario.nombre = req.body.nombre,
+                usuario.apellido = req.body.apellido,
+                usuario.email = req.body.email,
+                usuario.password = req.body.password,
+                usuario.dni = req.body.dni,
+                usuario.fecha_nacimiento = req.body.fecha_nacimiento,
+                usuario.rol = req.body.rol
 
-            await usuario.save(); 
+            await usuario.save();
             const resp = await usuarioModel.find({});
 
             res.status(200).send(resp);
@@ -176,7 +176,7 @@ module.exports = (app) => {
     //DELETE enpoint /usuario/id
     app.delete('/api/usuario/:id', async (req, res) => {
 
-        const usuario = await usuarioModel.deleteOne({_id: req.params.id});
+        const usuario = await usuarioModel.deleteOne({ _id: req.params.id });
         try {
             const resp = await usuarioModel.find({});
 
@@ -195,31 +195,31 @@ module.exports = (app) => {
 
         const categorias = await categoriaModel.find({});
 
-       try {
+        try {
             res.status(200).send(categorias);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
 
     //GET endpoint /categoria by ID
     app.get('/api/categoria/:id', async (req, res) => {
 
-        const categoria = await categoriaModel.findOne({_id: req.params.id});
-    
+        const categoria = await categoriaModel.findOne({ _id: req.params.id });
+
         try {
             res.status(200).send(categoria);
         } catch (error) {
             res.status(500).send(error);
         }
     });
-     
+
     //POST endpoint /categoria
     app.post('/api/categoria', async (req, res) => {
         const categorias = new categoriaModel(req.body);
-        
+
         try {
-            await categorias.save(); 
+            await categorias.save();
             const resp = await categoriaModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -230,14 +230,14 @@ module.exports = (app) => {
     //PUT endopint /categoria/id (sirve para editar un objeto a partir del ID)
     app.put('/api/categoria/:id', async (req, res) => {
 
-        const categoria = await categoriaModel.findOne({_id: req.params.id});
+        const categoria = await categoriaModel.findOne({ _id: req.params.id });
         try {
-            
-            categoria.id = req.body._id,
-            categoria.titulo = req.body.titulo,
-            categoria.descripcion = req.body.descripcion
 
-            await categoria.save(); 
+            categoria.id = req.body._id,
+                categoria.titulo = req.body.titulo,
+                categoria.descripcion = req.body.descripcion
+
+            await categoria.save();
             const resp = await categoriaModel.find({});
 
             res.status(200).send(resp);
@@ -250,7 +250,7 @@ module.exports = (app) => {
     //DELETE enpoint /categoria/id
     app.delete('/api/categoria/:id', async (req, res) => {
 
-        const categoria = await categoriaModel.deleteOne({_id: req.params.id});
+        const categoria = await categoriaModel.deleteOne({ _id: req.params.id });
         try {
             const resp = await categoriaModel.find({});
 
@@ -260,7 +260,7 @@ module.exports = (app) => {
         }
     });
 
-    
+
     //////////////////////////////////////////////////
     //////////////// CLASIFICACIONES /////////////////
     //////////////////////////////////////////////////
@@ -270,19 +270,19 @@ module.exports = (app) => {
 
         const clasificaciones = await clasificacionModel.find({});
 
-       try {
+        try {
             res.status(200).send(clasificaciones);
-       } catch (error) {
+        } catch (error) {
             res.status(500).send(error);
-       }
+        }
     });
-   
+
     //POST endpoint /clasificacion
     app.post('/api/clasificacion', async (req, res) => {
         const clasificaciones = new clasificacionModel(req.body);
-        
+
         try {
-            await clasificaciones.save(); 
+            await clasificaciones.save();
             const resp = await clasificacionModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -293,15 +293,15 @@ module.exports = (app) => {
     //PUT endopint /clasificacion/id (sirve para editar un objeto a partir del ID)
     app.put('/api/clasificacion/:id', async (req, res) => {
 
-        const clasificacion = await clasificacionModel.findOne({_id: req.params.id});
+        const clasificacion = await clasificacionModel.findOne({ _id: req.params.id });
         try {
-            
-            clasificacion.id = req.body._id,
-            clasificacion.titulo = req.body.titulo,
-            clasificacion.descripcion = req.body.descripcion,
-            clasificacion.valor = req.body.valor
 
-            await clasificacion.save(); 
+            clasificacion.id = req.body._id,
+                clasificacion.titulo = req.body.titulo,
+                clasificacion.descripcion = req.body.descripcion,
+                clasificacion.valor = req.body.valor
+
+            await clasificacion.save();
             const resp = await clasificacionModel.find({});
 
             res.status(200).send(resp);
@@ -314,7 +314,7 @@ module.exports = (app) => {
     //DELETE enpoint /clasificacion/id
     app.delete('/api/clasificacion/:id', async (req, res) => {
 
-        const clasificacion = await clasificacionModel.deleteOne({_id: req.params.id});
+        const clasificacion = await clasificacionModel.deleteOne({ _id: req.params.id });
         try {
             const resp = await clasificacionModel.find({});
 
@@ -329,8 +329,8 @@ module.exports = (app) => {
     app.get('/search', async (req, res) => {
         try {
             const search = req.query.q;
-            
-            const actividades = await actividadModel.find({titulo: {$regex: new RegExp(search, "i")}})
+
+            const actividades = await actividadModel.find({ titulo: { $regex: new RegExp(search, "i") } })
 
             res.status(200).send(actividades)
         } catch (error) {
@@ -339,8 +339,11 @@ module.exports = (app) => {
     })
 
     let port = 3004;
-    
+
     app.listen(port, () => {
         console.log(`Servidor arrancat, escoltant el port ${port}`);
     });
+
 }
+
+

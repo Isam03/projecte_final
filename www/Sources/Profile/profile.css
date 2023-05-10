@@ -2,6 +2,20 @@ body {
     background-color: #03112b;
 }
 
+.card-title{
+    font-size: x-large;
+}
+
+.card-subtitle{
+    font-size: larger;
+    color: aqua;
+}
+
+
+font{
+    color: #e3ebf7;
+}
+
 .rainbow-text {
     background: -webkit-linear-gradient(92deg, #95d7e3, #eb76ff);
     background-size: 600vw 600vw;

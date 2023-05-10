@@ -18,25 +18,30 @@
 
 <body>
   <!-- <video id="myVideo" src="../Imagenes/fondoLogin.mp4" autoplay loop muted></video> -->
-
   <div class='stars'></div>
   <div class='twinkling'></div>
   <div class='clouds'></div>
 
   <div class="container-fluid">
     <div class="imagen">
-      <img src="../Imagenes/Logo2.svg" id="logo" alt=""> <font id="queda"> Queda</font><font id="ya">Ya</font>
+      <img src="../Imagenes/Logo2.svg" id="logo" alt="">
+      <font id="queda"> Queda</font>
+      <font id="ya">Ya</font>
     </div>
     <div class="container" style="width: 400px; height: 500px;">
       <!-- Pills navs -->
       <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
           <a class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-            aria-controls="pills-login" aria-selected="true"><font>Login</font></a>
+            aria-controls="pills-login" aria-selected="true">
+            <font>Login</font>
+          </a>
         </li>
         <li class="nav-item" role="presentation">
           <a class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-            aria-controls="pills-register" aria-selected="false"><font>Register</font></a>
+            aria-controls="pills-register" aria-selected="false">
+            <font>Register</font>
+          </a>
         </li>
       </ul>
       <!-- Pills navs -->
@@ -46,19 +51,25 @@
         <div class="tab-pane fade show active" id="pills-login" role="tabpanel" aria-labelledby="tab-login">
           <form action="/login" method="post">
             <div class="text-center mb-3">
-              <h3><font>Login</font></h3>
+              <h3>
+                <font>Login</font>
+              </h3>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input type="email" name="email" id="loginName" class="form-control" />
-              <label class="form-label" for="loginName"><font>Email or username</font></label>
+              <label class="form-label" for="loginName">
+                <font>Email or username</font>
+              </label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
               <input type="password" name="password" id="loginPassword" class="form-control" />
-              <label class="form-label"  for="loginPassword"><font>Password</font></label>
+              <label class="form-label" for="loginPassword">
+                <font>Password</font>
+              </label>
             </div>
 
             <!-- 2 column grid layout -->
@@ -67,66 +78,87 @@
                 <!-- Checkbox -->
                 <div class="form-check mb-3 mb-md-0">
                   <input class="form-check-input" type="checkbox" value="" id="loginCheck" checked />
-                  <label class="form-check-label" for="loginCheck"><font> Remember me </font></label>
+                  <label class="form-check-label" for="loginCheck">
+                    <font> Remember me </font>
+                  </label>
                 </div>
               </div>
 
               <div class="col-md-6 d-flex justify-content-center">
                 <!-- Simple link -->
-                <a href="#!"><font><u>Forgot password?</u></font></a>
+                <a href="#!">
+                  <font><u>Forgot password?</u></font>
+                </a>
               </div>
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-4"><font>Sign in</font></button>
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              <font>Sign in</font>
+            </button>
 
             <!-- Register buttons -->
             <div class="text-center">
-              <p><font> Not a member? </font><a href="#!"><font><u>Register</u></font></a></p>
+              <p>
+                <font> Not a member? </font><a href="#!">
+                  <font><u>Register</u></font>
+                </a>
+              </p>
             </div>
           </form>
         </div>
         <div class="tab-pane fade" id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-          <form>
+          <form id="myForm" action="/register" method="post">
             <div class="text-center mb-3">
-              <h3><font>Register</font></h3>
+              <h3>
+                <font>Register</font>
+              </h3>
             </div>
 
             <!-- Username input -->
             <div class="form-outline mb-4">
-              <input type="text" id="registerUsername" class="form-control" />
-              <label class="form-label" for="registerUsername"><font>Username</font></label>
+              <input type="text" id="registerUsername" name="nombreUsuario" class="form-control" required />
+              <label class="form-label" for="registerUsername">
+                <font>Username</font>
+              </label>
             </div>
 
             <!-- Email input -->
             <div class="form-outline mb-4">
-              <input type="email" id="registerEmail" class="form-control" />
-              <label class="form-label" for="registerEmail"><font>Email</font></label>
+              <input type="email" id="registerEmail" name="email" class="form-control" required />
+              <label class="form-label" for="registerEmail">
+                <font>Email</font>
+              </label>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="registerPassword" class="form-control" />
-              <label class="form-label" for="registerPassword"><font>Password</font></label>
+              <input type="password" id="registerPassword" name="password" class="form-control" required />
+              <label class="form-label" for="registerPassword">
+                <font>Password</font>
+              </label>
             </div>
 
             <!-- Repeat Password input -->
             <div class="form-outline mb-4">
-              <input type="password" id="registerRepeatPassword" class="form-control" />
-              <label class="form-label" for="registerRepeatPassword"><font>Repeat password</font></label>
+              <input type="password" id="registerRepeatPassword" class="form-control" required />
+              <label class="form-label" for="registerRepeatPassword">
+                <font>Repeat password</font>
+              </label>
             </div>
+            <div id="liveAlertPlaceholder"></div>
 
             <!-- Checkbox -->
             <div class="form-check d-flex justify-content-center mb-4">
               <input class="form-check-input me-2" type="checkbox" value="" id="registerCheck" checked
                 aria-describedby="registerCheckHelpText" />
               <label class="form-check-label" for="registerCheck">
-               <font>He leido y <u>accepto los términos</u></font>
+                <font>He leido y <u>accepto los términos</u></font>
               </label>
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-block mb-3">Sign in</button>
+            <button type="submit" id="liveAlertBtn" class="btn btn-primary btn-block mb-3">Sign in</button>
           </form>
         </div>
       </div>
@@ -140,6 +172,54 @@
     crossorigin="anonymous"></script>
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+  <script>
+    const alertPlaceholder = document.getElementById('liveAlertPlaceholder')
+    const appendAlert = (message, type) => {
+      // Check if the same message is already shown
+      const existingAlert = alertPlaceholder.querySelector(`[data-message="${message}"]`)
+      if (existingAlert) {
+        // If so, do not create a new alert
+        return
+      }
+
+      const wrapper = document.createElement('div')
+      wrapper.innerHTML = [
+        `<div class="alert alert-${type} alert-dismissible" role="alert" style="margin-left:15px; margin-top:35px; position:absolute; z-index: 3; text align: center;" data-message="${message}">`,
+        `   <div>${message}</div>`,
+        '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
+        '</div>'
+      ].join('')
+
+      alertPlaceholder.append(wrapper)
+    }
+
+    const alertTrigger = document.getElementById('liveAlertBtn')
+    if (alertTrigger) {
+      alertTrigger.addEventListener('click', () => {
+        const form = document.getElementById('myForm');
+        form.addEventListener('submit', function (event) {
+          const password1 = document.getElementById('registerPassword').value;
+          const password2 = document.getElementById('registerRepeatPassword').value;
+          if (password1 !== password2) {
+            event.preventDefault(); // Evita que se envíe el formulario
+            appendAlert('Las contraseñas no coinciden!', 'danger')
+          }
+        });
+      })
+    }
+
+    // Remove data-message attribute from alert when it is closed
+    alertPlaceholder.addEventListener('closed.bs.alert', (event) => {
+      const message = event.target.dataset.message
+      if (message) {
+        delete event.target.dataset.message
+      }
+    })
+  </script>
+
+
+
 </body>
 
 </html>
