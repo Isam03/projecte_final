@@ -38,7 +38,7 @@ module.exports = (app) => {
 
        const actividad = await actividadModel.findOne({_id: req.params.id});
 
-       actividad.num_visitas += 1;
+       actividad.numvisitas += 1;
 
        await actividad.save();
 

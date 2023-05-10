@@ -111,14 +111,14 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true
 }))
 
-app.post('/register', (req, res) => {
-    const formData = req.body;
-    const usuarios = new usuarioModel(req.body);
+app.post('/register', async (req, res) => {
+    const usuario = req.body;
 
-    usuarios.save(formData, (err, result) => {
-        if (err) throw err;
-        res.redirect('/login', { message: "Usuario registrado, ya puede ingresar con su correo electronico y contraseña" });
-    });
+    try {
+        await axios.post('https://localhost:3004/api/usuario', usuario);
+    } catch (error) {
+        res.status(500).send('Server Error');
+    }
 });
 
 app.get('/protected', (req, res) => {
@@ -151,8 +151,13 @@ app.get('/logout', function (req, res, next) {
 });
 
 /// VISTA de EVENTO
-app.get('/event', (req, res) => {
-    res.render('event/event')
+app.get('/event/:id', async (req, res) => {
+    const resev = await axios.get('http://localhost:3004/api/actividad/' + req.params.id);
+    const data = resev.data;
+    const rescat = await axios.get('http://localhost:3004/api/categorias')
+    const cat = rescat.data;
+
+    res.render('event/event', { event: data, categoria: cat })
 })
 
 /// VISTA de CREAR EVENTO
