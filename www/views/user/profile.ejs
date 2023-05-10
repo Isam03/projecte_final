@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="../Sources/prueba.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="./Sources/style.css">
-    <link rel="stylesheet" href="/www/Sources/Profile/profile.css">
+    <link rel="stylesheet" href="../Sources/Profile/profile.css">
 
 </head>
 
@@ -125,16 +125,23 @@
 
     <div class="m-2">
         <div class="card rounded-3"
-            style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%; background-color: #03112b;">
-            <div class="card-body rounded-2" id="bodyCard">
-                <font style="color: #c4d7e9;"><h1 style="text-align: center;top: 50%;">Bienvenido a tu perfil,</font> <font class=".radial-gradient"> <% user.nombre%></h1></font>
+            style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
+            <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
+                <br><br><br><br><br><br>
+                <font style="color: #c4d7e9;">
+                    <h1 style="text-align: center; color: #c4d7e9;">Bienvenido a tu perfil,
+                </font>
+                <font class="rainbow-text">
+                    <%= user.nombreUsuario%></font>!
+                </h1>
+
             </div>
         </div>
     </div>
     <div style="top: 50%; left: 50%; transform: translate(-50%, -50%);  opacity: 98%; position: absolute; ">
         <a class="btn" style="border-radius: 150px;" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
             aria-controls="offcanvasExample"><img
-                style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #03112b;" <% if (user
+                style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #010a1b ;" <% if (user
                 !=undefined) {%>
             <% if (user.nombre=="Marc" ) {%>
                 src="../Imagenes/profilePic.jpg" alt="">
@@ -153,7 +160,8 @@
         </div>
         <div class="offcanvas-body">
             <div>
-                Some text as placeholder. In real life you can have the elements you have chosen. Like, text, images,
+                Some text as placeholder. In real life you can have the elements you have chosen. Like, text,
+                images,
                 lists, etc.
             </div>
             <div class="dropdown mt-3">
