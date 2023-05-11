@@ -177,6 +177,19 @@ app.get('/category/:id', async (req, res) => {
 })
 
 
+/// VISTA de Busqueda
+app.get('/search', async (req, res) => {
+    const search = async (query) => {
+        try {
+          const response = await axios.post('http://localhost:3004/api/search', { q: query });
+          const data = response.data;
+          res.render('search', {events: data})
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    
+})
 
 app.listen(port, () => {
     console.log(`Servidor arrancat, escoltant el port ${port}`);

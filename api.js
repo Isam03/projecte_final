@@ -6,11 +6,24 @@ const actividadModel = require("./models/actividad");
 const usuarioModel = require("./models/usuario");
 const categoriaModel = require("./models/categoria");
 const clasificacionModel = require("./models/clasificacion");
+const imagenModel = require("./models/imagen");
 const cors = require('cors');
 const moment = require('moment');
+const multer = require('multer');
 const { response } = require('express');
 
 module.exports = (app) => {
+
+    const storage = multer.diskStorage({
+            destination: (req, file, cb) => {
+            cb(null, 'uploads');
+        },
+            filename: (req, file, cb) => {
+            cb(null, file.originalname);
+        },
+    });
+    
+    const upload = multer({ storage });
 
     app.use(cors({
         origin: 'http://localhost:3000',
@@ -337,6 +350,24 @@ module.exports = (app) => {
             res.status(500).send(error);
         }
     })
+
+
+    /// IMAGENES endpoint
+    app.post('/api/upload', upload.single('imagefield'), async (req, res) => {
+        try {
+        const imagen = new imagenModel({
+            filename: req.file.originalname,
+            path: req.file.filename,
+        });
+        await imagen.save();
+    
+        res.send('Image uploaded successfully!');
+        } catch (error) {
+        console.error(error);
+        res.status(500).send(error);
+        }
+    });
+
 
     let port = 3004;
     
