@@ -368,6 +368,18 @@ module.exports = (app) => {
         }
     });
 
+    app.get('/api/images', async (req, res) => {
+        try {
+          const images = await imagenModel.find().lean();
+      
+          // render the view and pass the images data to it
+          res.send(images);
+        } catch (error) {
+          console.error(error);
+          res.status(500).send(error);
+        }
+      });
+
 
     let port = 3004;
     

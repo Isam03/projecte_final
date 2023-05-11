@@ -28,6 +28,7 @@ db.once("open", () => {
 });
 
 app.use(express.static(path.join(__dirname, 'www')));
+
 require('./api')(app);
 
 ///////////////////////////////////////////////////
@@ -54,6 +55,8 @@ app.use(flash());
 
 //     next();
 // });
+
+app.use('/uploads', express.static('uploads'));
 
 /// VISTA de INICIO
 app.get('/', async (req, res) => {
@@ -131,10 +134,12 @@ app.get('/protected', (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
         // Render the protected page
-        res.render('user/profile', { user: req.user });
+        const images = await axios.get('http://localhost:3004/api/images');
+        const data = images.data;
+        res.render('user/profile', { user: req.user, imagens: data });
     } else {
         // Redirect the user to the login page
         res.redirect('/login');
