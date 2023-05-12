@@ -18,10 +18,15 @@ const imagenSchema = new mongoose.Schema({
     id_actividad: {
         type: String,
         required: false
+    },
+    rol: {
+        type: String,
+        required: false
     }
 
 
-});
+
+}, { strict: false });
 
 const Imagen = mongoose.model("Imagen", imagenSchema);
   

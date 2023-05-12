@@ -38,7 +38,12 @@ const UsuarioSchema = new mongoose.Schema({
         type: Number,
         required: false,
         default: 2
+    },
+    foto_perfil: {
+        type: String,
+        required: false,
     }
+
 
 
 });
