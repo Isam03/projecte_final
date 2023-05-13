@@ -114,25 +114,28 @@ app.post('/login', passport.authenticate('local', {
     failureFlash: true
 }))
 
+// ENDPOINT REGISTER
 app.post('/register', async (req, res) => {
     const usuario = req.body;
-
+  
     try {
-        await axios.post('https://localhost:3004/api/usuario', usuario);
+      await axios.post('http://localhost:3004/api/usuario', usuario)
+      res.status(200).redirect('/login');;
     } catch (error) {
-        res.status(500).send('Server Error');
+      console.error(error);
+      res.status(500).send('Server Error');
     }
 });
 
-app.get('/protected', (req, res) => {
-    if (req.isAuthenticated()) {
-        // Render the protected page
-        res.render('user/panel', { user: req.user });
-    } else {
-        // Redirect the user to the login page
-        res.redirect('/login');
-    }
-});
+// app.get('/protected', (req, res) => {
+//     if (req.isAuthenticated()) {
+//         // Render the protected page
+//         res.render('user/panel', { user: req.user });
+//     } else {
+//         // Redirect the user to the login page
+//         res.redirect('/login');
+//     }
+// });
 
 app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
@@ -161,8 +164,13 @@ app.get('/event/:id', async (req, res) => {
     const data = resev.data;
     const rescat = await axios.get('http://localhost:3004/api/categorias')
     const cat = rescat.data;
-
-    res.render('event/event', { event: data, categoria: cat })
+    const resusu = await axios.get('http://localhost:3004/api/usuarios')
+    const usu = resusu.data;
+    var user = "";
+    if (req.isAuthenticated()) {
+        user = req.user;
+    }
+    res.render('event/event', { event: data, categoria: cat, usuario: usu, yo: user, moment })
 })
 
 /// VISTA de CREAR EVENTO
@@ -195,6 +203,21 @@ app.get('/search', async (req, res) => {
       }
     
 })
+
+// VISTA CHECKOUT
+app.get('/checkout', async(req,res) =>{
+    res.render('event/checkout');
+});
+
+app.post('/checkout', async(req,res) =>{
+    const ticket = req.body;
+    try {
+        await axios.post('http://localhost:3004/api/compra', ticket)
+        res.status(200).render('event/checkout');
+    } catch (error) {
+        res.status(500).send('Server checkout error');
+    }
+});
 
 app.listen(port, () => {
     console.log(`Servidor arrancat, escoltant el port ${port}`);

@@ -7,9 +7,11 @@ const usuarioModel = require("./models/usuario");
 const categoriaModel = require("./models/categoria");
 const clasificacionModel = require("./models/clasificacion");
 const imagenModel = require("./models/imagen");
+const ticketModel = require("./models/ticket");
 const cors = require('cors');
 const moment = require('moment');
 const multer = require('multer');
+const stripe = require('stripe')('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')
 const { response } = require('express');
 
 module.exports = (app) => {
@@ -151,10 +153,17 @@ module.exports = (app) => {
 
     //POST endpoint /usuario
     app.post('/api/usuario', async (req, res) => {
+<<<<<<< Updated upstream
         const usuarios = new usuarioModel(req.body);
 
         try {
             await usuarios.save();
+=======
+        
+        try {
+            const usuarios = new usuarioModel(req.body);
+            await usuarios.save(); 
+>>>>>>> Stashed changes
             const resp = await usuarioModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -430,6 +439,58 @@ module.exports = (app) => {
             res.status(500).send(error);
         }
     });
+
+
+    
+
+
+
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+    ////////////////      CHECK OUT       /////////////////////
+    ///////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////
+
+    // app.post('/api/comprar/', async(req, res) => {
+    //     try {
+    //         const ticket = new ticketModel(req.body);
+    //         await ticket.save();
+    //         res.status(200).send(resp);
+    //     } catch (error) {
+    //         res.status(500).send(error);
+    //     }
+    // });
+
+    
+    app.post('/create-checkout-session', async (req, res) => {
+        const session = await stripe.checkout.sessions.create({
+          line_items: [
+            {
+                price_data: {
+                  currency: "eur",
+                  product_data: {
+                      name: req.body.titulo,
+                      description: req.body.descripcion,
+                      metadata: {
+                        fecha: req.body.fecha,
+                        hora: req.body.hora,
+                        creado_por: req.body.creado_por,
+                        referencia: req.body.referencia
+                      }
+                  },
+                  unit_amount: req.body.precio,
+                },
+                quantity: 1,
+                product: req.body.id_actividad // Replace <product_id> with the actual product ID
+              },
+          ],
+          mode: 'payment',
+          success_url: 'http://localhost:3000/success',
+          cancel_url: 'http://localhost:3000/',
+        });
+      
+        res.redirect(303, session.url);
+      });
 
 
     let port = 3004;

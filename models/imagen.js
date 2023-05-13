@@ -1,5 +1,6 @@
 const { json } = require("express");
 const mongoose = require("mongoose");
+const { ObjectId } = require("bson");
 
 const imagenSchema = new mongoose.Schema({
 
@@ -12,11 +13,11 @@ const imagenSchema = new mongoose.Schema({
         required: false
     },
     id_usuario: {
-        type: String,
+        type: ObjectId,
         required: false
     },
     id_actividad: {
-        type: String,
+        type: ObjectId,
         required: false
     },
     rol: {

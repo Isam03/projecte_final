@@ -28,7 +28,11 @@
       <font id="queda"> Queda</font>
       <font id="ya">Ya</font>
     </div>
-    <div class="container" style="width: 400px; height: 500px;">
+  </div>
+  
+  <div class="container-fluid">
+    
+    <div class="container" style="width: 400px; height: auto;">
       <!-- Pills navs -->
       <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
         <li class="nav-item" role="presentation">
@@ -111,7 +115,7 @@
           <form id="myForm" action="/register" method="post">
             <div class="text-center mb-3">
               <h3>
-                <font>Register</font>
+                <font>Registro</font>
               </h3>
             </div>
 
@@ -123,11 +127,43 @@
               </label>
             </div>
 
+            <!-- name input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="registerName" name="nombre" class="form-control" required />
+              <label class="form-label" for="registerName">
+                <font>Nombre</font>
+              </label>
+            </div>
+
+            <!-- surname input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="registerSurname" name="apellido" class="form-control" required />
+              <label class="form-label" for="registerSurname">
+                <font>Apellido</font>
+              </label>
+            </div>
+
             <!-- Email input -->
             <div class="form-outline mb-4">
               <input type="email" id="registerEmail" name="email" class="form-control" required />
               <label class="form-label" for="registerEmail">
                 <font>Email</font>
+              </label>
+            </div>
+
+            <!-- Birthday input -->
+            <div class="form-outline mb-4">
+              <input type="date" id="registerBirth" name="fecha_nacimiento" class="form-control" required />
+              <label class="form-label" for="registerBirth">
+                <font>Fecha de nacimiento</font>
+              </label>
+            </div>
+
+            <!-- ID input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="registerId" name="dni" class="form-control" required />
+              <label class="form-label" for="registerId">
+                <font>Dni</font>
               </label>
             </div>
 
