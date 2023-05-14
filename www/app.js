@@ -30,3 +30,26 @@ function sendData(srch){
     });
 
 }
+
+function submitForm() {
+    const form = document.getElementById('my-form');
+    const formData = new FormData(form);
+    const id = // replace with the ID of the activity you want to update
+
+    fetch(`/api/actividad/${id}`, {
+      method: 'PUT',
+      body: formData
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Actividad actualizada exitosamente!');
+        window.location.href = '/actividades';
+      } else {
+        throw new Error('Error al actualizar actividad');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error al actualizar actividad');
+    });
+  }

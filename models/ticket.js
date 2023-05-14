@@ -25,7 +25,7 @@ const ticketSchema = new mongoose.Schema({
         required: false
     },
     precio: {
-        type: String,
+        type: Number,
         required: false
     },
     creado_por: {

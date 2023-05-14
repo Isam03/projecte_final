@@ -22,110 +22,7 @@
 
 
   <!-- Nav Bar -->
-  <div class="container position-sticky z-index-sticky top-0">
-    <nav
-      class="navbar navbar-expand-lg blur top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4 rounded-5"
-      style="background-color: #020b1c;opacity: 90%; justify-content: center;">
-      <div class="container-fluid">
-        <picture>
-          <source media="(min-width: 992px)" srcset="./imagenes/Logo2.svg" id="shake">
-          <img src="./imagenes/Logo2v2.svg" onclick="audioPlay()" alt="" id="shake"
-            style="height: 60px; width: 60px; margin-right: 5px;">
-
-        </picture>
-        <img id="logo-bar" src="./Imagenes/LogoBar.svg" alt="" style="height: 50px; margin-right: 5px;">
-        <button class="navbar-toggler custom-toggler rounded-5" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-          aria-label="Toggle navigation" style="padding-left: 20px;">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse nav-underline" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="reveal-text nav-link" id="logo-text"
-                style="color: #d38600; font-size:medium;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;"><b>Queda
-                  <font style="color: #ff5757;">Ya</font>
-                </b></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#" id="linkPagina2">
-                <font class="colorText">Crea tu evento</font>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <font class="colorText">FAQ's</font>
-              </a>
-            </li>
-          </ul>
-          <form class="d-flex justify-content-center align-items-center" role="search">
-            <div class="input-group">
-              <input id="searchBar" type="search" class="border-secondary form-control rounded-start-5"
-                placeholder="Busca un evento" aria-label="searchBar" aria-describedby="button-addon2"
-                style="background-color: #020b1c; color: #c4d7e9;" onkeyup="sendData(this)" disabled>
-              <button title="boton" class="btn btn-outline-secondary rounded-end-5" type="submit" id="button-addon2"
-                disabled><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                  class="bi bi-search" viewBox="0 0 16 16">
-                  <path
-                    d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                </svg></button>
-              <br>
-
-            </div>
-          </form>
-          <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="true">
-                <img id="profilePic" <% %>
-                <% %>
-                  src="../Imagenes/profilePic.jpg" alt="">
-
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" <% %>
-                    href="/profile">
-
-
-                        <font class="colorText"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16"
-                            style="margin-bottom: 5px;">
-                            <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
-                            <path fill-rule="evenodd"
-                              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
-                          </svg>
-                        </font>
-                  </a></li>
-                <li><a class="dropdown-item" href="#">
-                    <font class="colorText"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                        fill="currentColor" class="bi bi-bag-fill" viewBox="0 0 16 16" style="margin-bottom: 5px;">
-                        <path
-                          d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z" />
-                      </svg> Compras</font>
-                  </a></li>
-                <li>
-                  <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="/logout">
-                    
-                        <font class="colorText"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                            fill="currentColor" class="bi bi-box-arrow-in-left" viewBox="0 0 16 16"
-                            style="margin-bottom: 5px;">
-                            <path fill-rule="evenodd"
-                              d="M10 3.5a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-2a.5.5 0 0 1 1 0v2A1.5 1.5 0 0 1 9.5 14h-8A1.5 1.5 0 0 1 0 12.5v-9A1.5 1.5 0 0 1 1.5 2h8A1.5 1.5 0 0 1 11 3.5v2a.5.5 0 0 1-1 0v-2z" />
-                            <path fill-rule="evenodd"
-                              d="M4.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H14.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
-                          </svg>
-                        </font>
-                  </a></li>
-              </ul>
-            </li>
-          </ul>
-
-
-        </div>
-      </div>
-    </nav>
-  </div>
+  <%- include('../navbar.ejs') %>
   <!-- END Nav Bar -->
 
   <div class="m-2">
@@ -226,23 +123,85 @@
                                     <span class="visually-hidden">Precio</span>
                                 </span></h1>
                             <% } %>
-                            <form action="http://localhost:3004/create-checkout-session" method="POST">
-                                <input type="hidden" name="referencia" value="<%= "REF" + Math.floor(Math.random() * (999999 - 123456 + 1) + 123456) %>"/>
-                                <input type="hidden" name="titulo" value="<%= event.titulo %>"/>
-                                <input type="hidden" name="descripcion" value="<%= event.descripcion %>"/>
-                                <input type="hidden" name="fecha" value="<%= formatData %>"/>
-                                <input type="hidden" name="hora" value="<%= formatHora %>"/>
-                                <input type="hidden" name="precio" value="<%= event.precio %>"/>
-                                <input type="hidden" name="creado_por" value="<%= creador %>"/>
-                                <input type="hidden" name="id_usuario" value="<%= yo._id %>"/>
-                                <input type="hidden" name="id_actividad" value="<%= event._id %>"/>
-                                <button class="btn btn-info" type="submit">Comprar</button>
-                            </form>                              
+                            <% if (!user) { %>
+                                <button class="btn btn-info" type="submit" disabled>Hazte usuario para poder comprar</button>
+                            <% } else { %>
+                                <form action="http://localhost:3004/create-checkout-session" method="POST">
+                                    <input type="hidden" name="referencia" value="<%= "REF" + Math.floor(Math.random() * (999999 - 123456 + 1) + 123456) %>"/>
+                                    <input type="hidden" name="titulo" value="<%= event.titulo %>"/>
+                                    <input type="hidden" name="descripcion" value="<%= event.descripcion %>"/>
+                                    <input type="hidden" name="fecha" value="<%= formatData %>"/>
+                                    <input type="hidden" name="hora" value="<%= formatHora %>"/>
+                                    <input type="hidden" name="precio" value="<%= event.precio %>"/>
+                                    <input type="hidden" name="creado_por" value="<%= creador %>"/>
+                                    <input type="hidden" name="id_usuario" value="<%= user._id %>"/>
+                                    <input type="hidden" name="id_actividad" value="<%= event._id %>"/>
+                                    <button class="btn btn-info" type="submit">Comprar</button>
+                                </form>
+                            <% } %>
+                             
+                                                          
                         </div>
                       </p>
                       
                     </div>
                   </div>
+                  <!-- EDAD RECOMENDADA -->
+                  <div class="card mt-3" style="width: auto; height: 0 auto;">
+                    <div class="card-body">
+                      <h5 class="card-title">Edad mínima</h5>
+                      <p class="card-text">
+                        
+                        <div class="d-grid gap-2 text-center">
+                            <% let color = "" %>
+                            <% if (clasificaciones != "") { %>
+                                <% clasificaciones.forEach(element => { %>
+                                    <% if (event.id_clasificacion == element._id) { %>
+                                        <% if ((element.identificador == "A") || (element.identificador == "Ai")) { %>
+                                            <% color = "success" %>
+                                        <% } %>
+                                        <% if ((element.identificador == "7") || (element.identificador == "7i")) { %>
+                                            <% color = "info" %>
+                                        <% } %>
+                                        <% if (element.identificador == "+12") { %>
+                                            <% color = "warning" %>
+                                        <% } %>
+                                        <% if (element.identificador == "+16") { %>
+                                            <% color = "primary" %>
+                                        <% } %>
+                                        <% if (element.identificador == "+18") { %>
+                                            <% color = "danger" %>
+                                        <% } %>
+                                        
+                                        <h1><span class="<%= 'end-0 p-10 badge bg-' + color + ' border border-2 border-' + color + '-subtle' %>">
+                                            <b><%= element.identificador %></b>
+                                            <span class="visually-hidden">Edad minima</span>
+                                        </span></h1>
+                                        <p class="text-light"><%= element.descripcion %></p>
+                                    <% } %>
+                                <% }) %>
+                            <% } %>              
+                        </div>
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <% if (user && user.rol == 0) { %>
+                    <div class="card mt-3" style="width: auto; height: 0 auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">Administrar</h5>
+                            <p class="card-text">
+                            
+                            <div class="d-grid gap-2 text-center">
+                                <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#editModal">Editar actividad</button>                           
+                                <button class="btn btn-danger" type="button" onclick="eliminarActividad('<%= event._id %>')">Eliminar actividad</a>                           
+                            </div>
+                            </p>
+                            
+                        </div>
+                    </div>
+  
+                  <% } %>
             </div>
           </div>
             
@@ -253,17 +212,169 @@
   </div>
   </div>
 
+
+  <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="editModalLabel">Editar actividad</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form id="putForm">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Titulo">Titulo</span>
+                    <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Descripcion">Descripcion</span>
+                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Categoria">Categoria</span>
+                    <select class="form-control" placeholder="Categoria" name="categoria">
+                        <option value="">Seleccione una categoria</option>
+                        <% categoria.forEach(element => { %>
+                            <option value="<%= element._id %>"><%= element.titulo %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Clasificacion">Clasificacion</span>
+                    <select class="form-control" placeholder="Clasificacion" name="clasificacion">
+                        <option value="">Seleccione una clasificacion</option>
+                            <% clasificaciones.forEach(element => { %>
+                                <option value="<%= element._id %>"><%= element.descripcion %></option>
+                            <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
+                    <input type="datetime-local" class="form-control" placeholder="Fechahora" name="fechahora">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
+                    <input type="text" class="form-control" placeholder="Correocontacto" name="correoContacto">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Telefono">Telefono de contacto</span>
+                    <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Coords">Coordenadas (Latitud,Longitud)</span>
+                    <input type="text" class="form-control" placeholder="Coords" name="coords">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Creadopor">Creado por</span>
+                    <select class="form-control" placeholder="Creado por" name="creado_por">
+                        <option value="">Seleccione un usuario</option>
+                                <% usuario.forEach(element => { %>
+                                    <option value="<%= element._id %>"><%= element.nombreUsuario %></option>
+                                <% }) %>
+                    </select>
+                </div>    
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Precio">Precio</span>
+                    <input type="text" class="form-control" placeholder="Precio" name="precio">
+                </div>   
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="submitForm('<%= event._id %>')" class="btn btn-primary">Guardar</button>
+                    </div>               
+            </form>
+            </div>
+            
+        </div>
+        </div>
+    </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
     crossorigin="anonymous"></script>
-
+    <script src="../../app.js"></script>
   <script>
-    const myModal = document.getElementById('modal')
-    const myInput = document.getElementById('myInput')
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = (date.getMonth() + 1).toString().padStart(2, '0');
+        const day = date.getDate().toString().padStart(2, '0');
+        const hours = date.getHours().toString().padStart(2, '0');
+        const minutes = date.getMinutes().toString().padStart(2, '0');
+        const formattedDate = `${year}-${day}-${month} ${hours}:${minutes}:00`;
+        return formattedDate;
+    }
 
-    myModal.addEventListener('shown.bs.modal', () => {
-      myInput.focus()
-    })</script>
+    function submitForm(id) {
+    const form = document.getElementById('putForm');
+    const formData = new FormData(form);
+
+    if (!formData.get('categoria')) {
+      alert('Debe seleccionar una categoria');
+    }
+
+    let fecha = "";
+    if(formData.get('fechahora').length > 1){
+        fecha = formatDate(formData.get('fechahora'))
+    }
+
+    const data = {
+      titulo: formData.get('titulo'),
+      descripcion: formData.get('descripcion'),
+      categoria: formData.get('categoria'),
+      foto: formData.get('foto'),
+      fechahora: fecha,
+      duracion: formData.get('duracion'),
+      precio: formData.get('precio'),
+      correoContacto: formData.get('correoContacto'),
+      telefonoContacto: formData.get('telefonoContacto'),
+      creado_por: formData.get('creado_por'),
+      coords: formData.get('coords'),
+      id_widget: formData.get('id_widget'),
+      clasificacion: formData.get('clasificacion'),
+    };
+
+    
+
+    fetch(`http://localhost:3004/api/actividad/${id}`, {
+      method: 'PUT',
+      headers:  {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => {
+      if (response.ok) {
+        alert('Actividad actualizada con exito!');
+        window.location.reload()
+      } else {
+        throw new Error('Error al actualizar actividad');
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      alert('Error al actualizar actividad');
+    });
+  }
+
+  function eliminarActividad(id) {
+   
+   fetch(`http://localhost:3004/api/actividad/${id}`, 
+   {
+       method: "DELETE"
+   })
+       .then((res) => {
+           if(res.ok) {
+                window.location.href = "http://localhost:3000"
+           } else {
+               console.log("Error!")
+           }
+       })
+       .catch((err) => {
+           console.log("Error: ", err);
+       })
+}
+    </script>
 
   <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </body>

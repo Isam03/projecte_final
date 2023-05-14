@@ -84,21 +84,57 @@ module.exports = (app) => {
 
         const actividad = await actividadModel.findOne({ _id: req.params.id });
         try {
-            actividad.id = req.body._id,
-                actividad.titulo = req.body.titulo,
-                actividad.descripcion = req.body.descripcion,
-                actividad.id_categoria = req.body.id_categoria,
-                actividad.foto = req.body.foto,
-                actividad.fecha = req.body.fecha,
-                actividad.horario = req.body.horario,
-                actividad.duracion = req.body.duracion,
-                actividad.precio = req.body.precio,
-                actividad.correoContacto = req.body.correoContacto,
-                actividad.telefonoContacto = req.body.telefonoContacto,
-                actividad.creado_por = req.body.creado_por,
-                actividad.coords = req.body.coords,
-                actividad.id_widgetCompra = req.body.id_widgetCompra,
-                actividad.id_clasificacion = req.body.id_clasificacion
+            if (req.body.titulo !== "") {
+                actividad.titulo = req.body.titulo;
+            }
+        
+            if (req.body.descripcion !== "") {
+                actividad.descripcion = req.body.descripcion;
+            }
+        
+            if (req.body.id_categoria !== "") {
+                actividad.id_categoria = req.body.categoria;
+            }
+        
+            if (req.body.foto !== "") {
+                actividad.foto = req.body.foto;
+            }
+        
+            if (req.body.fechahora !== "") {
+                actividad.fechahora = req.body.fechahora;
+            }
+        
+            if (req.body.duracion !== "") {
+                actividad.duracion = req.body.duracion;
+            }
+        
+            if (req.body.precio !== "") {
+                actividad.precio = req.body.precio;
+            }
+        
+            if (req.body.correoContacto !== "") {
+                actividad.correoContacto = req.body.correoContacto;
+            }
+        
+            if (req.body.telefonoContacto !== "") {
+                actividad.telefonoContacto = req.body.telefonoContacto;
+            }
+        
+            if (req.body.creado_por !== "") {
+                actividad.creado_por = req.body.creado_por;
+            }
+        
+            if (req.body.coords !== "") {
+                actividad.coords = req.body.coords;
+            }
+        
+            if (req.body.id_widgetCompra !== "") {
+                actividad.id_widgetCompra = req.body.id_widgetCompra;
+            }
+        
+            if (req.body.id_clasificacion !== "") {
+                actividad.id_clasificacion = req.body.clasificacion;
+            }
             await actividad.save();
             const resp = await actividadModel.find({});
 
@@ -153,17 +189,10 @@ module.exports = (app) => {
 
     //POST endpoint /usuario
     app.post('/api/usuario', async (req, res) => {
-<<<<<<< Updated upstream
-        const usuarios = new usuarioModel(req.body);
-
-        try {
-            await usuarios.save();
-=======
         
         try {
             const usuarios = new usuarioModel(req.body);
             await usuarios.save(); 
->>>>>>> Stashed changes
             const resp = await usuarioModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -463,30 +492,32 @@ module.exports = (app) => {
 
     
     app.post('/create-checkout-session', async (req, res) => {
+        const ticket = new ticketModel(req.body);
+        await ticket.save();
+
         const session = await stripe.checkout.sessions.create({
-          line_items: [
-            {
-                price_data: {
-                  currency: "eur",
-                  product_data: {
-                      name: req.body.titulo,
-                      description: req.body.descripcion,
-                      metadata: {
-                        fecha: req.body.fecha,
-                        hora: req.body.hora,
-                        creado_por: req.body.creado_por,
-                        referencia: req.body.referencia
-                      }
-                  },
-                  unit_amount: req.body.precio,
+            line_items: [
+                {
+                    price_data: {
+                        currency: "eur",
+                        unit_amount_decimal: ticket.precio,
+                        product_data: {
+                            name: ticket.titulo,
+                            description: ticket.descripcion,
+                            metadata : {
+                                fecha: ticket.fecha,
+                                hora: ticket.hora,
+                                organizador: ticket.creado_por,
+                                referencia: ticket.referencia,
+                            },
+                        },
+                    },
+                    quantity: 1,
                 },
-                quantity: 1,
-                product: req.body.id_actividad // Replace <product_id> with the actual product ID
-              },
-          ],
-          mode: 'payment',
-          success_url: 'http://localhost:3000/success',
-          cancel_url: 'http://localhost:3000/',
+            ],
+            mode: 'payment',
+            success_url: 'http://localhost:3000/success',
+            cancel_url: 'http://localhost:3000/',
         });
       
         res.redirect(303, session.url);

@@ -6,54 +6,54 @@ const ActividadSchema = new mongoose.Schema({
 
     titulo: {
         type: String,
-        required: true
+        required: false
     },
     descripcion: {
         type: String,
-        required: true
+        required: false
     },
     id_categoria: {
         type: ObjectId,
-        required: true
+        required: false
     },
     foto: {
         type: String
     },
     fechahora: {
         type: String,
-        required: true
+        required: false
     },
     duracion: {
         type: String,
-        required: true
+        required: false
     },
     precio: {
         type: String,
-        required: true
+        required: false
     },
     correoContacto: {
         type: String,
-        required: true
+        required: false
     },
     telefonoContacto: {
         type: String,
-        required: true
+        required: false
     },
     creado_por: {
         type: String,
-        required: true
+        required: false
     },
     coords: {
         type: String,
-        required: true
+        required: false
     },
     id_widgetCompra: {
         type: Number,
-        required: true
+        required: false
     },
     id_clasificacion: {
-        type: Number,
-        required: true
+        type: ObjectId,
+        required: false
     },
     numvisitas:{
         type: Number,

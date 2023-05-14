@@ -3,16 +3,12 @@ const mongoose = require("mongoose");
 
 const ClasificacionSchema = new mongoose.Schema({
 
-    titulo: {
+    identificador: {
         type: String,
         required: true
     },
     descripcion: {
         type: String,
-        required: true
-    },
-    valor: {
-        type: Number,
         required: true
     }
 

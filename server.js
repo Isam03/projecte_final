@@ -166,11 +166,13 @@ app.get('/event/:id', async (req, res) => {
     const cat = rescat.data;
     const resusu = await axios.get('http://localhost:3004/api/usuarios')
     const usu = resusu.data;
-    var user = "";
+    const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+    const cla = rescla.data;
+    let usr;
     if (req.isAuthenticated()) {
-        user = req.user;
+        usr = req.user;
     }
-    res.render('event/event', { event: data, categoria: cat, usuario: usu, yo: user, moment })
+    res.render('event/event', { event: data, categoria: cat, usuario: usu, user: usr, clasificaciones: cla, moment })
 })
 
 /// VISTA de CREAR EVENTO
@@ -185,8 +187,11 @@ app.get('/category/:id', async (req, res) => {
     const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
     const dataAct = resAct.data;
     const dataCat = resCat.data;
-
-    res.render('category', { events: dataAct, categoria: dataCat })
+    let usr;
+    if (req.isAuthenticated()) {
+        usr = req.user;
+    }
+    res.render('category', { events: dataAct, categoria: dataCat, user: usr })
 })
 
 
@@ -205,8 +210,8 @@ app.get('/search', async (req, res) => {
 })
 
 // VISTA CHECKOUT
-app.get('/checkout', async(req,res) =>{
-    res.render('event/checkout');
+app.get('/success', async(req,res) =>{
+    res.render('event/success');
 });
 
 app.post('/checkout', async(req,res) =>{
@@ -218,6 +223,30 @@ app.post('/checkout', async(req,res) =>{
         res.status(500).send('Server checkout error');
     }
 });
+
+app.post('/webhook', express.json({type: 'application/json'}), (request, response) => {
+    const event = request.body;
+  
+    // Handle the event
+    switch (event.type) {
+      case 'payment_intent.succeeded':
+        const paymentIntent = event.data.object;
+        // Then define and call a method to handle the successful payment intent.
+        // handlePaymentIntentSucceeded(paymentIntent);
+        break;
+      case 'payment_method.attached':
+        const paymentMethod = event.data.object;
+        // Then define and call a method to handle the successful attachment of a PaymentMethod.
+        // handlePaymentMethodAttached(paymentMethod);
+        break;
+      // ... handle other event types
+      default:
+        console.log(`Unhandled event type ${event.type}`);
+    }
+  
+    // Return a response to acknowledge receipt of the event
+    response.json({received: true});
+  });
 
 app.listen(port, () => {
     console.log(`Servidor arrancat, escoltant el port ${port}`);
