@@ -87,51 +87,51 @@ module.exports = (app) => {
             if (req.body.titulo !== "") {
                 actividad.titulo = req.body.titulo;
             }
-        
+
             if (req.body.descripcion !== "") {
                 actividad.descripcion = req.body.descripcion;
             }
-        
+
             if (req.body.id_categoria !== "") {
                 actividad.id_categoria = req.body.categoria;
             }
-        
+
             if (req.body.foto !== "") {
                 actividad.foto = req.body.foto;
             }
-        
+
             if (req.body.fechahora !== "") {
                 actividad.fechahora = req.body.fechahora;
             }
-        
+
             if (req.body.duracion !== "") {
                 actividad.duracion = req.body.duracion;
             }
-        
+
             if (req.body.precio !== "") {
                 actividad.precio = req.body.precio;
             }
-        
+
             if (req.body.correoContacto !== "") {
                 actividad.correoContacto = req.body.correoContacto;
             }
-        
+
             if (req.body.telefonoContacto !== "") {
                 actividad.telefonoContacto = req.body.telefonoContacto;
             }
-        
+
             if (req.body.creado_por !== "") {
                 actividad.creado_por = req.body.creado_por;
             }
-        
+
             if (req.body.coords !== "") {
                 actividad.coords = req.body.coords;
             }
-        
+
             if (req.body.id_widgetCompra !== "") {
                 actividad.id_widgetCompra = req.body.id_widgetCompra;
             }
-        
+
             if (req.body.id_clasificacion !== "") {
                 actividad.id_clasificacion = req.body.clasificacion;
             }
@@ -189,10 +189,10 @@ module.exports = (app) => {
 
     //POST endpoint /usuario
     app.post('/api/usuario', async (req, res) => {
-        
+
         try {
             const usuarios = new usuarioModel(req.body);
-            await usuarios.save(); 
+            await usuarios.save();
             const resp = await usuarioModel.find({});
             res.status(200).send(resp);
         } catch (error) {
@@ -201,28 +201,75 @@ module.exports = (app) => {
     });
 
     //PUT endopint /usuario/id (sirve para editar un objeto a partir del ID)
-    // app.put('/api/usuario/:id', async (req, res) => {
+    app.put('/api/usuario/:id', async (req, res) => {
 
-    //     const usuario = await usuarioModel.findOne({ _id: req.params.id });
-    //     try {
-    //         usuario.id = req.body._id,
-    //             usuario.nombre = req.body.nombre,
-    //             usuario.apellido = req.body.apellido,
-    //             usuario.email = req.body.email,
-    //             usuario.password = req.body.password,
-    //             usuario.dni = req.body.dni,
-    //             usuario.fecha_nacimiento = req.body.fecha_nacimiento,
-    //             usuario.rol = req.body.rol
+        const usuario = await usuarioModel.findOne({ _id: req.params.id });
+        try {
+            usuario.id = req.body._id,
+                usuario.nombre = req.body.nombre,
+                usuario.apellido = req.body.apellido,
+                usuario.email = req.body.email,
+                usuario.password = req.body.password,
+                usuario.dni = req.body.dni,
+                usuario.fecha_nacimiento = req.body.fecha_nacimiento,
+                usuario.rol = req.body.rol,
+                usuario.foto_perfil = req.body.foto_perfil
 
-    //         await usuario.save();
-    //         const resp = await usuarioModel.find({});
+            await usuario.save();
+            const resp = await usuarioModel.find({});
 
-    //         res.status(200).send(resp);
+            res.status(200).send(resp);
 
-    //     } catch (error) {
-    //         res.status(500).send(error);
-    //     }
-    // });
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
+
+    //PUT endopint /actividad/id (sirve para editar un objeto a partir del ID)
+    app.put('/api/usuario/:id', async (req, res) => {
+
+        const usuario = await usuarioModel.findOne({ _id: req.params.id });
+        try {
+            if (req.body.nombre !== "") {
+                usuario.nombre = req.body.nombre;
+            }
+
+            if (req.body.apellido !== "") {
+                usuario.apellido = req.body.apellido;
+            }
+
+            if (req.body.email !== "") {
+                usuario.email = req.body.email;
+            }
+
+            if (req.body.password !== "") {
+                usuario.password = req.body.password;
+            }
+
+            if (req.body.dni !== "") {
+                usuario.dni = req.body.dni;
+            }
+
+            if (req.body.fecha_nacimiento !== "") {
+                usuario.fecha_nacimiento = req.body.fecha_nacimiento;
+            }
+
+            if (req.body.rol !== "") {
+                usuario.rol = req.body.rol;
+            }
+
+            if (req.body.foto_perfil !== "") {
+                usuario.foto_perfil = req.body.foto_perfil;
+            }
+            await usuario.save();
+            const resp = await usuarioModel.find({});
+
+            res.status(200).send(resp);
+
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
 
     // Endpoint para actualizar la foto de perfil del usuario
     app.put('/usuarios/:id/foto-perfil', (req, res) => {
@@ -471,6 +518,7 @@ module.exports = (app) => {
 
 
 
+<<<<<<< Updated upstream
     //GET endpoint /tickets
     app.get('/api/tickets', async (req, res) => {
 
@@ -482,6 +530,8 @@ module.exports = (app) => {
             res.status(500).send(error);
         }
     });
+=======
+>>>>>>> Stashed changes
 
 
 
@@ -501,7 +551,7 @@ module.exports = (app) => {
     //     }
     // });
 
-    
+
     app.post('/create-checkout-session', async (req, res) => {
         const ticket = new ticketModel(req.body);
         await ticket.save();
@@ -515,7 +565,7 @@ module.exports = (app) => {
                         product_data: {
                             name: ticket.titulo,
                             description: ticket.descripcion,
-                            metadata : {
+                            metadata: {
                                 fecha: ticket.fecha,
                                 hora: ticket.hora,
                                 organizador: ticket.creado_por,
@@ -530,9 +580,9 @@ module.exports = (app) => {
             success_url: 'http://localhost:3000/success',
             cancel_url: 'http://localhost:3000/',
         });
-      
+
         res.redirect(303, session.url);
-      });
+    });
 
 
     let port = 3004;

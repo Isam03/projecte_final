@@ -15,32 +15,7 @@
   <link rel="stylesheet" href="./Sources/style.css">
   <link rel="stylesheet" href="../Sources/Profile/profile.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-
-  <style>
-    .colored-div {
-      width: 100px;
-      height: 100px;
-      margin: 10px;
-      border: 1px solid black;
-      cursor: pointer;
-    }
-
-    #div1 {
-      background-color: red;
-    }
-
-    #div2 {
-      background-color: blue;
-    }
-
-    #div3 {
-      background-color: green;
-    }
-
-    .selected {
-      border: 3px solid black;
-    }
-  </style>
+  <script src="../../app.js"></script>
 
 </head>
 
@@ -49,251 +24,237 @@
 
   <!-- Nav Bar -->
   <%- include('profile-navbar.ejs') %>
-  <!-- END Nav Bar -->
+    <!-- END Nav Bar -->
 
-  <div class="m-2">
-    <div class="card rounded-3"
-      style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
-      <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
-        <br><br><br><br><br><br>
-        <font style="color: #c4d7e9;">
-          <h1 style="text-align: center; color: #c4d7e9;">Bienvenido a tu perfil,
-        </font>
-        <font class="rainbow-text">
-          <%= user.nombreUsuario%>!
-        </font>
-        </h1>
-        <br>
-        <div class="container-fluid" style="display: flex; flex-direction: row; justify-content: center;">
-          <div class="card" style="width: 600px; height: 0 auto; ">
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">
-                <font>Información personal</font>
-              </h3>
-              <br>
-              <h6 class="card-subtitle mb-2">Nombre Completo:</h6>
-              <p class="card-text">
-                <font>
-                  <%= user.nombre + " " + user.apellido %> <button type="button" class="btn btn-info"><i
-                        class="bi bi-pencil-square"></i></button>
-                </font>
-              </p>
-              <h6 class="card-subtitle mb-2">Nombre de usuario:</h6>
-              <p class="card-text">
-                <font>@<%= user.nombreUsuario %>
-                </font>
-              </p>
-              <h6 class="card-subtitle mb-2">Correo electrónico:</h6>
-              <p class="card-text">
-                <font>
-                  <%= user.email %>
-                </font>
-              </p>
-              <h6 class="card-subtitle mb-2">Contraseña:</h6>
-              <p class="card-text">
-                <font>Modificar contraseña </font> <button type="button" class="btn btn-info"><i
-                    class="bi bi-pencil-square"></i></button>
-              </p>
-              <h6 class="card-subtitle mb-2">DNI:</h6>
-              <p class="card-text">
-                <font>
-                  <%= user.dni %>
-                </font>
-              </p>
-              <h6 class="card-subtitle mb-2">Fecha de nacimiento:</h6>
-              <p class="card-text">
-                <font>
-                  <% user.fecha_nacimiento %> <button type="button" class="btn btn-info"><i
-                        class="bi bi-pencil-square"></i></button>
-                </font>
-              </p>
+    <div class="m-2">
+      <div class="card rounded-3"
+        style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
+        <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
+          <br><br><br><br><br><br>
+          <font style="color: #c4d7e9;">
+            <h1 style="text-align: center; color: #c4d7e9;">Bienvenido a tu perfil,
+          </font>
+          <font class="rainbow-text">
+            <%= user.nombreUsuario%>!
+          </font>
+          </h1>
+          <br>
+          <div class="container-fluid" style="display: flex; flex-direction: row; justify-content: center;">
+            <div class="card" style="width: 600px; height: 0 auto; ">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;">
+                  <font>Información personal</font>
+                </h3>
+                <br>
+                <h6 class="card-subtitle mb-2">Nombre Completo:</h6>
+                <p class="card-text">
+                  <font>
+                    <%= user.nombre + " " + user.apellido %> <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#cambiarNombre"><i
+                          class="bi bi-pencil-square"></i></button>
+                  </font>
+                </p>
+                <h6 class="card-subtitle mb-2">Nombre de usuario:</h6>
+                <p class="card-text">
+                  <font>@<%= user.nombreUsuario %>
+                  </font>
+                </p>
+                <h6 class="card-subtitle mb-2">Correo electrónico:</h6>
+                <p class="card-text">
+                  <font>
+                    <%= user.email %>
+                  </font>
+                </p>
+                <h6 class="card-subtitle mb-2">Contraseña:</h6>
+                <p class="card-text">
+                  <font>Modificar contraseña </font> <button type="button" class="btn btn-info"><i
+                      class="bi bi-pencil-square"></i></button>
+                </p>
+                <h6 class="card-subtitle mb-2">DNI:</h6>
+                <p class="card-text">
+                  <font>
+                    <%= user.dni %>
+                  </font>
+                </p>
+                <h6 class="card-subtitle mb-2">Fecha de nacimiento:</h6>
+                <p class="card-text">
+                  <font>
+                    <% user.fecha_nacimiento %> <button type="button" class="btn btn-info"><i
+                          class="bi bi-pencil-square"></i></button>
+                  </font>
+                </p>
+              </div>
             </div>
-          </div>
-          <div class="card" style="width: 600px; height: 0 auto; margin-left: 30px;">
-            <div class="card-body">
-              <h3 class="card-title" style="text-align: center;">
-                <font>Historial de compra</font>
-              </h3>
-              <% if (imagens !=null) { %>
-                <% imagens.forEach(element=> {%>
-                  <img src="uploads/<%= element.filename %>" alt="<%= element.path %>"
-                    style="width: 150px; height: 150px;">
-                  <% }); %>
-                    <% } else{%>
-                      <p class="card-text">
-                        <font>No hay imagenes subidas</font>
-                      </p>
-                      <% }%>
+            <div class="card" style="width: 600px; height: 0 auto; margin-left: 30px;">
+              <div class="card-body">
+                <h3 class="card-title" style="text-align: center;">
+                  <font>Historial de compra</font>
+                </h3>
+                <% if (imagens !=null) { %>
+                  <% imagens.forEach(element=> {%>
+                    <img src="uploads/<%= element.filename %>" alt="<%= element.path %>"
+                      style="width: 150px; height: 150px;">
+                    <% }); %>
+                      <% } else{%>
+                        <p class="card-text">
+                          <font>No hay imagenes subidas</font>
+                        </p>
+                        <% }%>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div style="top: 50%; left: 50%; transform: translate(-50%, -50%);  opacity: 98%; position: absolute; z-index: 0;">
-    <a class="btn" style="border-radius: 150px;" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
-      aria-controls="offcanvasExample"><img
-        style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #010a1b ; " <% if (user !=undefined)
-        {%>
-      <% if (user.nombre=="Marc" ) {%>
-        src="../Imagenes/profilePic.jpg" alt="">
-        <% }else{ %>
-          src="../Imagenes/images.jpeg" alt="">
-          <% } %>
-            <% }else{%>
-              src="../Imagenes/DefaultProfilePic.png" alt="">
-              <% } %>
-    </a>
-  </div>
-
-  <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
-    aria-labelledby="offcanvasExampleLabel" style="opacity: 90%;">
-    <div class="offcanvas-header" style="background-color: #04193f;">
-      <h5 class="offcanvas-title" id="offcanvasExampleLabel">
-        <font>Menú de usuario</font>
-      </h5>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body" style="background-color: #03112b;">
-      <div>
-        <p>
-          <font>Cambiar foto de perfil</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
-            aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoPerfil"><i
-              class="bi bi-pencil-square"></i></button>
-        </p>
-        <p>
-          <font>Cambiar fondo</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
-            aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoBackground"><i
-              class="bi bi-pencil-square"></i></button>
-        </p>
-        <p>
-          <font>Subir fotos</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
-            aria-label="Close" data-bs-toggle="modal" data-bs-target="#subirFoto"><i
-              class="bi bi-pencil-square"></i></button>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="fotoPerfil" tabindex="-1" aria-labelledby="modalFotoPerfil" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalFotoPerfil">Cambiar foto de perfil</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <% if (imagens !=null) { %>
-            <% imagens.forEach(element=> {%>
-              <% if (element.id_usuario==user._id) { %>
-                <img class="profile-image" src="uploads/<%= element.filename %>" alt="<%= element.path %>"
-                  style="width: 150px; height: 150px; border-radius: 20px; margin: 1px;margin-bottom: 5px;">
+    <div style="top: 50%; left: 50%; transform: translate(-50%, -50%);  opacity: 98%; position: absolute; z-index: 0;">
+      <a class="btn" style="border-radius: 150px;" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
+        aria-controls="offcanvasExample"><img
+          style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #010a1b ; " <% if (user
+          !=undefined) {%>
+        <% if (user.nombre=="Marc" ) {%>
+          src="../Imagenes/profilePic.jpg" alt="">
+          <% }else{ %>
+            src="../Imagenes/images.jpeg" alt="">
+            <% } %>
+              <% }else{%>
+                src="../Imagenes/DefaultProfilePic.png" alt="">
                 <% } %>
-                  <% }); %>
-                    <% } %>
+      </a>
+    </div>
 
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+    <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasExample"
+      aria-labelledby="offcanvasExampleLabel" style="opacity: 90%;">
+      <div class="offcanvas-header" style="background-color: #04193f;">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+          <font>Menú de usuario</font>
+        </h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body" style="background-color: #03112b;">
+        <div>
+          <p>
+            <font>Cambiar foto de perfil</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
+              aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoPerfil"><i
+                class="bi bi-pencil-square"></i></button>
+          </p>
+          <p>
+            <font>Cambiar fondo</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
+              aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoBackground"><i
+                class="bi bi-pencil-square"></i></button>
+          </p>
+          <p>
+            <font>Subir fotos</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
+              aria-label="Close" data-bs-toggle="modal" data-bs-target="#subirFoto"><i
+                class="bi bi-pencil-square"></i></button>
+          </p>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="fotoBackground" tabindex="-1" aria-labelledby="modalBackground" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalBackground">Cambiar fondo</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body d-flex">
-          <div id="div1" class="colored-div"></div>
-          <div id="div2" class="colored-div"></div>
-          <div id="div3" class="colored-div"></div>
-        </div>
-      </div>
-    </div>
-  </div>
+    <div class="modal fade" id="cambiarNombre" tabindex="-1" aria-labelledby="modalCambiarNombre" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalCambiarNombre">Editar nombre y apellido</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h1>Actualizar Usuario</h1>
 
-  <div class="modal fade" id="subirFoto" tabindex="-1" aria-labelledby="modalSubirFoto" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="modalSubirFoto">Subir imagenes</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="http://localhost:3004/api/upload" method="post" enctype="multipart/form-data">
-            <div class="input-group">
-              <input type="file" class="form-control" name="imagefield" id="inputGroupFile04"
-                aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
-              <input type="hidden" name="id_usuario" value="<%= user._id %>">
-              <input type="hidden" name="rol" value="2">
-              <input class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04" value="Upload"></input>
-            </div>
-          </form>
+            <form id="update-user-form">
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" value="<%= user.nombre %>"><br>
+
+              <label for="apellido">Apellido:</label>
+              <input type="text" id="apellido" name="apellido" value="<%= user.apellido %>"><br>
+
+              <button type="button" onclick="submitForm2('<%= user._id %>')">Guardar cambios</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
+    <div class="modal fade" id="fotoPerfil" tabindex="-1" aria-labelledby="modalFotoPerfil" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalFotoPerfil">Cambiar foto de perfil</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <% if (imagens !=null) { %>
+              <% imagens.forEach(element=> {%>
+                <% if (element.id_usuario==user._id) { %>
+                  <img class="profile-image" src="uploads/<%= element.filename %>" alt="<%= element.path %>"
+                    style="width: 150px; height: 150px; border-radius: 20px; margin: 1px;margin-bottom: 5px;">
+                  <% } %>
+                    <% }); %>
+                      <% } %>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="fotoBackground" tabindex="-1" aria-labelledby="modalBackground" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalBackground">Cambiar fondo</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body d-flex">
+            <div id="div1" class="colored-div"></div>
+            <div id="div2" class="colored-div"></div>
+            <div id="div3" class="colored-div"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="subirFoto" tabindex="-1" aria-labelledby="modalSubirFoto" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="modalSubirFoto">Subir imagenes</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="http://localhost:3004/api/upload" method="post" enctype="multipart/form-data">
+              <div class="input-group">
+                <input type="file" class="form-control" name="imagefield" id="inputGroupFile04"
+                  aria-describedby="inputGroupFileAddon04" aria-label="Upload" required>
+                <input type="hidden" name="id_usuario" value="<%= user._id %>">
+                <input type="hidden" name="rol" value="2">
+                <input class="btn btn-outline-secondary" type="submit" id="inputGroupFileAddon04"
+                  value="Upload"></input>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+      </script>
 
 
 
+    <script>
+      const myModal = document.getElementById('modal')
+      const myInput = document.getElementById('myInput')
 
-
-
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+      myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+      })
     </script>
 
-  <script>
-    $(".profile-image").click(function () {
-      var imagePath = $(this).attr("src");
-      var userID = "123"; // reemplaza con el ID del usuario actual
-      $.ajax({
-        url: "/usuarios/" + userID,
-        method: "PUT",
-        data: {
-          foto_perfil: imagePath
-        },
-        success: function (response) {
-          // código para manejar la respuesta del servidor
-        },
-        error: function (xhr, status, error) {
-          // código para manejar errores de la solicitud
-        }
-      });
-    });
-
-  </script>
-
-  <script>
-    const coloredDivs = document.querySelectorAll('.colored-div');
-
-    coloredDivs.forEach(div => {
-      div.addEventListener('click', function () {
-        coloredDivs.forEach(div => {
-          div.classList.remove('selected');
-        });
-        this.classList.add('selected');
-        document.body.style.backgroundColor = this.style.backgroundColor;
-      });
-    });
-  </script>
-
-  <script>
-    const myModal = document.getElementById('modal')
-    const myInput = document.getElementById('myInput')
-
-    myModal.addEventListener('shown.bs.modal', () => {
-      myInput.focus()
-    })
-  </script>
-
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </body>
 
 </html>

@@ -15,16 +15,16 @@ const UsuarioSchema = new mongoose.Schema({
     nombreUsuario: {
         type: String,
         unique: true,
-        required: true
+        required: false
     },
     email: {
         type: String,
         unique: true,
-        required: true
+        required: false
     },
     password: {
         type: String,
-        required: true
+        required: false
     },
     dni: {
         type: String,
@@ -32,7 +32,7 @@ const UsuarioSchema = new mongoose.Schema({
     },
     fecha_nacimiento: {
         type: Date,
-        required: true
+        required: false
     },
     rol: {
         type: Number,
@@ -43,8 +43,6 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         required: false,
     }
-
-
 
 });
 
