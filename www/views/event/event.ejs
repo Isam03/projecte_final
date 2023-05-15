@@ -5,8 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>
-    <%= event.titulo %>
+  <title><%= event.titulo %>
   </title>
   <link rel="icon" type="image/x-icon" href="./Imagenes/profilePic.jpg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -24,201 +23,92 @@
 
   <!-- Nav Bar -->
   <%- include('../navbar.ejs') %>
-    <!-- END Nav Bar -->
+  <!-- END Nav Bar -->
 
-    <div class="m-2">
-      <div class="card rounded-3"
-        style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
-        <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
+  <div class="m-2">
+    <div class="card rounded-3"
+      style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
+      <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
           <h1>
-            <font class="rainbow-text p-4">
-              <%= event.titulo %>
-            </font>
-          </h1>
-          <div class="container-fluid" style="justify-content: center;">
-            <div class="row d-flex gap-4 d-grid bd-highlight flex-wrap">
-              <div class="col-md-auto flex-grow-1">
+        <font class="rainbow-text p-4">
+          <%= event.titulo %>
+        </font>
+        </h1>
+        <div class="container-fluid" style="justify-content: center;">
+          <div class="row d-flex gap-4 d-grid bd-highlight flex-wrap">
+            <div class="col-md-auto flex-grow-1">
                 <div class="card " style="width: auto; height: 0 auto; ">
-                  <div class="card-body">
-                    <h3 class="card-title" style="text-align: center;">
-                      <font>Información</font>
-                    </h3>
-                    <br>
-                    <h6 class="card-subtitle mb-2">Descripcion</h6>
-                    <p class="card-text">
-                      <font>
-                        <%= event.descripcion %>
-                      </font>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Categoria</h6>
-                    <p class="card-text">
-                      <font>
-                        <% if(categoria !=null) { %>
-                          <% categoria.forEach(element=> { %>
-                            <% if (event.id_categoria==element._id) { %>
-                              <%= element.titulo %>
+                    <div class="card-body">
+                      <h3 class="card-title" style="text-align: center;">
+                        <font>Información</font>
+                      </h3>
+                      <br>
+                      <br>
+                      <div class="text-center">
+                        <img src="<%= event.foto %>" class="img-thumbnail rounded" alt="...">
+                      </div>
+                      <br>
+                      <br>
+                      <h6 class="card-subtitle mb-2">Descripcion</h6>
+                      <p class="card-text">
+                        <font>
+                          <%= event.descripcion %> 
+                        </font>
+                      </p>
+                      <h6 class="card-subtitle mb-2">Categoria</h6>
+                      <p class="card-text">
+                        <font>
+                        <% if(categoria != null) { %>
+                            <% categoria.forEach(element => { %>
+                                <% if (event.id_categoria == element._id) { %>
+                                    <%= element.titulo %>
                                 <% } %>
-                                  <% }) %>
-                                    <% } %>
-                      </font>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Fecha</h6>
-                    <p class="card-text">
-                      <font>
-                        <% const data=moment(event.fechahora, 'YYYY-DD-MM HH:mm:ss' ); const
-                          formatData=data.format('DD/MM/YYYY'); const formatHora=data.format('HH:mm') %>
+                            <% }) %>
+                        <% } %>
+                        </font>
+                      </p>
+                      <h6 class="card-subtitle mb-2">Fecha</h6>
+                      <p class="card-text">
+                        <font>
+                        <% 
+                        
+                        const data = moment(event.fechahora, 'YYYY-DD-MM HH:mm:ss');
+                        const formatData = data.format('DD/MM/YYYY');
+                        const formatHora = data.format('HH:mm') %>
 
                           <%= formatData %>
-                      </font>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Hora</h6>
-                    <p class="card-text">
-                      <%= formatHora %>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Correo de contacto</h6>
-                    <p class="card-text">
-                      <font>
-                        <%= event.correoContacto %>
-                      </font>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Telefono de contacto</h6>
-                    <p class="card-text">
-                      <font>
-                        <%= event.telefonoContacto %>
-                      </font>
-                    </p>
-                    <h6 class="card-subtitle mb-2">Mapa</h6>
-                    <% const coord=event.coords.split(',');%>
-                      <p class="card-text p-3"><iframe style="border-radius: 2rem;" width="100%" height="400"
-                          frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<%= "
-                          https://www.openstreetmap.org/export/embed.html?bbox=" + coord[1] + " ," + coord[0]
-                          + "&amp;layer=mapnik" %>"></iframe></p>
-                      <h6 class="card-subtitle mb-2">Creado por</h6>
-                      <% let creador="" %>
-                        <p class="card-text">
-                          <% if(usuario !=null) { %>
-                            <% usuario.forEach(element=> { %>
-                              <% if (event.creado_por==element._id) { %>
-                                <% creador=element.nombreUsuario; %>
-                                  <%= creador %>
-                                    <% } %>
-                                      <% }) %>
-                                        <% } %>
-                        </p>
-
-                  </div>
-                </div>
-              </div>
-              <div class="col">
-                <div class="card" style="width: auto; height: 0 auto;">
-                  <div class="card-body">
-                    <h5 class="card-title">Pago</h5>
-                    <p class="card-text">
-
-                    <div class="d-grid gap-2 text-center">
-                      <% if (event.precio==0) { %>
-                        <h1><span
-                            class=" end-0 p-2 badge rounded-pill text-warning-emphasis bg-warning-subtle border border-2 border-warning-subtle">
-                            <b>GRATIS</b>
-                            <span class="visually-hidden">Precio</span>
-                          </span></h1>
-
-                        <% } else { %>
-                          <h1><span
-                              class="end-0 p-2 badge rounded-pill text-success-emphasis bg-success-subtle border border-2 border-success-subtle">
-                              <%= event.precio %>€
-                                <span class="visually-hidden">Precio</span>
-                            </span></h1>
-                          <% } %>
-                            <% if (!user) { %>
-                              <button class="btn btn-info" type="submit" disabled>Hazte usuario para poder
-                                comprar</button>
-                              <% } else { %>
-                                <form action="http://localhost:3004/create-checkout-session" method="POST">
-                                  <input type="hidden" name="referencia" value="<%= " REF" + Math.floor(Math.random() *
-                                    (999999 - 123456 + 1) + 123456) %>"/>
-                                  <input type="hidden" name="titulo" value="<%= event.titulo %>" />
-                                  <input type="hidden" name="descripcion" value="<%= event.descripcion %>" />
-                                  <input type="hidden" name="fecha" value="<%= formatData %>" />
-                                  <input type="hidden" name="hora" value="<%= formatHora %>" />
-                                  <input type="hidden" name="precio" value="<%= event.precio %>" />
-                                  <input type="hidden" name="creado_por" value="<%= creador %>" />
-                                  <input type="hidden" name="id_usuario" value="<%= user._id %>" />
-                                  <input type="hidden" name="id_actividad" value="<%= event._id %>" />
-                                  <button class="btn btn-info" type="submit">Comprar</button>
-                                </form>
-                                <% } %>
-
-
-                    </div>
-                    </p>
-
-                  </div>
-                </div>
-
-                <div class="card mt-3" style="width: auto; height: 0 auto;">
-                  <div class="card-body">
-                    <h5 class="card-title">Edad mínima</h5>
-                    <p class="card-text">
-
-                    <div class="d-grid gap-2 text-center">
-                      <% let color="" %>
-                        <% if (clasificaciones !="" ) { %>
-                          <% clasificaciones.forEach(element=> { %>
-                            <% if (event.id_clasificacion==element._id) { %>
-                              <% if ((element.identificador=="A" ) || (element.identificador=="Ai" )) { %>
-                                <% color="success" %>
-                                  <% } %>
-                                    <% if ((element.identificador=="7" ) || (element.identificador=="7i" )) { %>
-                                      <% color="info" %>
-                                        <% } %>
-                                          <% if (element.identificador=="+12" ) { %>
-                                            <% color="warning" %>
-                                              <% } %>
-                                                <% if (element.identificador=="+16" ) { %>
-                                                  <% color="primary" %>
-                                                    <% } %>
-                                                      <% if (element.identificador=="+18" ) { %>
-                                                        <% color="danger" %>
-                                                          <% } %>
-
-                                                            <h1><span
-                                                                class="<%= 'end-0 p-10 badge bg-' + color + ' border border-2 border-' + color + '-subtle' %>">
-                                                                <b>
-                                                                  <%= element.identificador %>
-                                                                </b>
-                                                                <span class="visually-hidden">Edad minima</span>
-                                                              </span></h1>
-                                                            <p class="text-light">
-                                                              <%= element.descripcion %>
-                                                            </p>
-                                                            <% } %>
-                                                              <% }) %>
-                                                                <% } %>
-                    </div>
-                    </p>
-
-                  </div>
-                </div>
-                <% if (user && user.rol==0) { %>
-                  <div class="card mt-3" style="width: auto; height: 0 auto;">
-                    <div class="card-body">
-                      <h5 class="card-title">Administrar</h5>
-                      <p class="card-text">
-
-                      <div class="d-grid gap-2 text-center">
-                        <button class="btn btn-light" type="button" data-bs-toggle="modal"
-                          data-bs-target="#editModal">Editar actividad</button>
-                        <button class="btn btn-danger" type="button"
-                          onclick="eliminarActividad('<%= event._id %>')">Eliminar actividad</a>
-                      </div>
+                        </font>
                       </p>
+                      <h6 class="card-subtitle mb-2">Hora</h6>
+                      <p class="card-text"><%= formatHora %></p>
+                      <h6 class="card-subtitle mb-2">Correo de contacto</h6>
+                      <p class="card-text">
+                        <font>
+                          <%= event.correoContacto %>
+                        </font>
+                      </p>
+                      <h6 class="card-subtitle mb-2">Telefono de contacto</h6>
+                      <p class="card-text">
+                        <font>
+                          <%= event.telefonoContacto %>
+                        </font>
+                      </p>
+                      <h6 class="card-subtitle mb-2">Mapa</h6>
+                      <% const coord = event.coords.split(',');%>
+                      <p class="card-text p-3"><iframe style="border-radius: 2rem;" width="100%" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="<%= "https://www.openstreetmap.org/export/embed.html?bbox=" + coord[1] + "," + coord[0] + "&amp;layer=mapnik" %>"></iframe></p>
+                      <h6 class="card-subtitle mb-2">Creado por</h6>
+                      <% let creador = "" %>
+                      <p class="card-text"><% if(usuario != null) { %>
+                        <% usuario.forEach(element => { %>
+                            <% if (event.creado_por == element._id) { %>
+                                <% creador = element.nombreUsuario; %>
+                                <%= creador %>
+                            <% } %>
+                        <% }) %>
+                    <% } %></p>
 
                     </div>
                   </div>
-<<<<<<< Updated upstream
-
-=======
             </div>
             <div class="col">
                 <div class="card" style="width: auto; height: 0 auto;">
@@ -317,109 +207,104 @@
                         </div>
                     </div>
   
->>>>>>> Stashed changes
                   <% } %>
-              </div>
             </div>
-
-
           </div>
+            
+          
         </div>
       </div>
     </div>
-    </div>
+  </div>
+  </div>
 
 
-    <!-- Modal -->
+  <!-- Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+        <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+            <div class="modal-header">
             <h1 class="modal-title fs-5" id="editModalLabel">Editar actividad</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
+            </div>
+            <div class="modal-body">
             <form id="putForm">
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Titulo">Titulo</span>
-                <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Titulo">Titulo</span>
+                    <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                    
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Descripcion">Descripcion</span>
+                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Categoria">Categoria</span>
+                    <select class="form-control" placeholder="Categoria" name="categoria">
+                        <option value="">Seleccione una categoria</option>
+                        <% categoria.forEach(element => { %>
+                            <option value="<%= element._id %>"><%= element.titulo %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Clasificacion">Clasificacion</span>
+                    <select class="form-control" placeholder="Clasificacion" name="clasificacion">
+                        <option value="">Seleccione una clasificacion</option>
+                            <% clasificaciones.forEach(element => { %>
+                                <option value="<%= element._id %>"><%= element.descripcion %></option>
+                            <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
+                    <input type="datetime-local" class="form-control" placeholder="Fechahora" name="fechahora">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
+                    <input type="text" class="form-control" placeholder="Correocontacto" name="correoContacto">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Telefono">Telefono de contacto</span>
+                    <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Coords">Coordenadas (Latitud,Longitud)</span>
+                    <input type="text" class="form-control" placeholder="Coords" name="coords">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Creadopor">Creado por</span>
+                    <select class="form-control" placeholder="Creado por" name="creado_por">
+                        <option value="">Seleccione un usuario</option>
+                                <% usuario.forEach(element => { %>
+                                    <option value="<%= element._id %>"><%= element.nombreUsuario %></option>
+                                <% }) %>
+                    </select>
+                </div>    
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Precio">Precio</span>
+                    <input type="text" class="form-control" placeholder="Precio" name="precio">
+                </div>
+                <input type="hidden" class="form-control" name="numvisitas" value="<%= event.numvisitas %>">
 
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Descripcion">Descripcion</span>
-                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Categoria">Categoria</span>
-                <select class="form-control" placeholder="Categoria" name="categoria">
-                  <option value="">Seleccione una categoria</option>
-                  <% categoria.forEach(element=> { %>
-                    <option value="<%= element._id %>">
-                      <%= element.titulo %>
-                    </option>
-                    <% }) %>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Clasificacion">Clasificacion</span>
-                <select class="form-control" placeholder="Clasificacion" name="clasificacion">
-                  <option value="">Seleccione una clasificacion</option>
-                  <% clasificaciones.forEach(element=> { %>
-                    <option value="<%= element._id %>">
-                      <%= element.descripcion %>
-                    </option>
-                    <% }) %>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
-                <input type="datetime-local" class="form-control" placeholder="Fechahora" name="fechahora">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
-                <input type="text" class="form-control" placeholder="Correocontacto" name="correoContacto">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Telefono">Telefono de contacto</span>
-                <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Coords">Coordenadas (Latitud,Longitud)</span>
-                <input type="text" class="form-control" placeholder="Coords" name="coords">
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Creadopor">Creado por</span>
-                <select class="form-control" placeholder="Creado por" name="creado_por">
-                  <option value="">Seleccione un usuario</option>
-                  <% usuario.forEach(element=> { %>
-                    <option value="<%= element._id %>">
-                      <%= element.nombreUsuario %>
-                    </option>
-                    <% }) %>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="Precio">Precio</span>
-                <input type="text" class="form-control" placeholder="Precio" name="precio">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button type="button" onclick="submitForm('<%= event._id %>')" class="btn btn-primary">Guardar</button>
-              </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" onclick="submitForm('<%= event._id %>')" class="btn btn-primary">Guardar</button>
+                    </div>               
             </form>
-          </div>
-
+            </div>
+            
         </div>
-      </div>
+        </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-      crossorigin="anonymous"></script>
-
-    <script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+    crossorigin="anonymous"></script>
+    
+  <script>
     </script>
     <script src="../../app.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </body>
 
 </html>
