@@ -32,8 +32,8 @@ db.once("open", () => {
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-      user: 'ihajji.dam@institutcampalans.net',
-      pass: 'gi31557141'
+      user: 'quedaya.solicitud@institutcampalans.net',
+      pass: 'i2M5jf3bmZCj25T'
     }
   });
 
@@ -269,7 +269,7 @@ app.get('/search', async (req, res) => {
         '<b>Solicitante: </b>' +req.body.creado_por + '<br>';
 
         const mailOptions = {
-            from: 'ihajji.dam@institutcampalans.net',
+            from: 'quedaya.solicitud@gmail.com',
             to: 'mgiro.dam@institutcampalans.net',
             subject: 'Solicitud creacion de evento',
             html: html

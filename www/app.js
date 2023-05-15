@@ -47,8 +47,52 @@ function submitForm(id) {
   const form = document.getElementById('putForm');
   const formData = new FormData(form);
 
+<<<<<<< Updated upstream
   if (!formData.get('categoria')) {
     alert('Debe seleccionar una categoria');
+=======
+if (!formData.get('categoria')) {
+  alert('Debe seleccionar una categoria');
+}
+
+let fecha = "";
+if(formData.get('fechahora').length > 1){
+    fecha = formatDate(formData.get('fechahora'))
+}
+
+const data = {
+  titulo: formData.get('titulo'),
+  descripcion: formData.get('descripcion'),
+  categoria: formData.get('categoria'),
+  foto: formData.get('foto'),
+  fechahora: fecha,
+  duracion: formData.get('duracion'),
+  precio: formData.get('precio'),
+  correoContacto: formData.get('correoContacto'),
+  telefonoContacto: formData.get('telefonoContacto'),
+  creado_por: formData.get('creado_por'),
+  coords: formData.get('coords'),
+  id_widget: formData.get('id_widget'),
+  clasificacion: formData.get('clasificacion'),
+  numvisitas: formData.get('numvisitas')
+};
+
+
+
+fetch(`http://localhost:3004/api/actividad/${id}`, {
+  method: 'PUT',
+  headers:  {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+.then(response => {
+  if (response.ok) {
+    alert('Actividad actualizada con exito!');
+    window.location.reload()
+  } else {
+    throw new Error('Error al actualizar actividad');
+>>>>>>> Stashed changes
   }
 
   let fecha = "";

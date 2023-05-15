@@ -278,7 +278,9 @@
                 <div class="input-group mb-3">
                     <span class="input-group-text" id="Precio">Precio</span>
                     <input type="text" class="form-control" placeholder="Precio" name="precio">
-                </div>   
+                </div>
+                <input type="hidden" class="form-control" name="numvisitas" value="<%= event.numvisitas %>">
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                     <button type="button" onclick="submitForm('<%= event._id %>')" class="btn btn-primary">Guardar</button>
