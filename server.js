@@ -30,10 +30,12 @@ db.once("open", () => {
 });
 
 const transporter = nodemailer.createTransport({
-    service: 'gmail',
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false,
     auth: {
-      user: 'quedaya.solicitud@institutcampalans.net',
-      pass: 'i2M5jf3bmZCj25T'
+      user: 'quedaya@outlook.es',
+      pass: '#institutcampalans@'
     }
   });
 
@@ -269,8 +271,8 @@ app.get('/search', async (req, res) => {
         '<b>Solicitante: </b>' +req.body.creado_por + '<br>';
 
         const mailOptions = {
-            from: 'quedaya.solicitud@gmail.com',
-            to: 'mgiro.dam@institutcampalans.net',
+            from: '"QuedaYa" <quedaya@outlook.es>',
+            to: 'agarrig5@institutcampalans.net',
             subject: 'Solicitud creacion de evento',
             html: html
           };

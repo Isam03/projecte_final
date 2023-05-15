@@ -216,7 +216,108 @@
 
                     </div>
                   </div>
+<<<<<<< Updated upstream
 
+=======
+            </div>
+            <div class="col">
+                <div class="card" style="width: auto; height: 0 auto;">
+                    <div class="card-body">
+                      <h5 class="card-title">Pago</h5>
+                      <p class="card-text">
+                        
+                        <div class="d-grid gap-2 text-center">
+                            <% if (event.precio == 0) { %>
+                                <h1><span class=" end-0 p-2 badge rounded-pill text-warning-emphasis bg-warning-subtle border border-2 border-warning-subtle">
+                                    <b>GRATIS</b>
+                                    <span class="visually-hidden">Precio</span>
+                                </span></h1>
+                                
+                                <% } else { %>
+                                <h1><span class="end-0 p-2 badge rounded-pill text-success-emphasis bg-success-subtle border border-2 border-success-subtle">
+                                    <%= event.precio %>€
+                                    <span class="visually-hidden">Precio</span>
+                                </span></h1>
+                            <% } %>
+                            <% if (!user) { %>
+                                <button class="btn btn-info" type="submit" disabled>Hazte usuario para poder comprar</button>
+                            <% } else { %>
+                                <form action="http://localhost:3004/create-checkout-session" method="POST">
+                                    <input type="hidden" name="referencia" value="<%= "REF" + Math.floor(Math.random() * (999999 - 123456 + 1) + 123456) %>"/>
+                                    <input type="hidden" name="titulo" value="<%= event.titulo %>"/>
+                                    <input type="hidden" name="descripcion" value="<%= event.descripcion %>"/>
+                                    <input type="hidden" name="fecha" value="<%= formatData %>"/>
+                                    <input type="hidden" name="hora" value="<%= formatHora %>"/>
+                                    <input type="hidden" name="precio" value="<%= event.precio %>"/>
+                                    <input type="hidden" name="creado_por" value="<%= creador %>"/>
+                                    <input type="hidden" name="id_usuario" value="<%= user._id %>"/>
+                                    <input type="hidden" name="id_actividad" value="<%= event._id %>"/>
+                                    <button class="btn btn-info" type="submit">Comprar</button>
+                                </form>
+                            <% } %>
+                             
+                                                          
+                        </div>
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <!-- EDAD RECOMENDADA -->
+                  <div class="card mt-3" style="width: auto; height: 0 auto;">
+                    <div class="card-body">
+                      <h5 class="card-title">Edad mínima</h5>
+                      <p class="card-text">
+                        
+                        <div class="d-grid gap-2 text-center">
+                            <% let color = "" %>
+                            <% if (clasificaciones != "") { %>
+                                <% clasificaciones.forEach(element => { %>
+                                    <% if (event.id_clasificacion == element._id) { %>
+                                        <% if ((element.identificador == "A") || (element.identificador == "Ai")) { %>
+                                            <% color = "success" %>
+                                        <% } %>
+                                        <% if ((element.identificador == "7") || (element.identificador == "7i")) { %>
+                                            <% color = "info" %>
+                                        <% } %>
+                                        <% if (element.identificador == "12") { %>
+                                            <% color = "warning" %>
+                                        <% } %>
+                                        <% if (element.identificador == "16") { %>
+                                            <% color = "primary" %>
+                                        <% } %>
+                                        <% if (element.identificador == "18") { %>
+                                            <% color = "danger" %>
+                                        <% } %>
+                                        
+                                        <h1><span class="<%= 'end-0 p-10 badge bg-' + color + ' border border-2 border-' + color + '-subtle' %>">
+                                            <b><%= element.identificador %></b>
+                                            <span class="visually-hidden">Edad minima</span>
+                                        </span></h1>
+                                        <p class="text-light"><%= element.descripcion %></p>
+                                    <% } %>
+                                <% }) %>
+                            <% } %>              
+                        </div>
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <% if (user && user.rol == 0) { %>
+                    <div class="card mt-3" style="width: auto; height: 0 auto;">
+                        <div class="card-body">
+                            <h5 class="card-title">Administrar</h5>
+                            <p class="card-text">
+                            
+                            <div class="d-grid gap-2 text-center">
+                                <button class="btn btn-light" type="button" data-bs-toggle="modal" data-bs-target="#editModal">Editar actividad</button>                           
+                                <button class="btn btn-danger" type="button" onclick="eliminarActividad('<%= event._id %>')">Eliminar actividad</a>                           
+                            </div>
+                            </p>
+                            
+                        </div>
+                    </div>
+  
+>>>>>>> Stashed changes
                   <% } %>
               </div>
             </div>
