@@ -297,11 +297,9 @@ app.get('/search', async (req, res) => {
         const usu = resusu.data;
         const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
         const cla = rescla.data;
-        const restick = await axios.get('http://localhost:3004/api/tickets')
-        const tick = restick.data;
         let usr = req.user;
         if (req.isAuthenticated() && (req.user.rol == 0)) {
-            res.render('user/admin', { event: data, categoria: cat, usuario: usu, user: usr, clasificaciones: cla,ticket: tick, moment })
+            res.render('user/admin', { event: data, categoria: cat, usuario: usu, user: usr, clasificaciones: cla, moment })
         }else {
             res.redirect('/');
         }

@@ -2,372 +2,467 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= event.titulo %>
-  </title>
-  <link rel="icon" type="image/x-icon" href="./Imagenes/profilePic.jpg">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-  <link rel="stylesheet" href="../Sources/prueba.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="./Sources/style.css">
-  <link rel="stylesheet" href="../Sources/Profile/profile.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= event.titulo %>
+    </title>
+    <link rel="icon" type="image/x-icon" href="./Imagenes/profilePic.jpg">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../Sources/prueba.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link rel="stylesheet" href="./Sources/style.css">
+    <link rel="stylesheet" href="../Sources/Profile/profile.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 </head>
 
 <body>
 
 
-  <!-- Nav Bar -->
-  <%- include('../navbar.ejs') %>
-  <!-- END Nav Bar -->
+    <!-- Nav Bar -->
+    <%- include('../navbar.ejs') %>
+        <!-- END Nav Bar -->
 
-  <div class="m-2">
-    <div class="card rounded-3"
-      style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
-      <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-light">
-                    &nbsp;Panel de administración
-                  </h1>
-            </div>
-            <div class="col">
-                <div class="mt-4 gap-4" style="justify-content: right;">
-                    <button type="button" class="btn btn-warning mt-1 gap-2" data-bs-toggle="modal" data-bs-target="#actModal">Crear actividad</button>
-                    <button type="button" class="btn btn-info mt-1 gap-2" data-bs-toggle="modal" data-bs-target="#catModal">Nueva categoria</button>
-                    <button type="button" class="btn btn-info mt-1 gap-2" data-bs-toggle="modal" data-bs-target="#clasModal">Nueva clasificación</button>
-                  </div>
-            </div>
-        </div>
-        
-
-        <div class="container-fluid" style="justify-content: center;">
-          <div class="row d-flex gap-4 d-grid bd-highlight flex-wrap">
-            <div class="col-md-auto flex-grow-1">
-                <!-- Card actividades -->
-                <div class="card mt-4" style="width: auto; height: 0 auto;overflow-x: scroll;">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                        <font>Actividades</font>
-                        </h5>
-                        <p class="card-text" >
-                            <table class="table table-dark table-striped table-hover text-light "  >
-                                <thead>
-                                  <tr>
-                                    <th>Titulo</th>
-                                    <th>Descripción</th>
-                                    <th>Categoria</th>
-                                    <th>Fecha y hora</th>
-                                    <th>Precio</th>
-                                    <th>Correo</th>
-                                    <th>Telefono</th>
-                                    <th>Organizador</th>
-                                    <th>Coordenadas</th>
-                                    <th>Clasificacion</th>
-                                    <th>Acciones</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <% event.forEach(element => { %>
-                                        <tr>
-                                            <td><%= element.titulo %></td>
-                                            <td><%= element.descripcion %></td>
-                                            <% categoria.forEach(cat => { %>
-                                                <% if (element.id_categoria == cat._id) { %>
-                                                    <td><%= cat.titulo %></td>
-                                                <% } %>
-                                            <% }) %>
-                                            <td><%= element.fechahora %></td>
-                                            <td><%= element.precio %></td>
-                                            <td><%= element.correoContacto %></td>
-                                            <td><%= element.telefonoContacto %></td>
-                                            <% usuario.forEach(usu => { %>
-                                                <% if (element.creado_por == usu._id) { %>
-                                                    <td><%= usu.nombreUsuario %></td>
-                                                <% } %>
-                                            <% }) %>
-                                            <td><%= element.coords %></td>
-                                            <% clasificaciones.forEach(cla => { %>
-                                                <% if (element.id_clasificacion == cla._id) { %>
-                                                    <td><%= cla.identificador %></td>
-                                                <% } %>
-                                            <% }) %>
-                                            <td><button type="button" onclick="eliminarActAdmin('<%= element._id %>')" class="btn btn-danger"><i
-                                                class="bi bi-trash"></i></button></td>
-                                          </tr>
-                                    <% }) %>
-                                </tbody>
-                              </table>
-                        </p>
-
-                    </div>
-                </div>
-                <!-- Card Usuarios -->
-                <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
-                    <div class="card-body">
-                        <h5 class="card-title">
-                        <font>Usuarios</font></h5>
-                        <p class="card-text">
-                            <table class="table table-dark table-striped table-hover text-light ">
-                                <thead>
-                                  <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Usuario</th>
-                                    <th>Email</th>
-                                    <th>DNI</th>
-                                    <th>Fecha de nacimiento</th>
-                                    <th>Rol</th>
-                                    <th>Acciones</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    <% usuario.forEach(element => { %>
-                                        <tr>
-                                            <td><%= element.nombre %></td>
-                                            <td><%= element.apellido %></td>
-                                            <td><%= element.nombreUsuario %></td>
-                                            <td><%= element.email %></td>
-                                            <td><%= element.dni %></td>
-                                            <td><%= element.fecha_nacimiento %></td>
-                                            <td><%= element.rol %></td>
-                                            <td><button type="button" onclick="eliminarUsu('<%= element._id %>')" class="btn btn-danger"><i
-                                                class="bi bi-trash"></i></button></td>
-                                          </tr>
-                                    <% }) %>
-                                </tbody>
-                              </table>
-                              
-                        </p>
-
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <!-- Card categorias -->
-                <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
-                    <div class="card-body">
-                      <h5 class="card-title">Categorias</h5>
-                      <p class="card-text">
-                        <table class="table table-dark table-striped table-hover text-light ">
-                            <thead>
-                              <tr>
-                                <th>Titulo</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <% categoria.forEach(element => { %>
-                                    <tr>
-                                        <td><%= element.titulo %></td>
-                                        <td><%= element.descripcion %></td>
-                                        <td><button type="button" onclick="eliminarCat('<%= element._id %>')" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></button></td>
-                                      </tr>
-                                <% }) %>
-                            </tbody>
-                          </table>
-                      </p>
-                      
-                    </div>
-                  </div>
-                  <!-- Card clasificaciones -->
-                  <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
-                    <div class="card-body">
-                      <h5 class="card-title">Clasificaciones</h5>
-                      <p class="card-text">
-                        <table class="table table-dark table-striped table-hover text-light " style="overflow: scroll;">
-                            <thead>
-                              <tr>
-                                <th>Identificador</th>
-                                <th>Descripción</th>
-                                <th>Acciones</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                                <% clasificaciones.forEach(element => { %>
-                                    <tr>
-                                        <td><%= element.identificador %></td>
-                                        <td><%= element.descripcion %></td>
-                                        <td><button type="button" onclick="eliminarCla('<%= element._id %>')" class="btn btn-danger"><i
-                                            class="bi bi-trash"></i></button></td>
-                                      </tr>
-                                <% }) %>
-                            </tbody>
-                          </table>
+        <div class="m-2">
+            <div class="card rounded-3"
+                style="position: absolute; top: 50%; left: 5%; width: 90%; height: 900px; opacity: 95%;">
+                <div class="card-body rounded-2" id="bodyCard" style="background-color: #010a1b;">
+                    <div class="row">
+                        <div class="col">
+                            <h1 class="text-light">
+                                &nbsp;Panel de administración
+                            </h1>
                         </div>
-                      </p>
-                      
+                        <div class="col">
+                            <div class="mt-4 gap-4" style="justify-content: right;">
+                                <button type="button" class="btn btn-outline-warning mt-1 gap-2" data-bs-toggle="modal"
+                                    data-bs-target="#actModal">Crear actividad</button>
+                                <button type="button" class="btn btn-outline-info mt-1 gap-2" data-bs-toggle="modal"
+                                    data-bs-target="#catModal">Nueva categoria</button>
+                                <button type="button" class="btn btn-outline-warning mt-1 gap-2" data-bs-toggle="modal"
+                                    data-bs-target="#clasModal">Nueva clasificación</button>
+                            </div>
+                        </div>
                     </div>
-                  </div>
-            </div>
-          </div>
-            
-          
-        </div>
-      </div>
-    </div>
-  </div>
-  </div>
 
-    <!-- Actividad Modal -->
-    <div class="modal fade" id="actModal" tabindex="-1" aria-labelledby="actModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="actModalLabel">Nueva actividad</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="eventForm" >
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Titulo">Titulo</span>
-                        <input type="text" class="form-control" placeholder="titulo" name="titulo">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Descripcion">Descripcion</span>
-                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Imagen">Imagen (url)</span>
-                        <input type="text" class="form-control" placeholder="Imagen" name="foto">
-                    </div> 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Categoria">Categoria</span>
-                        <select class="form-control" placeholder="Categoria" name="id_categoria">
-                            <option value="">Seleccione una categoria</option>
-                            <% categoria.forEach(element => { %>
-                                <option value="<%= element._id %>"><%= element.titulo %></option>
-                            <% }) %>
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Clasificacion">Clasificacion</span>
-                        <select class="form-control" placeholder="Clasificacion" name="id_clasificacion">
-                            <option value="">Seleccione una clasificacion</option>
-                                <% clasificaciones.forEach(element => { %>
-                                    <option value="<%= element._id %>"><%= element.identificador %></option>
-                                <% }) %>
-                        </select>
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
-                        <input type="datetime-local" class="form-control" placeholder="Fechahora" name="fechahora">
-                    </div>  
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
-                        <input type="text" class="form-control" placeholder="Correo de contacto" name="correoContacto">
-                    </div>  
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Telefono">Telefono de contacto</span>
-                        <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
-                    </div>  
-                    <div class="input-group ">
-                        <span class="input-group-text" id="Coords">Coordenadas</span>
-                        <input type="text" class="form-control" placeholder="Coordenadas" name="coords">
-                    </div>  
-                    <div class="form-text mb-3" id="Coords">Formato: (Latitud,Longitud)</div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Precio">Precio</span>
-                        <input type="text" class="form-control" placeholder="Precio" name="precio">
-                    </div>   
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="creadopor">Organizador</span>
-                        <select class="form-control" placeholder="Creado por" name="creado_por">
-                            <option value="">Seleccione una clasificacion</option>
-                                <% usuario.forEach(element => { %>
-                                    <option value="<%= element._id %>"><%= element.nombreUsuario %></option>
-                                <% }) %>
-                        </select>
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="crearEvento()">Crear</button>
-                        </div>               
-                </form>
-            
-            </div>
-            
-        </div>
-        </div>
-    </div>
 
-     <!-- Categoria Modal -->
-     <div class="modal fade" id="catModal" tabindex="-1" aria-labelledby="catModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="actModalLabel">Nueva actividad</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="catForm" >
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Titulo">Titulo</span>
-                        <input type="text" class="form-control" placeholder="titulo" name="titulo">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Descripcion">Descripcion</span>
-                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="crearCategoria()">Crear</button>
-                        </div>               
-                </form>
-            
-            </div>
-            
-        </div>
-        </div>
-    </div>
+                    <div class="container-fluid" style="justify-content: center;">
+                        <div class="row d-flex gap-4 d-grid bd-highlight flex-wrap">
+                            <div class="col-md-auto flex-grow-1">
+                                <!-- Card actividades -->
+                                <div class="card mt-4" style="width: auto; height: 0 auto;overflow-x: scroll;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <font>Actividades</font>
+                                        </h5>
+                                        <p class="card-text">
+                                        <table class="table table-dark table-striped table-hover text-light ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Titulo</th>
+                                                    <th>Descripción</th>
+                                                    <th>Categoria</th>
+                                                    <th>Fecha y hora</th>
+                                                    <th>Precio</th>
+                                                    <th>Correo</th>
+                                                    <th>Telefono</th>
+                                                    <th>Organizador</th>
+                                                    <th>Coordenadas</th>
+                                                    <th>Clasificacion</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% event.forEach(element=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= element.titulo.substring(0,20) %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.descripcion.substring(0,50) %>...
+                                                        </td>
+                                                        <% categoria.forEach(cat=> { %>
+                                                            <% if (element.id_categoria==cat._id) { %>
+                                                                <td>
+                                                                    <%= cat.titulo %>
+                                                                </td>
+                                                                <% } %>
+                                                                    <% }) %>
+                                                                        <td>
+                                                                            <%= element.fechahora %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= element.precio %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= element.correoContacto.substring(0,15) %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= element.telefonoContacto %>
+                                                                        </td>
+                                                                        <% usuario.forEach(usu=> { %>
+                                                                            <% if (element.creado_por==usu._id) { %>
+                                                                                <td>
+                                                                                    <%= usu.nombreUsuario %>
+                                                                                </td>
+                                                                                <% } %>
+                                                                                    <% }) %>
+                                                                                        <td>
+                                                                                            <%= element.coords.substring(0,15) %>
+                                                                                        </td>
+                                                                                        <% clasificaciones.forEach(cla=>
+                                                                                            { %>
+                                                                                            <% if
+                                                                                                (element.id_clasificacion==cla._id)
+                                                                                                { %>
+                                                                                                <td>
+                                                                                                    <%= cla.identificador
+                                                                                                        %>
+                                                                                                </td>
+                                                                                                <% } %>
+                                                                                                    <% }) %>
+                                                                                                        <td><button
+                                                                                                                type="button"
+                                                                                                                onclick="eliminarActAdmin('<%= element._id %>')"
+                                                                                                                class="btn btn-danger"><i
+                                                                                                                    class="bi bi-trash"></i></button>
+                                                                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                        </p>
 
-    <!-- Clasificacio Modal -->
-    <div class="modal fade" id="clasModal" tabindex="-1" aria-labelledby="catModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-            <h1 class="modal-title fs-5" id="actModalLabel">Nueva actividad</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form id="claForm" >
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Identificador">Identificador</span>
-                        <input type="text" class="form-control" placeholder="Identificador" name="identificador">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text" id="Descripcion">Descripcion</span>
-                        <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="crearClasificacion()">Crear</button>
-                        </div>               
-                </form>
-            
-            </div>
-            
-        </div>
-        </div>
-    </div>
+                                    </div>
+                                </div>
+                                <!-- Card Usuarios -->
+                                <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <font>Usuarios</font>
+                                        </h5>
+                                        <p class="card-text">
+                                        <table class="table table-dark table-striped table-hover text-light ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Apellido</th>
+                                                    <th>Usuario</th>
+                                                    <th>Email</th>
+                                                    <th>DNI</th>
+                                                    <th>Fecha de nacimiento</th>
+                                                    <th>Rol</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% usuario.forEach(element=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= element.nombre %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.apellido %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.nombreUsuario %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.email %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.dni %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.fecha_nacimiento %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.rol %>
+                                                        </td>
+                                                        <td><button type="button"
+                                                                onclick="eliminarUsu('<%= element._id %>')"
+                                                                class="btn btn-danger"><i
+                                                                    class="bi bi-trash"></i></button></td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-    crossorigin="anonymous"></script>
-    
-  <script>
-    </script>
-    <script src="../../app.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <!-- Card categorias -->
+                                <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Categorias</h5>
+                                        <p class="card-text">
+                                        <table class="table table-dark table-striped table-hover text-light ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Titulo</th>
+                                                    <th>Descripción</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% categoria.forEach(element=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= element.titulo %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.descripcion %>
+                                                        </td>
+                                                        <td>
+                                                            <% if (element.titulo=="Escape Rooms" ||
+                                                                element.titulo=="Quedadas" || element.titulo=="Eventos"
+                                                                ) {%>
+                                                                <button type="button"
+                                                                    class="btn btn-secondary" disabled><i
+                                                                        class="bi bi-trash"></i></button>
+                                                        </td>
+                                                        <% } else { %>
+                                                            <button type="button"
+                                                                onclick="eliminarCat('<%= element._id %>')"
+                                                                class="btn btn-danger"><i
+                                                                    class="bi bi-trash"></i></button>
+                                                            </td>
+                                                            <% } %>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                        </p>
+
+                                    </div>
+                                </div>
+                                <!-- Card clasificaciones -->
+                                <div class="card mt-4" style="width: auto; height: 0 auto; overflow-x: scroll;">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Clasificaciones</h5>
+                                        <p class="card-text">
+                                        <table class="table table-dark table-striped table-hover text-light "
+                                            style="overflow: scroll;">
+                                            <thead>
+                                                <tr>
+                                                    <th>Identificador</th>
+                                                    <th>Descripción</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% clasificaciones.forEach(element=> { %>
+                                                    <tr>
+                                                        <td>
+                                                            <%= element.identificador %>
+                                                        </td>
+                                                        <td>
+                                                            <%= element.descripcion %>
+                                                        </td>
+                                                        <td><button type="button"
+                                                                onclick="eliminarCla('<%= element._id %>')"
+                                                                class="btn btn-danger"><i
+                                                                    class="bi bi-trash"></i></button></td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    </p>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <!-- Actividad Modal -->
+        <div class="modal fade" id="actModal" tabindex="-1" aria-labelledby="actModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="actModalLabel">Nueva actividad</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="eventForm">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Titulo">Titulo</span>
+                                <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Descripcion">Descripcion</span>
+                                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Imagen">Imagen (url)</span>
+                                <input type="text" class="form-control" placeholder="Imagen" name="foto">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Categoria">Categoria</span>
+                                <select class="form-control" placeholder="Categoria" name="id_categoria">
+                                    <option value="">Seleccione una categoria</option>
+                                    <% categoria.forEach(element=> { %>
+                                        <option value="<%= element._id %>">
+                                            <%= element.titulo %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Clasificacion">Clasificacion</span>
+                                <select class="form-control" placeholder="Clasificacion" name="id_clasificacion">
+                                    <option value="">Seleccione una clasificacion</option>
+                                    <% clasificaciones.forEach(element=> { %>
+                                        <option value="<%= element._id %>">
+                                            <%= element.identificador %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
+                                <input type="datetime-local" class="form-control" placeholder="Fechahora"
+                                    name="fechahora">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
+                                <input type="text" class="form-control" placeholder="Correo de contacto"
+                                    name="correoContacto">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Telefono">Telefono de contacto</span>
+                                <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
+                            </div>
+                            <div class="input-group ">
+                                <span class="input-group-text" id="Coords">Coordenadas</span>
+                                <input type="text" class="form-control" placeholder="Coordenadas" name="coords">
+                            </div>
+                            <div class="form-text mb-3" id="Coords">Formato: (Latitud,Longitud)</div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Precio">Precio</span>
+                                <input type="text" class="form-control" placeholder="Precio" name="precio">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="creadopor">Organizador</span>
+                                <select class="form-control" placeholder="Creado por" name="creado_por">
+                                    <option value="">Seleccione una clasificacion</option>
+                                    <% usuario.forEach(element=> { %>
+                                        <option value="<%= element._id %>">
+                                            <%= element.nombreUsuario %>
+                                        </option>
+                                        <% }) %>
+                                </select>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="crearEvento()">Crear</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Categoria Modal -->
+        <div class="modal fade" id="catModal" tabindex="-1" aria-labelledby="catModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="actModalLabel">Nueva categoria</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="catForm">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Titulo">Titulo</span>
+                                <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Descripcion">Descripcion</span>
+                                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="crearCategoria()">Crear</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Clasificacio Modal -->
+        <div class="modal fade" id="clasModal" tabindex="-1" aria-labelledby="catModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="actModalLabel">Nueva actividad</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="claForm">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Identificador">Identificador</span>
+                                <input type="text" class="form-control" placeholder="Identificador"
+                                    name="identificador">
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="Descripcion">Descripcion</span>
+                                <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary"
+                                    onclick="crearClasificacion()">Crear</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+            crossorigin="anonymous"></script>
+
+        <script>
+            const myModal = document.getElementById('modal')
+            const myInput = document.getElementById('myInput')
+
+            myModal.addEventListener('shown.bs.modal', () => {
+                myInput.focus()
+            })
+        </script>
+
+        <script>
+        </script>
+        <script src="../../app.js"></script>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 </body>
 
 </html>

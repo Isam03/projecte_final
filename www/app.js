@@ -47,52 +47,8 @@ function submitForm(id) {
   const form = document.getElementById('putForm');
   const formData = new FormData(form);
 
-<<<<<<< Updated upstream
   if (!formData.get('categoria')) {
     alert('Debe seleccionar una categoria');
-=======
-if (!formData.get('categoria')) {
-  alert('Debe seleccionar una categoria');
-}
-
-let fecha = "";
-if(formData.get('fechahora').length > 1){
-    fecha = formatDate(formData.get('fechahora'))
-}
-
-const data = {
-  titulo: formData.get('titulo'),
-  descripcion: formData.get('descripcion'),
-  categoria: formData.get('categoria'),
-  foto: formData.get('foto'),
-  fechahora: fecha,
-  duracion: formData.get('duracion'),
-  precio: formData.get('precio'),
-  correoContacto: formData.get('correoContacto'),
-  telefonoContacto: formData.get('telefonoContacto'),
-  creado_por: formData.get('creado_por'),
-  coords: formData.get('coords'),
-  id_widget: formData.get('id_widget'),
-  clasificacion: formData.get('clasificacion'),
-  numvisitas: formData.get('numvisitas')
-};
-
-
-
-fetch(`http://localhost:3004/api/actividad/${id}`, {
-  method: 'PUT',
-  headers:  {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-.then(response => {
-  if (response.ok) {
-    alert('Actividad actualizada con exito!');
-    window.location.reload()
-  } else {
-    throw new Error('Error al actualizar actividad');
->>>>>>> Stashed changes
   }
 
   let fecha = "";
@@ -114,6 +70,7 @@ fetch(`http://localhost:3004/api/actividad/${id}`, {
     coords: formData.get('coords'),
     id_widget: formData.get('id_widget'),
     clasificacion: formData.get('clasificacion'),
+    numvisitas: formData.get('numvisitas')
   };
 
 
@@ -132,26 +89,68 @@ fetch(`http://localhost:3004/api/actividad/${id}`, {
       } else {
         throw new Error('Error al actualizar actividad');
       }
+
+      let fecha = "";
+      if (formData.get('fechahora').length > 1) {
+        fecha = formatDate(formData.get('fechahora'))
+      }
+
+      const data = {
+        titulo: formData.get('titulo'),
+        descripcion: formData.get('descripcion'),
+        categoria: formData.get('categoria'),
+        foto: formData.get('foto'),
+        fechahora: fecha,
+        duracion: formData.get('duracion'),
+        precio: formData.get('precio'),
+        correoContacto: formData.get('correoContacto'),
+        telefonoContacto: formData.get('telefonoContacto'),
+        creado_por: formData.get('creado_por'),
+        coords: formData.get('coords'),
+        id_widget: formData.get('id_widget'),
+        clasificacion: formData.get('clasificacion'),
+      };
+
+
+
+      fetch(`http://localhost:3004/api/actividad/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+        .then(response => {
+          if (response.ok) {
+            alert('Actividad actualizada con exito!');
+            window.location.reload()
+          } else {
+            throw new Error('Error al actualizar actividad');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+          alert('Error al actualizar actividad');
+        });
     })
-    .catch(error => {
-      console.error(error);
-      alert('Error al actualizar actividad');
-    });
 }
 
 
-
-
 function submitForm2(id) {
-  const form = document.getElementById('update-user-form');
+  const form = document.getElementById('putForm2');
   const formData = new FormData(form);
 
   const data = {
     nombre: formData.get('nombre'),
     apellido: formData.get('apellido'),
+    nombreUsuario: formData.get('nombreUsuario'),
+    email: formData.get('email'),
+    password: formData.get('password'),
+    dni: formData.get('dni'),
+    fecha_nacimiento: formData.get('fecha_nacimiento'),
+    rol: formData.get('rol'),
+    foto_perfil: formData.get('foto_perfil'),
   };
-
-
 
   fetch(`http://localhost:3004/api/usuario/${id}`, {
     method: 'PUT',

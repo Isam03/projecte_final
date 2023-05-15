@@ -227,9 +227,11 @@ module.exports = (app) => {
 
     //PUT endopint /actividad/id (sirve para editar un objeto a partir del ID)
     app.put('/api/usuario/:id', async (req, res) => {
-
+       
         const usuario = await usuarioModel.findOne({ _id: req.params.id });
+        
         try {
+            console.log(usuario);
             if (req.body.nombre !== "") {
                 usuario.nombre = req.body.nombre;
             }
@@ -261,6 +263,7 @@ module.exports = (app) => {
             if (req.body.foto_perfil !== "") {
                 usuario.foto_perfil = req.body.foto_perfil;
             }
+            console.log(usuario);
             await usuario.save();
             const resp = await usuarioModel.find({});
 
@@ -270,55 +273,6 @@ module.exports = (app) => {
             res.status(500).send(error);
         }
     });
-
-    // Endpoint para actualizar la foto de perfil del usuario
-    app.put('/usuarios/:id/foto-perfil', (req, res) => {
-        const userId = req.params.id;
-        const imagePath = req.body.path; // Suponiendo que se envía el path de la imagen en el cuerpo de la solicitud
-
-        // Buscar la imagen correspondiente al path recibido
-        Imagen.findOne({ path: imagePath }, (err, imagen) => {
-            if (err) {
-                // Manejar el error
-                return res.status(500).send(err);
-            }
-
-            if (!imagen) {
-                // Si no se encuentra la imagen, enviar una respuesta con error
-                return res.status(404).send({ message: 'No se encontró la imagen' });
-            }
-
-            const userIdFromImage = imagen.id_usuario;
-
-            // Buscar al usuario correspondiente al id recibido
-            Usuario.findById(userId, (err, usuario) => {
-                if (err) {
-                    // Manejar el error
-                    return res.status(500).send(err);
-                }
-
-                if (!usuario) {
-                    // Si no se encuentra el usuario, enviar una respuesta con error
-                    return res.status(404).send({ message: 'No se encontró el usuario' });
-                }
-
-                // Actualizar el campo foto_perfil del usuario con el path recibido
-                usuario.foto_perfil = imagePath;
-
-                // Guardar el usuario actualizado en la base de datos
-                usuario.save((err, usuarioActualizado) => {
-                    if (err) {
-                        // Manejar el error
-                        return res.status(500).send(err);
-                    }
-
-                    // Enviar una respuesta con el usuario actualizado
-                    res.send(usuarioActualizado);
-                });
-            });
-        });
-    });
-
 
     //DELETE enpoint /usuario/id
     app.delete('/api/usuario/:id', async (req, res) => {
@@ -515,26 +469,7 @@ module.exports = (app) => {
             res.status(500).send(error);
         }
     });
-
-
-
-<<<<<<< Updated upstream
-    //GET endpoint /tickets
-    app.get('/api/tickets', async (req, res) => {
-
-        const tickets = await ticketModel.find({});
-
-        try {
-            res.status(200).send(tickets);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    });
-=======
->>>>>>> Stashed changes
-
-
-
+    
     ///////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////
     ////////////////      CHECK OUT       /////////////////////

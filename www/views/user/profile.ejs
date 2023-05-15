@@ -43,14 +43,14 @@
             <div class="card" style="width: 600px; height: 0 auto; ">
               <div class="card-body">
                 <h3 class="card-title" style="text-align: center;">
-                  <font>Información personal</font>
+                  <font>Información personal</font> <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                    data-bs-target="#editModal"><i class="bi bi-pencil-square"></i></button>
                 </h3>
                 <br>
                 <h6 class="card-subtitle mb-2">Nombre Completo:</h6>
                 <p class="card-text">
                   <font>
-                    <%= user.nombre + " " + user.apellido %> <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#cambiarNombre"><i
-                          class="bi bi-pencil-square"></i></button>
+                    <%= user.nombre + " " + user.apellido %>
                   </font>
                 </p>
                 <h6 class="card-subtitle mb-2">Nombre de usuario:</h6>
@@ -64,11 +64,6 @@
                     <%= user.email %>
                   </font>
                 </p>
-                <h6 class="card-subtitle mb-2">Contraseña:</h6>
-                <p class="card-text">
-                  <font>Modificar contraseña </font> <button type="button" class="btn btn-info"><i
-                      class="bi bi-pencil-square"></i></button>
-                </p>
                 <h6 class="card-subtitle mb-2">DNI:</h6>
                 <p class="card-text">
                   <font>
@@ -78,8 +73,7 @@
                 <h6 class="card-subtitle mb-2">Fecha de nacimiento:</h6>
                 <p class="card-text">
                   <font>
-                    <% user.fecha_nacimiento %> <button type="button" class="btn btn-info"><i
-                          class="bi bi-pencil-square"></i></button>
+                    <% user.fecha_nacimiento %>
                   </font>
                 </p>
               </div>
@@ -87,18 +81,20 @@
             <div class="card" style="width: 600px; height: 0 auto; margin-left: 30px;">
               <div class="card-body">
                 <h3 class="card-title" style="text-align: center;">
-                  <font>Historial de compra</font>
+                  <font>Imagenes subidas</font>
                 </h3>
                 <% if (imagens !=null) { %>
-                  <% imagens.forEach(element=> {%>
-                    <img src="uploads/<%= element.filename %>" alt="<%= element.path %>"
-                      style="width: 150px; height: 150px;">
-                    <% }); %>
-                      <% } else{%>
-                        <p class="card-text">
-                          <font>No hay imagenes subidas</font>
-                        </p>
-                        <% }%>
+                  <div class="d-flex flex-wrap justify-content-center">
+                    <% imagens.forEach(element=> { %>
+                      <%if (element.id_usuario==user._id) { %>
+                      <img class="img-fluid" src="uploads/<%= element.filename %>" alt="<%= element.path %>"
+                        style="max-width: 150px; max-height: 150px; margin: 5px; border-radius: 20px;">
+                        <% } %>
+                      <% }); %>
+                  </div>
+                  <% } else { %>
+                    <p class="card-text">No hay imágenes subidas</p>
+                    <% } %>
               </div>
             </div>
           </div>
@@ -108,16 +104,13 @@
     <div style="top: 50%; left: 50%; transform: translate(-50%, -50%);  opacity: 98%; position: absolute; z-index: 0;">
       <a class="btn" style="border-radius: 150px;" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
         aria-controls="offcanvasExample"><img
-          style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #010a1b ; " <% if (user
-          !=undefined) {%>
-        <% if (user.nombre=="Marc" ) {%>
-          src="../Imagenes/profilePic.jpg" alt="">
-          <% }else{ %>
-            src="../Imagenes/images.jpeg" alt="">
-            <% } %>
-              <% }else{%>
-                src="../Imagenes/DefaultProfilePic.png" alt="">
-                <% } %>
+          style="border-radius: 150px; width: 300px;height: 300px; border: 5px solid #010a1b ; " 
+          <% if (user.foto_perfil != undefined) {%>
+        src="uploads/<%= user.foto_perfil %>" alt="">
+          <% } else{ %>
+            src="./Imagenes/DefaultProfilePic.png" alt="">
+         <% } %>
+          
       </a>
     </div>
 
@@ -150,26 +143,79 @@
       </div>
     </div>
 
-    <div class="modal fade" id="cambiarNombre" tabindex="-1" aria-labelledby="modalCambiarNombre" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalCambiarNombre">Editar nombre y apellido</h1>
+            <h1 class="modal-title fs-5" id="editModalLabel">Editar usuario</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <h1>Actualizar Usuario</h1>
+            <form id="putForm2">
 
-            <form id="update-user-form">
-              <label for="nombre">Nombre:</label>
-              <input type="text" id="nombre" name="nombre" value="<%= user.nombre %>"><br>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="Nombre">Nombre</span>
+                <input type="text" class="form-control" placeholder="<%= user.nombre %>" name="nombre"
+                  value="<%= user.nombre %>">
+              </div>
 
-              <label for="apellido">Apellido:</label>
-              <input type="text" id="apellido" name="apellido" value="<%= user.apellido %>"><br>
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="Apellido">Apellido</span>
+                <input type="text" class="form-control" placeholder="<%= user.apellido %>" name="apellido"
+                  value="<%= user.apellido %>">
+              </div>
 
-              <button type="button" onclick="submitForm2('<%= user._id %>')">Guardar cambios</button>
+              <div class="input-group mb-3">
+                <input type="hidden" class="form-control" placeholder="<%= user.nombreUsuario %>" name="nombreUsuario" value="<%= user.nombreUsuario %>">
+              </div>
+
+              <div class="input-group mb-3">
+                <input type="hidden" class="form-control" placeholder="<%= user.email %>" name="email" value="<%= user.email %>">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="Password">Password</span>
+                <input type="text" class="form-control" placeholder="Password" name="password">
+              </div>
+
+              <div class="input-group mb-3">
+                <input type="hidden" class="form-control" placeholder="<%= user.dni %>" name="dni" value="<%= user.dni %>">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="Fecha_nacimiento">Fecha de nacimiento</span>
+                <input type="datetime-local" class="form-control" placeholder="<%= user.fecha_nacimiento %>"
+                  name="fecha_nacimiento" value="fecha_nacimiento">
+              </div>
+
+              <div class="input-group mb-3">
+                <input type="hidden" class="form-control" placeholder="<%= user.rol %>" name="rol" value="<%= user.rol %>">
+              </div>
+
+              <div class="input-group mb-3">
+                <span class="input-group-text" id="Foto_perfil">Foto de perfil</span>
+                <select class="form-control" placeholder="<%= user.foto_perfil %>" name="foto_perfil">
+                  <option value="<%= user.foto_perfil %>">
+                    <%= user.foto_perfil %>
+                  </option>
+                  <% imagens.forEach(element=> { %>
+                    <%if (element.id_usuario==user._id) { %>
+                      <option value="<%= element.filename %>">
+                        <%= element.filename %>
+                      </option>
+                      <% } %>
+                        <% }) %>
+                </select>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="submitForm2('<%= user._id %>')" class="btn btn-primary">Guardar</button>
+              </div>
             </form>
           </div>
+
         </div>
       </div>
     </div>
