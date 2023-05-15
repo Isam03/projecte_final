@@ -7,7 +7,9 @@ var moment = require('moment');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const nodemailer = require('nodemailer');
 const usuarioModel = require("./models/usuario");
+
 const categoriaModel = require("./models/usuario");
 
 const app = express();
@@ -26,6 +28,14 @@ db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", () => {
     console.log("Connected successfully");
 });
+
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'ihajji.dam@institutcampalans.net',
+      pass: 'gi31557141'
+    }
+  });
 
 app.use(express.static(path.join(__dirname, 'www')));
 
@@ -67,6 +77,12 @@ app.get('/', async (req, res) => {
         const categoria = await axios.get('http://localhost:3004/api/categorias/');
         const dataCat = categoria.data;
 
+        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const cla = rescla.data;
+
+        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const usu = resusu.data;
+
         // const page = parseInt(req.query.page) - 1||0;
         // const limit = parseInt(req.query.limit) || 5;
         // const search = req.query.search || "";
@@ -87,11 +103,9 @@ app.get('/', async (req, res) => {
         // }
 
         if (req.isAuthenticated()) {
-            // Render the protected page
-            res.render('index', { events: data, user: req.user, categoria: dataCat });
+            res.render('index', { events: data, user: req.user, categoria: dataCat, clasificaciones: cla, usuario: usu });
         } else {
-            // Redirect the user to the login page
-            res.render('index', { events: data, user: req.user, categoria: dataCat });
+            res.render('index', { events: data, user: req.user, categoria: dataCat, clasificaciones: cla, usuario: usu});
         }
 
 
@@ -127,6 +141,21 @@ app.post('/register', async (req, res) => {
     }
 });
 
+// ENDPOINT CREAR ACTIVIDAD
+app.post('/crear/actividad', async (req, res) => {
+    const actividad = req.body;
+
+    
+  
+    try {
+      await axios.post('http://localhost:3004/api/actividad', actividad)
+      res.status(200).redirect('/admin');;
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+});
+
 // app.get('/protected', (req, res) => {
 //     if (req.isAuthenticated()) {
 //         // Render the protected page
@@ -139,10 +168,18 @@ app.post('/register', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
+        const categoria = await axios.get('http://localhost:3004/api/categorias/');
+        const dataCat = categoria.data;
+
+        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const cla = rescla.data;
+
+        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const usu = resusu.data;
         // Render the protected page
         const images = await axios.get('http://localhost:3004/api/images');
         const data = images.data;
-        res.render('user/profile', { user: req.user, imagens: data });
+        res.render('user/profile', { user: req.user, imagens: data, categoria: dataCat, clasificaciones: cla, usuario: usu });
     } else {
         // Redirect the user to the login page
         res.redirect('/login');
@@ -175,6 +212,7 @@ app.get('/event/:id', async (req, res) => {
     res.render('event/event', { event: data, categoria: cat, usuario: usu, user: usr, clasificaciones: cla, moment })
 })
 
+
 /// VISTA de CREAR EVENTO
 app.get('/event/create', (req, res) => {
     res.render('event/crear')
@@ -187,11 +225,17 @@ app.get('/category/:id', async (req, res) => {
     const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
     const dataAct = resAct.data;
     const dataCat = resCat.data;
+    const rescate = await axios.get('http://localhost:3004/api/categorias')
+    const cat = rescate.data;
+    const resusu = await axios.get('http://localhost:3004/api/usuarios')
+    const usu = resusu.data;
+    const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+    const cla = rescla.data;
     let usr;
     if (req.isAuthenticated()) {
         usr = req.user;
     }
-    res.render('category', { events: dataAct, categoria: dataCat, user: usr })
+    res.render('category', { events: dataAct, categoria: cat, usuario: usu, clasificaciones: cla, categorias: dataCat, user: usr })
 })
 
 
@@ -208,6 +252,61 @@ app.get('/search', async (req, res) => {
       }
     
 })
+
+    // ENDPOINT SOLICITUD CREACION EVENTO (MAIL)
+    app.post('/send', async (req, res) => {
+
+        let html = '<b>Titulo: </b>' + req.body.titulo + '<br>' + 
+        '<b>Descripcion: </b>' + req.body.descripcion + '<br>' +
+        '<b>Imagen(url): </b>' + req.body.imagenUrl + '<br>' +
+        '<b>Categoria: </b>' +req.body.categoria+ '<br>' +
+        '<b>Clasificacion: </b>' +req.body.clasificacion+ '<br>' +
+        '<b>Fecha y hora: </b>' +req.body.fechahora+ '<br>' +
+        '<b>Correo: </b>' +req.body.correoContacto+ '<br>' +
+        '<b>Telefono: </b>' +req.body.telefonoContacto+ '<br>' +
+        '<b>Coordenadas: </b>' +req.body.coords + '<br>';
+        '<b>Precio: </b>' +req.body.precio + '<br>';
+        '<b>Solicitante: </b>' +req.body.creado_por + '<br>';
+
+        const mailOptions = {
+            from: 'ihajji.dam@institutcampalans.net',
+            to: 'mgiro.dam@institutcampalans.net',
+            subject: 'Solicitud creacion de evento',
+            html: html
+          };
+        
+          // Send the email
+          transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+            } else {
+              console.log('Email sent: ' + info.response);
+            }
+          });
+        
+        res.redirect('/');
+    });
+
+    /// VISTA PANEL DE ADMINISTRACION
+    app.get('/admin', async (req, res) => {
+        const resev = await axios.get('http://localhost:3004/api/actividades/');
+        const data = resev.data;
+        const rescat = await axios.get('http://localhost:3004/api/categorias')
+        const cat = rescat.data;
+        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const usu = resusu.data;
+        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const cla = rescla.data;
+        const restick = await axios.get('http://localhost:3004/api/tickets')
+        const tick = restick.data;
+        let usr = req.user;
+        if (req.isAuthenticated() && (req.user.rol == 0)) {
+            res.render('user/admin', { event: data, categoria: cat, usuario: usu, user: usr, clasificaciones: cla,ticket: tick, moment })
+        }else {
+            res.redirect('/');
+        }
+        
+    })
 
 // VISTA CHECKOUT
 app.get('/success', async(req,res) =>{

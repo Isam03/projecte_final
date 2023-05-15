@@ -24,7 +24,7 @@
                 </b></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="linkPagina2">
+              <a class="nav-link" href="#" id="linkPagina2" data-bs-toggle="modal" data-bs-target="#requestModal"> 
                 <font class="colorText">Crea tu evento</font>
               </a>
             </li>
@@ -37,15 +37,9 @@
           <form class="d-flex justify-content-center align-items-center" role="search" action="/search" method="post">
             
             <div class="input-group">
-                <input id="searchBar" type="search" class="border-secondary form-control rounded-start-5"
+                <input id="searchBar" type="search" class="border-secondary form-control rounded-5"
                 placeholder="Busca un evento" aria-label="searchBar" aria-describedby="button-addon2"
                 style="background-color: #020b1c; color: #c4d7e9;" onkeyup="sendData(this)">
-                <button title="boton" class="btn btn-outline-secondary rounded-end-5" type="submit"
-                  id="button-addon2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-search" viewBox="0 0 16 16">
-                    <path
-                      d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                  </svg></button>
                   <br>
                 <div data-bs-spy="scroll" class="flex-column align-items-stretch pe-4 border-end" style="overflow: scroll;height: 10rem;position: absolute;background-color: white;top: 100%; border-radius: 3px;z-index: 3;visibility: hidden;" id="searchResults"></div>
               
@@ -117,3 +111,87 @@
       </div>
     </nav>
   </div>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="requestModal" tabindex="-1" aria-labelledby="requestModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h1 class="modal-title fs-5" id="requestModalLabel">Solicitud</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <% if (user != undefined) { %>
+            <form action="/send" method="post" id="mailForm">
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Titulo">Titulo</span>
+                    <input type="text" class="form-control" placeholder="titulo" name="titulo">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Descripcion">Descripcion</span>
+                    <input type="text" class="form-control" placeholder="Descripcion" name="descripcion">
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Imagen">Imagen (url)</span>
+                    <input type="text" class="form-control" placeholder="Imagen" name="imagenUrl">
+                </div> 
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Categoria">Categoria</span>
+                    <select class="form-control" placeholder="Categoria" name="categoria">
+                        <option value="">Seleccione una categoria</option>
+                        <% categoria.forEach(element => { %>
+                            <option value="<%= element._id %>"><%= element.titulo %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Clasificacion">Clasificacion</span>
+                    <select class="form-control" placeholder="Clasificacion" name="clasificacion">
+                        <option value="">Seleccione una clasificacion</option>
+                            <% clasificaciones.forEach(element => { %>
+                                <option value="<%= element._id %>"><%= element.identificador %></option>
+                            <% }) %>
+                    </select>
+                </div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Fechahora">Fecha y Hora</span>
+                    <input type="datetime-local" class="form-control" placeholder="Fechahora" name="fechahora">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Correocontacto">Correo de contacto</span>
+                    <input type="text" class="form-control" placeholder="Correo de contacto" name="correoContacto">
+                </div>  
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Telefono">Telefono de contacto</span>
+                    <input type="text" class="form-control" placeholder="Telefono" name="telefonoContacto">
+                </div>  
+                <div class="input-group ">
+                    <span class="input-group-text" id="Coords">Coordenadas</span>
+                    <input type="text" class="form-control" placeholder="Coordenadas" name="coords">
+                </div>  
+                <div class="form-text mb-3" id="Coords">Formato: (Latitud,Longitud)</div>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="Precio">Precio</span>
+                    <input type="text" class="form-control" placeholder="Precio" name="precio">
+                </div>   
+                <div class="input-group mb-3">
+                    <input type="hidden" class="form-control" placeholder="Creado por" name="creado_por" value="<%= user._id %>">
+                </div>    
+                
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+                    </div>               
+            </form>
+
+        <% } else { %>
+            <p>Quieres crear una nueva solicitud? Inicia sesion o registrate!</p>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <% } %>
+        
+        </div>
+        
+    </div>
+    </div>
+</div>

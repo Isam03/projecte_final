@@ -91,8 +91,8 @@
             <path
               d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
           </svg>
-          <% if(categoria != null) { %>
-          <font id="colorText"> <%= categoria.titulo %> </font><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+          <% if(categorias != null) { %>
+          <font id="colorText"> <%= categorias.titulo %> </font><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
             fill="#c4d7e9" class="bi bi-arrow-right" viewBox="0 0 16 16">
             <path fill-rule="evenodd"
               d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z" />
@@ -103,7 +103,7 @@
             <div class="row row-cols-4">
               <% if (events !=null) { %>
                 <% events.forEach(element=> { %>
-                    <% if (element.id_categoria == categoria._id) { %>
+                    <% if (element.id_categoria == categorias._id) { %>
                       <div class="col">
                         <div id="card" class="card" style="max-height: 17rem;">
                           <div id="img-wrapper" class="img-wrapper"><img src="../Imagenes/comida-rapida-casera.jpg"

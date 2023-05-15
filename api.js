@@ -16,6 +16,7 @@ const { response } = require('express');
 
 module.exports = (app) => {
 
+
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
             cb(null, 'uploads');
@@ -67,9 +68,8 @@ module.exports = (app) => {
 
     //POST endpoint /actividades
     app.post('/api/actividad', async (req, res) => {
-        const actividades = new actividadModel(req.body);
-
         try {
+            const actividades = new actividadModel(req.body);
             await actividades.save();
             const actv = await actividadModel.find({});
             res.status(200).send(actv);
@@ -470,7 +470,18 @@ module.exports = (app) => {
     });
 
 
-    
+
+    //GET endpoint /tickets
+    app.get('/api/tickets', async (req, res) => {
+
+        const tickets = await ticketModel.find({});
+
+        try {
+            res.status(200).send(tickets);
+        } catch (error) {
+            res.status(500).send(error);
+        }
+    });
 
 
 
