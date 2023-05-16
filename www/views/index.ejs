@@ -120,12 +120,13 @@
                             <div class="card swiper-slide">
                               <div class="image-box">
                                 <a href="<%= " http://localhost:3000/event/" + events[i]._id %>">
-<<<<<<< Updated upstream
-                                  <img src="<%= events[i].foto %>" alt="" class="card-img-top"
-=======
-                                  <img src="../Imagenes/Imagenes prueba para escape rooms/escapeRoom<%= Math.floor(Math.random() * 9) + 1 %>.png" alt="" class="card-img-top"
->>>>>>> Stashed changes
-                                    alt="..." />
+                                  <% if (events[i].id_categoria == "64620db0557e03e697a21024") { %>
+                                    <img src="../../Imagenes/Imagenes prueba para escape rooms/escapeRoom<%= Math.floor(Math.random() * 9) + 1 %>.png" class="card-img-top" alt="...">
+                                 <% }else if(events[i].id_categoria == "6462707e470fbf14d3749496") {%>
+                                  <img src="../../Imagenes/Imagenes prueba para quedadas/quedadas<%= Math.floor(Math.random() * 9) + 1 %>.jpeg"  class="card-img-top" alt="...">
+                                  <% }else{ %>
+                                    <img src="../../Imagenes/Imagenes de prueba para eventos/evento<%= Math.floor(Math.random() * 9) + 1 %>.png"  class="card-img-top" alt="...">
+                                  <% } %>
                                 </a>
                               </div>
                               <div class="profile-details">
@@ -164,16 +165,14 @@
                                 <% } %>
 
                   </div>
-                  <div class="swiper-button-next swiper-navBtn"></div>
+                  <!-- <div class="swiper-button-next swiper-navBtn"></div>
                   <div class="swiper-button-prev swiper-navBtn"></div>
-                  <div class="swiper-pagination"></div>
+                  <div class="swiper-pagination"></div> -->
                 </div>
 
               </div>
               <% }) %>
                 <% } %>
-
-
 
         </div>
 

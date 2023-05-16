@@ -118,11 +118,17 @@
                       <div class="card swiper-slide">
                         <div class="image-box">
                           <a href="<%= "http://localhost:3000/event/" + events[i]._id %>">
-                            <img src="../Imagenes/comida-rapida-casera.jpg" alt="" class="card-img-top" alt="..." />
+                            <% if (events[i].id_categoria == "64620db0557e03e697a21024") { %>
+                              <img src="../../Imagenes/Imagenes prueba para escape rooms/escapeRoom<%= Math.floor(Math.random() * 9) + 1 %>.png" class="card-img-top" alt="...">
+                           <% }else if(events[i].id_categoria == "6462707e470fbf14d3749496") {%>
+                            <img src="../../Imagenes/Imagenes prueba para quedadas/quedadas<%= Math.floor(Math.random() * 9) + 1 %>.jpeg"  class="card-img-top" alt="...">
+                            <% }else{ %>
+                              <img src="../../Imagenes/Imagenes de prueba para eventos/evento<%= Math.floor(Math.random() * 9) + 1 %>.png"  class="card-img-top" alt="...">
+                            <% } %>
                           </a>
                         </div>
                         <div class="profile-details">
-                          <img src="../Imagenes/profilePic.jpg" alt="" />
+                          <img src="../Imagenes/Logo2v2.png" alt="" />
                           <div class="name-job">
                             <h3 class="name" style="color: #c4d7e9;">
                               <%= events[i].titulo %>
@@ -160,7 +166,6 @@
               
           </div>
           <% } %>
-          
 
               
             </div>

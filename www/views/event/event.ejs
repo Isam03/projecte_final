@@ -45,7 +45,14 @@
                       <br>
                       <br>
                       <div class="text-center">
-                        <img src="<%= event.foto %>" class="img-thumbnail rounded" alt="...">
+                        <% if (event.id_categoria == "64620db0557e03e697a21024") { %>
+                          <img src="../../Imagenes/Imagenes prueba para escape rooms/escapeRoom<%= Math.floor(Math.random() * 9) + 1 %>.png" class="img-thumbnail rounded" style="width: 15%; height: auto;" alt="...">
+                       <% }else if(event.id_categoria == "6462707e470fbf14d3749496") {%>
+                        <img src="../../Imagenes/Imagenes prueba para quedadas/quedadas<%= Math.floor(Math.random() * 9) + 1 %>.jpeg"  style="width: 15%; height: auto;" class="img-thumbnail rounded" alt="...">
+                        <% }else{ %>
+                          <img src="../../Imagenes/Imagenes de prueba para eventos/evento<%= Math.floor(Math.random() * 9) + 1 %>.png"  style="width: 15%; height: auto;" class="img-thumbnail rounded" alt="...">
+                        <% } %>
+                        
                       </div>
                       <br>
                       <br>
