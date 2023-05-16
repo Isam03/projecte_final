@@ -14,7 +14,7 @@ const categoriaModel = require("./models/usuario");
 
 const app = express();
 require('./config/passport');
-const port = 3000;
+const port = process.env.PORT || 3000;
 app.use(express.json());
 
 mongoose.connect('mongodb+srv://isam:isam03@parking.ikyce.mongodb.net/quedaya',

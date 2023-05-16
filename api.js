@@ -520,7 +520,7 @@ module.exports = (app) => {
     });
 
 
-    let port = 3004;
+    let port = process.env.PORT_BACK || 3004;
 
     app.listen(port, () => {
         console.log(`Servidor arrancat, escoltant el port ${port}`);
