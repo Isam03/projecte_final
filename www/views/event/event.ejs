@@ -139,7 +139,7 @@
                             <% if (!user) { %>
                                 <button class="btn btn-info" type="submit" disabled>Hazte usuario para poder comprar</button>
                             <% } else { %>
-                                <form action="http://localhost:3004/create-checkout-session" method="POST">
+                                <form action="https://quedaya.herokuapp.com:3004/create-checkout-session" method="POST">
                                     <input type="hidden" name="referencia" value="<%= "REF" + Math.floor(Math.random() * (999999 - 123456 + 1) + 123456) %>"/>
                                     <input type="hidden" name="titulo" value="<%= event.titulo %>"/>
                                     <input type="hidden" name="descripcion" value="<%= event.descripcion %>"/>

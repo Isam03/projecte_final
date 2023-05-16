@@ -29,7 +29,7 @@ module.exports = (app) => {
     const upload = multer({ storage });
 
     app.use(cors({
-        origin: 'http://localhost:3000',
+        origin: 'https://quedaya.herokuapp.com:3000',
         optionsSuccessStatus: 200
     }));
 
@@ -512,8 +512,8 @@ module.exports = (app) => {
                 },
             ],
             mode: 'payment',
-            success_url: 'http://localhost:3000/success',
-            cancel_url: 'http://localhost:3000/',
+            success_url: 'https://quedaya.herokuapp.com:3000/success',
+            cancel_url: 'https://quedaya.herokuapp.com:3000/',
         });
 
         res.redirect(303, session.url);

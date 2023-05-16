@@ -94,7 +94,7 @@
         </a>
           
           <% if (categorias != null) { %>
-              <a class="icon-link icon-link-hover tituloCategoria" href="<%= "http://localhost:3000/category/" + categorias._id %>">
+              <a class="icon-link icon-link-hover tituloCategoria" href="<%= "https://quedaya.herokuapp.com:3000/category/" + categorias._id %>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi-people-fill"
                   viewBox="0 0 16 16">
                   <path
@@ -117,7 +117,7 @@
                       <div class="col mt-5">
                       <div class="card swiper-slide">
                         <div class="image-box">
-                          <a href="<%= "http://localhost:3000/event/" + events[i]._id %>">
+                          <a href="<%= "https://quedaya.herokuapp.com:3000/event/" + events[i]._id %>">
                             <% if (events[i].id_categoria == "64620db0557e03e697a21024") { %>
                               <img src="../../Imagenes/Imagenes prueba para escape rooms/escapeRoom<%= Math.floor(Math.random() * 9) + 1 %>.png" class="card-img-top" alt="...">
                            <% }else if(events[i].id_categoria == "6462707e470fbf14d3749496") {%>

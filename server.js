@@ -73,16 +73,16 @@ app.use('/uploads', express.static('uploads'));
 /// VISTA de INICIO
 app.get('/', async (req, res) => {
     try {
-        const response = await axios.get('http://localhost:3004/api/actividades');
+        const response = await axios.get('https://quedaya.herokuapp.com:3004/api/actividades');
         const data = response.data;
 
-        const categoria = await axios.get('http://localhost:3004/api/categorias/');
+        const categoria = await axios.get('https://quedaya.herokuapp.com:3004/api/categorias/');
         const dataCat = categoria.data;
 
-        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const rescla = await axios.get('https://quedaya.herokuapp.com:3004/api/clasificaciones')
         const cla = rescla.data;
 
-        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const resusu = await axios.get('https://quedaya.herokuapp.com:3004/api/usuarios')
         const usu = resusu.data;
 
         // const page = parseInt(req.query.page) - 1||0;
@@ -135,7 +135,7 @@ app.post('/register', async (req, res) => {
     const usuario = req.body;
   
     try {
-      await axios.post('http://localhost:3004/api/usuario', usuario)
+      await axios.post('https://quedaya.herokuapp.com:3004/api/usuario', usuario)
       res.status(200).redirect('/login');;
     } catch (error) {
       console.error(error);
@@ -150,7 +150,7 @@ app.post('/crear/actividad', async (req, res) => {
     
   
     try {
-      await axios.post('http://localhost:3004/api/actividad', actividad)
+      await axios.post('https://quedaya.herokuapp.com:3004/api/actividad', actividad)
       res.status(200).redirect('/admin');;
     } catch (error) {
       console.error(error);
@@ -170,16 +170,16 @@ app.post('/crear/actividad', async (req, res) => {
 
 app.get('/profile', async (req, res) => {
     if (req.isAuthenticated()) {
-        const categoria = await axios.get('http://localhost:3004/api/categorias/');
+        const categoria = await axios.get('https://quedaya.herokuapp.com:3004/api/categorias/');
         const dataCat = categoria.data;
 
-        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const rescla = await axios.get('https://quedaya.herokuapp.com:3004/api/clasificaciones')
         const cla = rescla.data;
 
-        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const resusu = await axios.get('https://quedaya.herokuapp.com:3004/api/usuarios')
         const usu = resusu.data;
         // Render the protected page
-        const images = await axios.get('http://localhost:3004/api/images');
+        const images = await axios.get('https://quedaya.herokuapp.com:3004/api/images');
         const data = images.data;
         res.render('user/profile', { user: req.user, imagens: data, categoria: dataCat, clasificaciones: cla, usuario: usu });
     } else {
@@ -199,13 +199,13 @@ app.get('/logout', function (req, res, next) {
 
 /// VISTA de EVENTO
 app.get('/event/:id', async (req, res) => {
-    const resev = await axios.get('http://localhost:3004/api/actividad/' + req.params.id);
+    const resev = await axios.get('https://quedaya.herokuapp.com:3004/api/actividad/' + req.params.id);
     const data = resev.data;
-    const rescat = await axios.get('http://localhost:3004/api/categorias')
+    const rescat = await axios.get('https://quedaya.herokuapp.com:3004/api/categorias')
     const cat = rescat.data;
-    const resusu = await axios.get('http://localhost:3004/api/usuarios')
+    const resusu = await axios.get('https://quedaya.herokuapp.com:3004/api/usuarios')
     const usu = resusu.data;
-    const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+    const rescla = await axios.get('https://quedaya.herokuapp.com:3004/api/clasificaciones')
     const cla = rescla.data;
     let usr;
     if (req.isAuthenticated()) {
@@ -223,15 +223,15 @@ app.get('/event/create', (req, res) => {
 
 /// VISTA de CATEGORIAS
 app.get('/category/:id', async (req, res) => {
-    const resAct = await axios.get('http://localhost:3004/api/actividades');
-    const resCat = await axios.get('http://localhost:3004/api/categoria/' + req.params.id);
+    const resAct = await axios.get('https://quedaya.herokuapp.com:3004/api/actividades');
+    const resCat = await axios.get('https://quedaya.herokuapp.com:3004/api/categoria/' + req.params.id);
     const dataAct = resAct.data;
     const dataCat = resCat.data;
-    const rescate = await axios.get('http://localhost:3004/api/categorias')
+    const rescate = await axios.get('https://quedaya.herokuapp.com:3004/api/categorias')
     const cat = rescate.data;
-    const resusu = await axios.get('http://localhost:3004/api/usuarios')
+    const resusu = await axios.get('https://quedaya.herokuapp.com:3004/api/usuarios')
     const usu = resusu.data;
-    const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+    const rescla = await axios.get('https://quedaya.herokuapp.com:3004/api/clasificaciones')
     const cla = rescla.data;
     let usr;
     if (req.isAuthenticated()) {
@@ -245,7 +245,7 @@ app.get('/category/:id', async (req, res) => {
 app.get('/search', async (req, res) => {
     const search = async (query) => {
         try {
-          const response = await axios.post('http://localhost:3004/api/search', { q: query });
+          const response = await axios.post('https://quedaya.herokuapp.com:3004/api/search', { q: query });
           const data = response.data;
           res.render('search', {events: data})
         } catch (error) {
@@ -291,13 +291,13 @@ app.get('/search', async (req, res) => {
 
     /// VISTA PANEL DE ADMINISTRACION
     app.get('/admin', async (req, res) => {
-        const resev = await axios.get('http://localhost:3004/api/actividades/');
+        const resev = await axios.get('https://quedaya.herokuapp.com:3004/api/actividades/');
         const data = resev.data;
-        const rescat = await axios.get('http://localhost:3004/api/categorias')
+        const rescat = await axios.get('https://quedaya.herokuapp.com:3004/api/categorias')
         const cat = rescat.data;
-        const resusu = await axios.get('http://localhost:3004/api/usuarios')
+        const resusu = await axios.get('https://quedaya.herokuapp.com:3004/api/usuarios')
         const usu = resusu.data;
-        const rescla = await axios.get('http://localhost:3004/api/clasificaciones')
+        const rescla = await axios.get('https://quedaya.herokuapp.com:3004/api/clasificaciones')
         const cla = rescla.data;
         let usr = req.user;
         if (req.isAuthenticated() && (req.user.rol == 0)) {
@@ -316,7 +316,7 @@ app.get('/success', async(req,res) =>{
 app.post('/checkout', async(req,res) =>{
     const ticket = req.body;
     try {
-        await axios.post('http://localhost:3004/api/compra', ticket)
+        await axios.post('https://quedaya.herokuapp.com:3004/api/compra', ticket)
         res.status(200).render('event/checkout');
     } catch (error) {
         res.status(500).send('Server checkout error');

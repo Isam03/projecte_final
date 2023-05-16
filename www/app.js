@@ -7,7 +7,7 @@ function sendData(srch) {
 
   if (query.length > 0) {
     searchResults.style.visibility = "visible";
-    const url = `http://localhost:3004/search?q=${query}`;
+    const url = `https://quedaya.herokuapp.com:3004/search?q=${query}`;
 
     fetch(url)
       .then(response => response.json())
@@ -18,7 +18,7 @@ function sendData(srch) {
         }
         data.forEach((item, index) => {
           if (index > 0) searchResults.innerHTML += '<hr>';
-          searchResults.innerHTML += `<a href="http://localhost:3000/event/${item._id}"><p>${item.titulo}</p></a>`
+          searchResults.innerHTML += `<a href="https://quedaya.herokuapp.com:3000/event/${item._id}"><p>${item.titulo}</p></a>`
         });
       })
   }
@@ -75,7 +75,7 @@ function submitForm(id) {
 
 
 
-  fetch(`http://localhost:3004/api/actividad/${id}`, {
+  fetch(`https://quedaya.herokuapp.com:3004/api/actividad/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -113,7 +113,7 @@ function submitForm(id) {
 
 
 
-      fetch(`http://localhost:3004/api/actividad/${id}`, {
+      fetch(`https://quedaya.herokuapp.com:3004/api/actividad/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -152,7 +152,7 @@ function submitForm2(id) {
     foto_perfil: formData.get('foto_perfil'),
   };
 
-  fetch(`http://localhost:3004/api/usuario/${id}`, {
+  fetch(`https://quedaya.herokuapp.com:3004/api/usuario/${id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json'
@@ -177,13 +177,13 @@ function submitForm2(id) {
 
 function eliminarActividad(id) {
 
-  fetch(`http://localhost:3004/api/actividad/${id}`,
+  fetch(`https://quedaya.herokuapp.com:3004/api/actividad/${id}`,
     {
       method: "DELETE"
     })
     .then((res) => {
       if (res.ok) {
-        window.location.href = "http://localhost:3000"
+        window.location.href = "https://quedaya.herokuapp.com:3000"
       } else {
         console.log("Error!")
       }
@@ -196,7 +196,7 @@ function eliminarActividad(id) {
 
 function eliminarActAdmin(id) {
 
-  fetch(`http://localhost:3004/api/actividad/${id}`,
+  fetch(`https://quedaya.herokuapp.com:3004/api/actividad/${id}`,
     {
       method: "DELETE"
     })
@@ -214,7 +214,7 @@ function eliminarActAdmin(id) {
 
 function eliminarCla(id) {
 
-  fetch(`http://localhost:3004/api/clasificacion/${id}`,
+  fetch(`https://quedaya.herokuapp.com:3004/api/clasificacion/${id}`,
     {
       method: "DELETE"
     })
@@ -232,7 +232,7 @@ function eliminarCla(id) {
 
 function eliminarUsu(id) {
 
-  fetch(`http://localhost:3004/api/usuario/${id}`,
+  fetch(`https://quedaya.herokuapp.com:3004/api/usuario/${id}`,
     {
       method: "DELETE"
     })
@@ -250,7 +250,7 @@ function eliminarUsu(id) {
 
 function eliminarCat(id) {
 
-  fetch(`http://localhost:3004/api/categoria/${id}`,
+  fetch(`https://quedaya.herokuapp.com:3004/api/categoria/${id}`,
     {
       method: "DELETE"
     })
@@ -295,7 +295,7 @@ function crearEvento() {
 
 
 
-  fetch(`http://localhost:3004/api/actividad/`, {
+  fetch(`https://quedaya.herokuapp.com:3004/api/actividad/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -328,7 +328,7 @@ function crearCategoria() {
 
 
 
-  fetch(`http://localhost:3004/api/categoria/`, {
+  fetch(`https://quedaya.herokuapp.com:3004/api/categoria/`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -361,7 +361,7 @@ function crearClasificacion() {
 
 
 
-  fetch(`http://localhost:3004/api/clasificacion`, {
+  fetch(`https://quedaya.herokuapp.com:3004/api/clasificacion`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
