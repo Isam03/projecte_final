@@ -125,16 +125,6 @@
       <div class="offcanvas-body" style="background-color: #03112b;">
         <div>
           <p>
-            <font>Cambiar foto de perfil</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
-              aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoPerfil"><i
-                class="bi bi-pencil-square"></i></button>
-          </p>
-          <p>
-            <font>Cambiar fondo</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
-              aria-label="Close" data-bs-toggle="modal" data-bs-target="#fotoBackground"><i
-                class="bi bi-pencil-square"></i></button>
-          </p>
-          <p>
             <font>Subir fotos</font> <button type="button" class="btn btn-info" data-bs-dismiss="offcanvas"
               aria-label="Close" data-bs-toggle="modal" data-bs-target="#subirFoto"><i
                 class="bi bi-pencil-square"></i></button>
@@ -216,48 +206,6 @@
             </form>
           </div>
 
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="fotoPerfil" tabindex="-1" aria-labelledby="modalFotoPerfil" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalFotoPerfil">Cambiar foto de perfil</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <% if (imagens !=null) { %>
-              <% imagens.forEach(element=> {%>
-                <% if (element.id_usuario==user._id) { %>
-                  <img class="profile-image" src="uploads/<%= element.filename %>" alt="<%= element.path %>"
-                    style="width: 150px; height: 150px; border-radius: 20px; margin: 1px;margin-bottom: 5px;">
-                  <% } %>
-                    <% }); %>
-                      <% } %>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal fade" id="fotoBackground" tabindex="-1" aria-labelledby="modalBackground" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5" id="modalBackground">Cambiar fondo</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body d-flex">
-            <div id="div1" class="colored-div"></div>
-            <div id="div2" class="colored-div"></div>
-            <div id="div3" class="colored-div"></div>
-          </div>
         </div>
       </div>
     </div>
