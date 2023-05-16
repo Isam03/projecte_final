@@ -11,7 +11,7 @@ const ticketModel = require("./models/ticket");
 const cors = require('cors');
 const moment = require('moment');
 const multer = require('multer');
-const stripe = require('stripe')('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')
+const stripe = require('stripe')('sk_test_51N6wogIpj2kPszHnQQKnFBitfzuj2XX8LfbEiMwEKBYwIe7pcaBFfygNqaxC5RXcL89oLVLTMijEU4YhqSnVvuN400r39SI1FZ')
 const { response } = require('express');
 
 module.exports = (app) => {
@@ -492,20 +492,14 @@ module.exports = (app) => {
         await ticket.save();
 
         const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
             line_items: [
                 {
                     price_data: {
                         currency: "eur",
-                        unit_amount_decimal: ticket.precio,
+                        unit_amount: 250,
                         product_data: {
-                            name: ticket.titulo,
-                            description: ticket.descripcion,
-                            metadata: {
-                                fecha: ticket.fecha,
-                                hora: ticket.hora,
-                                organizador: ticket.creado_por,
-                                referencia: ticket.referencia,
-                            },
+                            name: 'Esdeveniment',
                         },
                     },
                     quantity: 1,

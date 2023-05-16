@@ -383,3 +383,25 @@ function crearClasificacion() {
 }
 
 
+/// checkout
+
+const stripe = Stripe('pk_live_51N6wogIpj2kPszHnq9TRNpFkrO0cojAcnqWCmoR9FaeFelom4jmluUGZXo2FcfkRTYhsHJZH2aT6hAFqhV3J7P6J00lKO15jtb');
+
+const button = document.getElementById('checkout-button');
+
+const form = document.getElementById('checkForm');
+  const formData = new FormData(form);
+
+button.addEventListener('click', async () => {
+  const { error } = await stripe.redirectToCheckout({
+    lineItems: [{ price: 'price_1N8KhrIpj2kPszHninLSc4Rw', quantity: 1 }],
+    mode: 'payment',
+    successUrl: 'http://localhost:3000/success',
+    cancelUrl: 'http://localhost:3000/cancel',
+  });
+
+  if (error) {
+    console.error(error);
+  }
+});
+
